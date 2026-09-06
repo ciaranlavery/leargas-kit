@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Your Monday numbers, on one page (sample)</title>
+<style>
+body{font-family:system-ui,sans-serif;margin:0;background:#f5f5f5;color:#1a1a1a;line-height:1.6}
+.wrap{max-width:700px;margin:0 auto;padding:28px 20px 60px}
+.page{background:#fff;border:1px solid #e5e0cf;border-radius:14px;padding:26px 24px;box-shadow:0 2px 10px rgba(11,26,51,.07)}
+h1{font-size:24px;margin:.2em 0}.lede{color:#444;max-width:560px}
+h2{font-size:17px;margin:22px 0 8px;color:#0B1C3F;border-left:5px solid #FCDC00;padding-left:10px}
+.hero{background:linear-gradient(135deg,#08274A,#0C2340);color:#fff;border-radius:12px;padding:22px 22px;margin-bottom:4px}
+.hero h1{color:#fff}
+.hero .lede{color:#cdd8ea}
+.hero .sample{background:#FCDC00;border-color:#FCDC00;color:#0a1830}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+@media(max-width:480px){.grid{grid-template-columns:1fr}}
+.kpi{background:#f8fafc;border:1px solid #e5e7eb;border-top:5px solid #0B1C3F;border-radius:10px;padding:14px;min-width:0}
+.kpi.warntop{border-top-color:#e0a800}
+.kpi.wide{grid-column:1/-1;display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.kpi .v{font-size:24px;font-weight:800;color:#0B1C3F;overflow-wrap:anywhere}
+.kpi .l{font-size:12px;color:#5c6577}
+.up{color:#1d9d6c;font-size:12px;font-weight:700}.warn{color:#a08600;font-size:12px;font-weight:700}
+.note{font-size:13px;color:#444;background:#f8fafc;border-radius:8px;padding:8px 12px;margin:0}
+.spot{background:linear-gradient(135deg,#08274A,#0C2340);border-radius:12px;padding:16px 18px;margin:4px 0 0;color:#fff}
+.spot-row{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.12);font-size:14px}
+.spot-row:last-of-type{border:none}
+.spot-row b{color:#FCDC00;white-space:nowrap}
+.spot-row b.spot-warn{color:#f0c75e}
+.spot-mut{font-size:12px;color:#cdd8ea;margin:10px 0 0}
+ul.ticks{list-style:none;padding:0;margin:10px 0}
+ul.ticks li{background:#eef4ff;border-radius:8px;padding:8px 12px;margin:6px 0;font-size:14px}
+ul.ticks li::before{content:'✓ ';color:#1d9d6c;font-weight:800}
+.price{background:#fff8e1;border:1px solid #e0c200;border-radius:12px;padding:14px 16px}
+.p-big{font-size:30px;font-weight:800;color:#0B1C3F}.p-big span{font-size:14px;font-weight:400;color:#5c6577}
+.step{display:flex;gap:10px;margin:8px 0;font-size:14px}.n{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:#0B1C3F;color:#FCDC00;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:14px}
+.sample{display:inline-block;background:#fff8e1;border:1px solid #a08600;color:#6b5d00;border-radius:999px;padding:1px 12px;font-size:12px;font-weight:700}
+.wordmark{text-align:center;font-size:11px;font-weight:800;letter-spacing:3px;color:#FCDC00;margin-top:6px}
+.contact{background:#0B1C3F;color:#fff;border-radius:10px;padding:12px 16px;margin-top:18px;font-size:15px}
+.madein{font-size:11px;color:#FCDC00;font-weight:800;letter-spacing:2px;margin:8px 0 0}
+.hero-row{display:flex;gap:18px;align-items:center}
+.badge-art{flex-shrink:0}
+a.cta{display:inline-block;margin-top:12px;background:#FCDC00;color:#0a1830;font-weight:800;font-size:15px;padding:10px 20px;border-radius:10px;text-decoration:none}
+.quote{border:2px dashed #a08600;border-radius:12px;padding:14px 16px;margin:14px 0;background:#fffdf4}
+.quote .stars{color:#e0a800;font-weight:800;letter-spacing:3px}
+.quote p{margin:.3em 0;font-size:14px}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.kpi{animation:rise .5s ease both}
+.grid .kpi:nth-child(2){animation-delay:.08s}.grid .kpi:nth-child(3){animation-delay:.16s}.grid .kpi:nth-child(4){animation-delay:.24s}.grid .kpi:nth-child(5){animation-delay:.32s}
+.seller{margin-top:26px;border:2px dashed #a08600;border-radius:12px;padding:16px 18px;background:#fff}
+.seller h2{color:#6b5d00;margin-top:0}
+table{width:100%;border-collapse:collapse;font-size:13.5px}td{padding:6px 8px;border-bottom:1px solid #eee;vertical-align:top}
+.mut{color:#5c6577;font-size:12px}
+@media print{
+body{background:#fff}.wrap{padding:0;max-width:none}.page{box-shadow:none;border:none;border-radius:0}
+.seller{display:none}.wrap{padding-bottom:0}
+.hero{background:#fff;color:#1a1a1a;border:1px solid #0B1C3F}.hero h1{color:#0B1C3F}.hero .lede{color:#444}
+.hero .madein{color:#6b5d00}.hero a.cta{background:#fff;border:2px solid #0B1C3F;color:#0B1C3F}
+.hero .wordmark{color:#0B1C3F}
+.kpi{animation:none}
+.contact{background:#fff;color:#1a1a1a;border:1px solid #0B1C3F}
+.spot{background:#fff;color:#1a1a1a;border:1px solid #0B1C3F}
+.spot-row{border-bottom-color:#eee}.spot-row b{color:#0B1C3F}.spot-row b.spot-warn{color:#6b5d00}.spot-mut{color:#444}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="page">
+<div class="hero">
+<div class="hero-row">
+<div class="badge-art"><svg width="72" height="72" viewBox="0 0 72 72"><circle cx="36" cy="36" r="34" fill="#FCDC00"/><rect x="20" y="38" width="8" height="14" rx="2" fill="#0B1C3F"/><rect x="32" y="30" width="8" height="22" rx="2" fill="#0B1C3F"/><rect x="44" y="22" width="8" height="30" rx="2" fill="#0B1C3F"/></svg><div class="wordmark">LÉARGAS</div></div>
+<div>
+<h1>Your Monday numbers, on one page</h1>
+<p class="lede">Every Monday morning: revenue, costs, cash position and items requiring attention - compiled automatically.</p>
+<p class="madein">MADE IN BELFAST</p>
+<a class="cta" href="tel:[phone]">Book a 30-min chat - [phone]</a>
+</div>
+</div>
+</div>
+<p class="mut">Today that requires consolidating multiple systems and a spreadsheet every Monday. This pack replaces the manual consolidation - not the systems themselves.</p>
+
+<h2>What last Monday would have looked like</h2>
+<p><span class="sample">Mock data - illustrative figures</span></p>
+<div class="grid">
+<div class="kpi"><div class="v">£8,420</div><div class="l">Total revenue <span class="up">▲ 4% vs last week</span></div></div>
+<div class="kpi"><div class="v">£5,980</div><div class="l">Gross profit · 71% margin</div></div>
+<div class="kpi"><div class="v">£5,910</div><div class="l">Total expenses</div></div>
+<div class="kpi"><div class="v">£2,510</div><div class="l">Net profit · 30% margin</div></div>
+<div class="kpi wide warntop"><div class="v">£31,000</div><div class="l">Cash at bank <span class="warn">≈ 5 weeks cover</span></div></div>
+</div>
+<p class="note">Anything that needs attention shows <span class="warn">amber</span> - stock running low, cash cover declining, a cost line moving unexpectedly. You review it in a minute; you decide what to do.</p>
+
+<h2>Beyond what the accounts reach</h2>
+<div class="spot">
+<div class="spot-row"><span>Promo check - Green Machine 2-for-1</span><b>+£310 net · 71% margin</b></div>
+<div class="spot-row"><span>Fastest mover - Mango Tango</span><b>182 units · up 18%</b></div>
+<div class="spot-row"><span>Waste flag - Berry Boost</span><b class="spot-warn">11% waste · review portioning</b></div>
+<p class="spot-mut">Recorded daily in your systems → displayed daily here. This granularity sits below anything monthly accounts ever reach.</p>
+</div>
+
+<h2>No work required on your side.</h2>
+<ul class="ticks">
+<li>No new software or hardware.</li>
+<li>No manual entry - all data inputs you already hold, consolidated in one place.</li>
+<li>We catch the duplicates, gaps and odd lines first, so you never have to wonder what's real.</li>
+</ul>
+
+<h2>What it costs</h2>
+<div class="price"><div class="p-big">£595 <span>a month +VAT</span></div><p>Rolling monthly, cancel with 30 days. <b>Month one is a trial</b> - same pack, and it counts as month one if you stay.</p><p>Optional extras are built around your data - <b>£195 a month</b> each, only if you want them. For example: <b>Promo check</b> - did your latest offer actually make money? <b>Rota check</b> - busy hours covered without paying idle ones? <b>Pipeline check</b> - who's close to buying? Nothing off the shelf.</p></div>
+
+<div class="quote"><div class="stars">★★★★★</div><p>"Our first design partner's words go here."</p><p class="mut">- Belfast independent, coming soon. Real reviews only - this space stays empty until earned.</p></div>
+
+<h2>What happens next</h2>
+<div class="step"><div class="n">1</div><div><b>30-minute chat</b>, free. We look at where your numbers live. If it's not a fit, we'll say so.</div></div>
+<div class="step"><div class="n">2</div><div><b>Half-day setup on video (£150)</b> - we connect everything once. Comes straight off your first bill if you start within a month.</div></div>
+<div class="step"><div class="n">3</div><div><b>First pack within 10 days of setup.</b> Lands on the first Monday after everything's connected and checked. You review a single page to start the week.</div></div>
+<div class="contact"><b>[Your name]</b> · [phone] · [email]</div>
+<p class="mut">Mock data throughout - your pack shows your numbers. Léargas · All your data sources in one place, every Monday - down to daily detail.</p>
+</div>
+
+<div class="seller">
+<h2>For you only - don't print this bit (hidden when printing)</h2>
+<table>
+<tr><td><b>0:00</b></td><td>Hook: "Four systems, four stories, one page." Ask which login eats most time.</td></tr>
+<tr><td><b>1:00</b></td><td>Money cards above. "Which of these took longest last month?"</td></tr>
+<tr><td><b>2:30</b></td><td>Point at bank cover: "Five weeks - would you have known that Monday?"</td></tr>
+<tr><td><b>3:30</b></td><td>Amber line, then microscope: "Anything amber needs a look - and this layer is what your accountant never reaches."</td></tr>
+<tr><td><b>4:30</b></td><td>Price + trial. "One paid month, not twelve. You keep everything."</td></tr>
+<tr><td><b>5:00</b></td><td>Ask: "Who else should see this? What can you screenshare next week?" Book setup.</td></tr>
+</table>
+<p class="mut">Full mock KPIs + modules deck: <code>dist/modules-proto.html</code> (generic). Ticket: <code>wayfinding/tickets/ca3-anonymized-proof-kit.md</code>.</p>
+</div>
+</div>
+</body>
+</html>

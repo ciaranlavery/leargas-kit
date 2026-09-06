@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample Leisure Club - Dashboard (demo)</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#081426;color:#e8edf6;font-family:'Inter',system-ui,sans-serif;min-height:100vh;font-size:14px}
+.layout{display:flex;min-height:100vh}
+
+/* ---------- sidebar ---------- */
+.side{width:240px;flex-shrink:0;background:#0a1830;border-right:1px solid rgba(255,255,255,.06);padding:22px 14px;display:flex;flex-direction:column;gap:4px;position:sticky;top:0;height:100vh}
+.brand{display:flex;align-items:center;gap:12px;padding:0 8px 20px;border-bottom:1px solid rgba(255,255,255,.06);margin-bottom:14px}
+.brand-badge{width:42px;height:42px;border-radius:12px;overflow:hidden;flex-shrink:0;background:#fff}
+.brand-badge img{width:100%;height:100%;object-fit:cover}
+.brand-name{font-family:'Cinzel',serif;font-size:15px;font-weight:700;line-height:1.2}
+.nav-label{font-size:10px;color:#5d739a;text-transform:uppercase;letter-spacing:.12em;padding:14px 8px 6px}
+.nav-item{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:9px;color:#9db1d0;font-weight:500;font-size:13px;cursor:pointer}
+.nav-item svg{width:16px;height:16px;flex-shrink:0;opacity:.85}
+.nav-item:hover{background:rgba(255,255,255,.05);color:#e8edf6}
+.nav-item.active{background:#FCDC00;color:#0a1830;font-weight:600}
+.nav-item.active svg{opacity:1}
+.side-foot{margin-top:auto;padding:8px;font-size:10px;color:#5d739a;border-top:1px solid rgba(255,255,255,.06)}
+.side-foot b{color:#9db1d0}
+
+/* ---------- main ---------- */
+.main{flex:1;padding:26px 30px;max-width:1500px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:22px;flex-wrap:wrap}
+.top h1{font-family:'Cinzel',serif;font-size:22px;font-weight:700}
+.top .date{font-size:12px;color:#7f93b3;margin-top:2px}
+.controls{display:flex;gap:8px}
+.pill{background:#0a1830;border:1px solid rgba(255,255,255,.08);color:#9db1d0;padding:8px 14px;border-radius:999px;font-size:12px;font-weight:600;cursor:pointer}
+.pill.on{background:#FCDC00;color:#0a1830;border-color:transparent}
+.ranges{display:none;align-items:center;gap:8px;margin:12px 0 22px;flex-wrap:wrap}
+.ranges input{background:#0a1830;border:1px solid rgba(255,255,255,.15);color:#e8edf6;border-radius:8px;padding:7px 10px;font-size:12px;font-family:'Inter',sans-serif;color-scheme:dark}
+.ranges .lab{font-size:11px;color:#7f93b3}
+.ranges .go{background:#FCDC00;color:#0a1830;border:none;border-radius:8px;padding:7px 14px;font-weight:700;font-size:12px;cursor:pointer}
+.ranges .go:hover{opacity:.9}
+
+/* ---------- KPI cards ---------- */
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px}
+.kpi{background:#0a1830;border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:16px 18px}
+.kpi .k-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.kpi .k-label{font-size:11px;color:#7f93b3;text-transform:uppercase;letter-spacing:.08em;font-weight:600}
+.kpi svg{width:16px;height:16px;opacity:.5}
+.kpi .k-val{font-size:26px;font-weight:800;letter-spacing:-.02em}
+.kpi .k-delta{font-size:11px;margin-top:6px;display:flex;align-items:center;gap:5px}
+.up{color:#34d399}.down{color:#f87171}.flat{color:#9db1d0}.gold{color:#FCDC00}
+
+/* ---------- grid & panels ---------- */
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+.panel{background:#0a1830;border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:18px 20px}
+.panel h3{font-size:13px;font-weight:700;margin-bottom:2px}
+.panel .sub{font-size:11px;color:#7f93b3;margin-bottom:14px}
+.span8{grid-column:span 8}.span4{grid-column:span 4}.span6{grid-column:span 6}.span3{grid-column:span 3}.span12{grid-column:span 12}
+.chartbox{position:relative;height:240px}
+.chartbox.tall{height:300px}
+
+/* view switching */
+.view{display:none}
+.view.on{display:block}
+
+/* ---------- rows ---------- */
+.row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.row:last-child{border-bottom:none;padding-bottom:2px}
+.dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.r-name{flex:1;font-size:13px;font-weight:600}
+.r-sub{font-size:11px;color:#7f93b3;margin-top:2px}
+.r-val{font-size:13px;font-weight:700;text-align:right}
+.r-sub2{font-size:10px;color:#7f93b3;text-align:right}
+.bar{height:6px;border-radius:4px;background:rgba(255,255,255,.07);overflow:hidden;margin-top:8px}
+.bar i{display:block;height:100%;border-radius:4px;background:#FCDC00}
+.srcline{display:flex;align-items:center;gap:10px;padding:6px 0;font-size:12px}
+.srcline .sw{width:10px;height:10px;border-radius:3px;flex-shrink:0}
+.srcline .nm{flex:1;color:#9db1d0}
+.heat{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.heat .d{background:rgba(255,255,255,.04);border-radius:8px;padding:8px 4px;text-align:center}
+.heat .d b{display:block;font-size:11px;margin-bottom:4px;color:#9db1d0}
+.heat .c{font-size:11px;font-weight:700}
+.bar-mini{height:4px;border-radius:2px;background:rgba(255,255,255,.08);margin-top:6px}
+.bar-mini i{display:block;height:100%;border-radius:2px}
+
+/* ---------- tables ---------- */
+.ttable{width:100%;border-collapse:collapse;font-size:12px}
+.ttable th{text-align:left;font-size:10px;color:#7f93b3;text-transform:uppercase;letter-spacing:.08em;padding:6px 8px;border-bottom:1px solid rgba(255,255,255,.07)}
+.ttable td{padding:8px;border-bottom:1px solid rgba(255,255,255,.05)}
+.ttable tr:last-child td{border-bottom:none}
+.tag{font-size:10px;font-weight:700;padding:3px 9px;border-radius:999px;white-space:nowrap}
+.tag.ok{background:rgba(52,211,153,.15);color:#34d399}
+.tag.warn{background:rgba(252,220,0,.15);color:#FCDC00}
+.tag.bad{background:rgba(248,113,113,.15);color:#f87171}
+
+@media (max-width:1100px){
+  .side{display:none}
+  .kpis{grid-template-columns:repeat(2,1fr)}
+  .span8,.span4,.span6,.span3{grid-column:span 12}
+}
+</style>
+</head>
+<body><div style="position:fixed;right:12px;bottom:12px;z-index:99;background:#FCDC00;color:#0a1830;font:700 12px system-ui,sans-serif;padding:8px 14px;border-radius:999px;box-shadow:0 2px 8px rgba(0,0,0,.4)">DEMO · sample leisure-club figures</div>
+<div class="layout">
+
+  <!-- ======= SIDEBAR ======= -->
+  <aside class="side">
+    <div class="brand">
+      <div class="brand-badge" style="display:flex;align-items:center;justify-content:center;font-weight:800;font-size:20px;color:#0a1830;">S</div>
+      <div class="brand-name">Sample Leisure Club</div>
+    </div>
+    <div class="nav-label">Club</div>
+    <div class="nav-item active" data-view="overview">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+      Overview
+    </div>
+    <div class="nav-item" data-view="members"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/></svg>Members</div>
+    <div class="nav-item" data-view="finance"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><rect x="7" y="9" width="3" height="6"/><rect x="12" y="5" width="3" height="10"/><rect x="17" y="12" width="3" height="3"/></svg>Finance</div>
+    <div class="nav-item" data-view="barevents"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h3l2-7 4 14 2-7h5"/></svg>Bar &amp; Events</div>
+    <div class="nav-label">Partners</div>
+    <div class="nav-item" data-view="sponsors"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3 6 6 .5-4.5 4 1.5 6-6-3.5L6 18.5l1.5-6L3 8.5 9 8z"/></svg>Sponsors</div>
+    <div class="side-foot"><b>Board-ready</b> · refreshed every Monday<br>Data to Sun 30 Aug</div>
+  </aside>
+
+  <!-- ======= MAIN ======= -->
+  <main class="main">
+    <div class="top">
+      <div>
+        <h1 id="viewTitle">Club health</h1>
+        <div class="date" id="viewSub">Mon 24 – Sun 30 Aug · last complete week</div>
+      </div>
+      <div class="controls" id="pills">
+        <span class="pill on" data-p="week">This week</span>
+        <span class="pill" data-p="month">This month</span>
+        <span class="pill" data-p="quarter">Quarter</span>
+        <span class="pill" data-p="year">Year</span>
+      </div>
+    </div>
+
+    <div class="ranges" id="rangeRow">
+      <span class="lab">From</span><input type="date" id="rStart">
+      <span class="lab">to</span><input type="date" id="rEnd">
+      <button class="go" id="rApply">Apply range</button>
+    </div>
+
+    <!-- ============ OVERVIEW ============ -->
+    <section class="view on" id="view-overview">
+      <div class="kpis">
+        <div class="kpi" data-kpi="revenue">
+          <div class="k-top"><span class="k-label">Revenue</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M13 9l3 3-3 3"/></svg></div>
+          <div class="k-val">£29,700</div>
+          <div class="k-delta up">▲ 3.2% <span style="color:#7f93b3">vs last week</span></div>
+        </div>
+        <div class="kpi" data-kpi="expenses">
+          <div class="k-top"><span class="k-label">Expenses</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M13 9l3 3-3 3"/></svg></div>
+          <div class="k-val">£16,400</div>
+          <div class="k-delta up">▲ 4.2% <span style="color:#7f93b3">vs last week</span></div>
+        </div>
+        <div class="kpi" data-kpi="members">
+          <div class="k-top"><span class="k-label">Active members</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3.5"/><path d="M3.5 20c.8-3.4 3-5 5.5-5s4.7 1.6 5.5 5M16 5.5a3.5 3.5 0 010 4M18 15c1.8.7 2.7 2.4 3 5"/></svg></div>
+          <div class="k-val">1,128</div>
+          <div class="k-delta up">+4 <span style="color:#7f93b3">net this week</span></div>
+        </div>
+        <div class="kpi" data-kpi="court">
+          <div class="k-top"><span class="k-label">Court utilisation</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M8 12h8"/></svg></div>
+          <div class="k-val gold">73%</div>
+          <div class="k-delta"><span style="color:#34d399">▲ 5%</span> <span style="color:#7f93b3">vs last week</span></div>
+        </div>
+        <div class="kpi" data-kpi="bar">
+          <div class="k-top"><span class="k-label">Bar sales</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3h12M6 3v6a4 4 0 008 0V3M10 3v18M6 21h12"/></svg></div>
+          <div class="k-val">£18,900</div>
+          <div class="k-delta up">▲ 11% <span style="color:#7f93b3">vs last week</span></div>
+        </div>
+        <div class="kpi" data-kpi="gym">
+          <div class="k-top"><span class="k-label">Gym sessions</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 4v16M18 4v16M4 6h16M4 18h16"/></svg></div>
+          <div class="k-val">1,240</div>
+          <div class="k-delta up">▲ 7% <span style="color:#7f93b3">this week</span></div>
+        </div>
+        <div class="kpi" data-kpi="function">
+          <div class="k-top"><span class="k-label">Function room</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 7h.01M11 7h.01M7 13h.01M11 13h.01M7 17h.01"/></svg></div>
+          <div class="k-val">6</div>
+          <div class="k-delta flat">bookings <span style="color:#7f93b3">next 30 days</span></div>
+        </div>
+        <div class="kpi" data-kpi="sponsors">
+          <div class="k-top"><span class="k-label">Sponsors</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3 6 6 .5-4.5 4 1.5 6-6-3.5L6 18.5l1.5-6L3 8.5 9 8z"/></svg></div>
+          <div class="k-val gold">6</div>
+          <div class="k-delta down">2 renewals due <span style="color:#7f93b3">in 60 days</span></div>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="panel span8">
+          <h3>Revenue vs expenses</h3>
+          <div class="sub" id="revExpSub">Last 8 months · revenue holds its summer peak</div>
+          <div class="chartbox tall"><canvas id="cRevExp"></canvas></div>
+        </div>
+        <div class="panel span4">
+          <h3>Income by source</h3>
+          <div class="sub" id="srcSub">September · membership is the backbone</div>
+          <div class="chartbox" style="height:170px"><canvas id="cSource"></canvas></div>
+          <div id="srcLegend" style="margin-top:6px"></div>
+        </div>
+        <div class="panel span6">
+          <h3>Court utilisation</h3>
+          <div class="sub" id="courtsSub">Booked court-hours vs available · this week</div>
+          <div class="chartbox"><canvas id="cCourts"></canvas></div>
+        </div>
+        <div class="panel span6">
+          <h3>Membership mix</h3>
+          <div class="sub">1,128 active by category · real fee bands</div>
+          <div class="chartbox"><canvas id="cMix"></canvas></div>
+        </div>
+        <div class="panel span4">
+          <h3>Bar takings by day</h3>
+          <div class="sub">Daily profile · social nights pull the bar</div>
+          <div class="chartbox"><canvas id="cBar"></canvas></div>
+        </div>
+        <div class="panel span4">
+          <h3>Gym traffic</h3>
+          <div class="sub">Check-ins by hour · Tuesday peak</div>
+          <div class="chartbox"><canvas id="cGym"></canvas></div>
+        </div>
+        <div class="panel span4">
+          <h3>Check-ins by day</h3>
+          <div class="sub">Daily footfall · Tue is busiest</div>
+          <div class="heat" id="heat"></div>
+        </div>
+        <div class="panel span6">
+          <h3>Function room · next 30 days</h3>
+          <div class="sub">6 bookings · £4,960 forecast income</div>
+          <div id="fnRows"></div>
+        </div>
+        <div class="panel span6">
+          <h3>Sponsor watch</h3>
+          <div class="sub">2 renewals due within 60 days · 1 at risk</div>
+          <div id="spRows"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MEMBERS ============ -->
+    <section class="view" id="view-members">
+      <div class="kpis">
+        <div class="kpi" data-kpi="active">
+          <div class="k-top"><span class="k-label">Active members</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3.5"/></svg></div>
+          <div class="k-val">1,128</div>
+          <div class="k-delta up">▲ 1.7% <span style="color:#7f93b3">vs last month</span></div>
+        </div>
+        <div class="kpi" data-kpi="joins">
+          <div class="k-top"><span class="k-label">New joins</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3.5"/><path d="M3.5 20c.8-3.4 3-5 5.5-5s4.7 1.6 5.5 5"/></svg></div>
+          <div class="k-val">24</div>
+          <div class="k-delta up">▲ 4% <span style="color:#7f93b3">vs last month</span></div>
+        </div>
+        <div class="kpi" data-kpi="renewals">
+          <div class="k-top"><span class="k-label">Renewals due</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+          <div class="k-val">130</div>
+          <div class="k-delta flat">next <span style="color:#7f93b3">90 days</span></div>
+        </div>
+        <div class="kpi" data-kpi="fee">
+          <div class="k-top"><span class="k-label">Avg annual fee</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><rect x="7" y="9" width="3" height="6"/></svg></div>
+          <div class="k-val">£438</div>
+          <div class="k-delta flat">across <span style="color:#7f93b3">paid tiers</span></div>
+        </div>
+      </div>
+      <div class="grid">
+        <div class="panel span6">
+          <h3>Joiners vs leavers</h3>
+          <div class="sub" id="jlvSub">Last 12 months · net growth every month</div>
+          <div class="chartbox"><canvas id="cJlv"></canvas></div>
+        </div>
+        <div class="panel span6">
+          <h3>Top categories</h3>
+          <div class="sub">1,128 members · £420,198 fee income</div>
+          <div class="chartbox"><canvas id="cTop"></canvas></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FINANCE ============ -->
+    <section class="view" id="view-finance">
+      <div class="kpis">
+        <div class="kpi" data-kpi="revenue">
+          <div class="k-top"><span class="k-label">Revenue</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg></div>
+          <div class="k-val">£29,700</div>
+          <div class="k-delta up">▲ 3.2% <span style="color:#7f93b3">vs last week</span></div>
+        </div>
+        <div class="kpi" data-kpi="expenses">
+          <div class="k-top"><span class="k-label">Expenses</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg></div>
+          <div class="k-val">£16,400</div>
+          <div class="k-delta up">▲ 4.2% <span style="color:#7f93b3">vs last week</span></div>
+        </div>
+        <div class="kpi" data-kpi="surplus">
+          <div class="k-top"><span class="k-label">Net surplus</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M13 9l3 3-3 3"/></svg></div>
+          <div class="k-val gold">£13,300</div>
+          <div class="k-delta up">▲ 2% <span style="color:#7f93b3">vs last week</span></div>
+        </div>
+        <div class="kpi" data-kpi="cash">
+          <div class="k-top"><span class="k-label">Cash at bank</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M7 15h4"/></svg></div>
+          <div class="k-val">£284,000</div>
+          <div class="k-delta flat">reserved <span style="color:#7f93b3">for courts &amp; refurbs</span></div>
+        </div>
+      </div>
+      <div class="grid">
+        <div class="panel span8">
+          <h3>Revenue vs expenses</h3>
+          <div class="sub" id="finRevSub">Monthly revenue vs expenses · Sep–Aug</div>
+          <div class="chartbox tall"><canvas id="cFinRev"></canvas></div>
+        </div>
+        <div class="panel span4">
+          <h3>Income by source</h3>
+          <div class="sub">Where the money comes from</div>
+          <div class="chartbox" style="height:170px"><canvas id="cFinSrc"></canvas></div>
+          <div id="finSrcLegend" style="margin-top:6px"></div>
+        </div>
+        <div class="panel span6">
+          <h3 id="marginTitle">Monthly net margin</h3>
+          <div class="sub">Surplus after all running costs</div>
+          <div class="chartbox"><canvas id="cMargin"></canvas></div>
+        </div>
+        <div class="panel span6">
+          <h3>Where the money goes</h3>
+          <div class="sub" id="expSub">Biggest expense lines · this month</div>
+          <div class="chartbox"><canvas id="cExp"></canvas></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ BAR & EVENTS ============ -->
+    <section class="view" id="view-barevents">
+      <div class="kpis">
+        <div class="kpi" data-kpi="bar">
+          <div class="k-top"><span class="k-label">Bar sales</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3h12M6 3v6a4 4 0 008 0V3M10 3v18M6 21h12"/></svg></div>
+          <div class="k-val">£18,900</div>
+          <div class="k-delta up">▲ 11% <span style="color:#7f93b3">vs last week</span></div>
+        </div>
+        <div class="kpi" data-kpi="func">
+          <div class="k-top"><span class="k-label">Function income</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></svg></div>
+          <div class="k-val gold">£4,960</div>
+          <div class="k-delta up">▲ 22% <span style="color:#7f93b3">next 30 days</span></div>
+        </div>
+        <div class="kpi" data-kpi="events">
+          <div class="k-top"><span class="k-label">Events</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h3l2-7 4 14 2-7h5"/></svg></div>
+          <div class="k-val">6</div>
+          <div class="k-delta flat">incl. <span style="color:#7f93b3">2 tournaments</span></div>
+        </div>
+        <div class="kpi" data-kpi="spend">
+          <div class="k-top"><span class="k-label">Avg spend / head</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 9h10M7 13h10"/></svg></div>
+          <div class="k-val">£4.60</div>
+          <div class="k-delta up">▲ 8% <span style="color:#7f93b3">tournament weeks</span></div>
+        </div>
+      </div>
+      <div class="grid">
+        <div class="panel span6">
+          <h3>Bar takings by day</h3>
+          <div class="sub">Social nights pull the bar · Fri/Sat peak</div>
+          <div class="chartbox"><canvas id="cBarB"></canvas></div>
+        </div>
+        <div class="panel span6">
+          <h3>Function room · next 30 days</h3>
+          <div class="sub">6 bookings · £4,960 forecast income</div>
+          <div id="fnRows2"></div>
+        </div>
+        <div class="panel span12">
+          <h3>Upcoming events</h3>
+          <div class="sub">Every event has a bar story</div>
+          <table class="ttable">
+            <thead><tr><th>Event</th><th>When</th><th>Bar lift</th><th>Status</th></tr></thead>
+            <tbody id="evRows"></tbody>
+          </table>
+        </div>
+        <div class="panel span6">
+          <h3>Softs · Coca-Cola range</h3>
+          <div class="sub">Cases on hand · green ok · amber watch · red order</div>
+          <div class="chartbox" style="height:260px"><canvas id="cStockSofts"></canvas></div>
+        </div>
+        <div class="panel span6">
+          <h3>Wines</h3>
+          <div class="sub">Bottles on hand · Prosecco needs ordering before the weekend</div>
+          <div class="chartbox" style="height:260px"><canvas id="cStockWine"></canvas></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SPONSORS ============ -->
+    <section class="view" id="view-sponsors">
+      <div class="kpis">
+        <div class="kpi" data-kpi="value">
+          <div class="k-top"><span class="k-label">Sponsor value</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3 6 6 .5-4.5 4 1.5 6-6-3.5L6 18.5l1.5-6L3 8.5 9 8z"/></svg></div>
+          <div class="k-val gold">£13,500</div>
+          <div class="k-delta up">▲ 5% <span style="color:#7f93b3">vs last year</span></div>
+        </div>
+        <div class="kpi" data-kpi="active">
+          <div class="k-top"><span class="k-label">Active sponsors</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></div>
+          <div class="k-val">6</div>
+          <div class="k-delta flat">4 named campaigns</div>
+        </div>
+        <div class="kpi" data-kpi="renewals">
+          <div class="k-top"><span class="k-label">Renewals due</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+          <div class="k-val">2</div>
+          <div class="k-delta down">within <span style="color:#7f93b3">60 days</span></div>
+        </div>
+        <div class="kpi" data-kpi="risk">
+          <div class="k-top"><span class="k-label">At risk</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg></div>
+          <div class="k-val down">1</div>
+          <div class="k-delta flat">no contact <span style="color:#7f93b3">this quarter</span></div>
+        </div>
+      </div>
+      <div class="grid">
+        <div class="panel span12">
+          <h3>Sponsor portfolio</h3>
+          <div class="sub" id="spSub">Real sponsor names · terms from the sponsorship position</div>
+          <table class="ttable">
+            <thead><tr><th>Sponsor</th><th>Value</th><th>Terms</th><th>Watch</th><th style="width:24%">Progress</th></tr></thead>
+            <tbody id="spTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  var GOLD='#FCDC00', TICK='#7f93b3';
+  var gridColor=function(){return 'rgba(255,255,255,.05)'};
+  Chart.defaults.color=TICK;
+  Chart.defaults.font.family="'Inter',sans-serif";
+  Chart.defaults.font.size=11;
+  function mk(id,cfg){return new Chart(document.getElementById(id),cfg)}
+  function base(extra){
+    return Object.assign({responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{boxWidth:8,boxHeight:8,padding:14}}}},extra);
+  }
+  function el(id){return document.getElementById(id)}
+  function fmt(n){return n.toLocaleString('en-GB')}
+  var __bvN=0;
+  function barValue(fmtFn){
+    __bvN++;
+    return {id:'barValue'+__bvN,afterDatasetsDraw:function(chart){
+      var ctx=chart.ctx;
+      if(!ctx||!ctx.save)return;
+      chart.data.datasets.forEach(function(ds,di){
+        var meta=chart.getDatasetMeta(di);
+        if(!meta||!meta.data)return;
+        meta.data.forEach(function(bar,i){
+          var v=ds.data[i];
+          if(v==null)return;
+          ctx.save();
+          ctx.fillStyle='#e8edf6';
+          ctx.font='600 10px Inter, sans-serif';
+          if(chart.config.options&&chart.config.options.indexAxis==='y'){
+            ctx.textAlign='left';ctx.textBaseline='middle';
+            ctx.fillText(fmtFn(v,i),bar.x+6,bar.y);
+          }else{
+            ctx.textAlign='center';ctx.textBaseline='bottom';
+            ctx.fillText(fmtFn(v,i),bar.x,bar.y-4);
+          }
+          ctx.restore();
+        });
+      });
+    }};
+  }
+
+  var srcColors=['#FCDC00','#f59e0b','#38bdf8','#a3e635','#c084fc'];
+  var srcNames=['Membership','Bar','Court fees','Gym','Function room'];
+  function srcData(s){return [54,18,14,9,5].map(function(v,i){return Math.round(v*s)});}
+  function srcLegend(id,data){
+    var box=el(id);if(!box)return;
+    box.innerHTML='';
+    var tot=data.reduce(function(a,b){return a+b},0)||1;
+    srcNames.forEach(function(n,i){
+      var line=document.createElement('div');line.className='srcline';
+      line.innerHTML='<span class="sw" style="background:'+srcColors[i]+'"></span><span class="nm">'+n+'</span><b>'+Math.round(data[i]/tot*100)+'%</b>';
+      box.appendChild(line);
+    });
+  }
+
+  /* ---- overview period data (KPI + charts) ---------------------------- */
+  var P={
+    week:{
+      kpi:{
+        revenue:{v:'£29,700',d:'▲ 3.2%',c:'up',s:'vs last week'},
+        expenses:{v:'£16,400',d:'▲ 4.2%',c:'up',s:'vs last week'},
+        members:{v:'1,128',d:'+4',c:'up',s:'net this week'},
+        court:{v:'73%',d:'▲ 5%',c:'flat',s:'vs last week',gold:true,dgreen:true},
+        bar:{v:'£18,900',d:'▲ 11%',c:'up',s:'vs last week'},
+        gym:{v:'1,240',d:'▲ 7%',c:'up',s:'this week'},
+        function:{v:'6',d:'bookings',c:'flat',s:'next 30 days'},
+        sponsors:{v:'6',d:'2 renewals due',c:'down',s:'in 60 days',gold:true}
+      },
+      charts:{
+        revExp:{labels:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],data:[[2.6,3.9,3.2,3.0,5.1,6.7,5.2],[1.7,2.3,2.0,2.1,2.8,3.0,2.5]]},
+        source:{labels:['This week'],data:[[42,26,15,10,7]]},
+        courts:{labels:['Tennis','Paddle','Squash'],data:[[76,81,62],[24,19,38]]},
+        bar:{labels:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],data:[[1.4,1.1,1.6,2.1,3.8,4.9,3.9]]},
+        gym:{labels:['6a','7a','8a','9a','10a','11a','12p','1p','2p','3p','4p','5p','6p','7p','8p','9p'],data:[[12,40,66,52,30,26,34,30,28,24,30,48,86,74,38,12]]}
+      }
+    },
+    month:{
+      kpi:{
+        revenue:{v:'£128,400',d:'▲ 6.4%',c:'up',s:'vs last month'},
+        expenses:{v:'£71,200',d:'▲ 4.2%',c:'up',s:'vs last month'},
+        members:{v:'1,128',d:'+19',c:'up',s:'net this month'},
+        court:{v:'71%',d:'▲ 3%',c:'flat',s:'vs last month',gold:true,dgreen:true},
+        bar:{v:'£74,000',d:'▲ 9%',c:'up',s:'vs last month'},
+        gym:{v:'4,980',d:'▲ 5%',c:'up',s:'this month'},
+        function:{v:'18',d:'bookings',c:'flat',s:'this month'},
+        sponsors:{v:'6',d:'2 renewals due',c:'down',s:'in 60 days',gold:true}
+      },
+      charts:{
+        revExp:{labels:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug'],data:[[86,92,98,105,112,116,124,128],[58,61,60,66,69,70,72,71]]},
+        source:{labels:['This month'],data:[[54,18,14,9,5]]},
+        courts:{labels:['Tennis','Paddle','Squash'],data:[[73,78,60],[27,22,40]]},
+        bar:{labels:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],data:[[1.5,1.2,1.7,2.2,3.6,5.1,4.0]]},
+        gym:{labels:['6a','7a','8a','9a','10a','11a','12p','1p','2p','3p','4p','5p','6p','7p','8p','9p'],data:[[14,44,70,55,32,28,36,32,30,26,32,52,90,78,40,13]]}
+      }
+    },
+    quarter:{
+      kpi:{
+        revenue:{v:'£358,000',d:'▲ 10.1%',c:'up',s:'vs last quarter'},
+        expenses:{v:'£206,000',d:'▲ 5%',c:'up',s:'vs last quarter'},
+        members:{v:'1,128',d:'+47',c:'up',s:'net this quarter'},
+        court:{v:'69%',d:'▲ 2%',c:'flat',s:'vs last quarter',gold:true,dgreen:true},
+        bar:{v:'£216,000',d:'▲ 12%',c:'up',s:'vs last quarter'},
+        gym:{v:'14,600',d:'▲ 6%',c:'up',s:'vs last quarter'},
+        function:{v:'52',d:'bookings',c:'flat',s:'this quarter'},
+        sponsors:{v:'6',d:'2 renewals due',c:'down',s:'in 60 days',gold:true}
+      },
+      charts:{
+        revExp:{labels:["Q3 '25","Q4 '25","Q1 '26","Q2 '26"],data:[[248,276,302,358],[168,181,190,206]]},
+        source:{labels:['This quarter'],data:[[55,17,14,9,5]]},
+        courts:{labels:['Tennis','Paddle','Squash'],data:[[70,75,58],[30,25,42]]},
+        bar:{labels:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],data:[[1.5,1.2,1.7,2.2,3.7,5.3,4.1]]},
+        gym:{labels:['6a','7a','8a','9a','10a','11a','12p','1p','2p','3p','4p','5p','6p','7p','8p','9p'],data:[[13,42,68,53,31,27,35,31,29,25,31,50,88,76,39,12]]}
+      }
+    },
+    year:{
+      kpi:{
+        revenue:{v:'£1,492,000',d:'▲ 14%',c:'up',s:'vs last year'},
+        expenses:{v:'£860,000',d:'▲ 6.2%',c:'up',s:'vs last year'},
+        members:{v:'1,128',d:'+137',c:'up',s:'net this year'},
+        court:{v:'70%',d:'▲ 4%',c:'flat',s:'vs last year',gold:true,dgreen:true},
+        bar:{v:'£862,000',d:'▲ 8%',c:'up',s:'vs last year'},
+        gym:{v:'58,300',d:'▲ 9%',c:'up',s:'vs last year'},
+        function:{v:'190',d:'bookings',c:'flat',s:'this year'},
+        sponsors:{v:'6',d:'3 renewals due',c:'down',s:'this year',gold:true}
+      },
+      charts:{
+        revExp:{labels:['2022','2023','2024','2025','2026'],data:[[980,1040,1120,1310,1492],[720,740,760,810,860]]},
+        source:{labels:['This year'],data:[[56,15,13,10,6]]},
+        courts:{labels:['Tennis','Paddle','Squash'],data:[[68,72,55],[32,28,45]]},
+        bar:{labels:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],data:[[1.5,1.2,1.7,2.2,3.8,5.4,4.2]]},
+        gym:{labels:['6a','7a','8a','9a','10a','11a','12p','1p','2p','3p','4p','5p','6p','7p','8p','9p'],data:[[13,43,69,54,32,28,36,32,30,26,32,51,89,77,40,13]]}
+      }
+    }
+  };
+
+  /* ---- extra per-period series (members/finance) ---------------------- */
+  var JLVM=['Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug'];
+  var JLV={
+    month:{labels:JLVM,data:[[16,14,18,13,19,15,21,17,19,18,23,24],[7,7,6,7,5,6,5,6,6,6,6,5]]},
+    quarter:{labels:["Q3 '25","Q4 '25","Q1 '26","Q2 '26"],data:[[48,51,57,65],[20,19,17,18]]},
+    year:{labels:['2022','2023','2024','2025','2026'],data:[[140,146,154,177,196],[69,67,65,61,59]]}
+  };
+  var MARGIN={
+    week:{labels:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],data:[[1.2,1.6,1.4,1.2,2.4,3.0,2.5]]},
+    month:{labels:JLVM,data:[[43,41,35,29,39,38,46,46,57,60,54,57]]},
+    quarter:{labels:["Q3 '25","Q4 '25","Q1 '26","Q2 '26"],data:[[80,95,112,152]]},
+    year:{labels:['2022','2023','2024','2025','2026'],data:[[260,300,340,500,632]]}
+  };
+  var TOPNAMES=['Standard (O29)','Juvenile (U15)','Junior (U18)','Senior (15+ yrs)','Junior Family'];
+  var SOFTNAMES=['Coke Classic 330ml','Diet Coke 330ml','Coke Zero 330ml','Fanta Orange 330ml','Sprite 330ml'];
+  var SOFTCUR=[52,30,41,9,26];
+  var SOFTPAR=[48,36,36,24,24];
+  var WINENAMES=['Malbec (house red)','Sauvignon Blanc','Prosecco','Pinot Grigio Rosé','Pinot Grigio'];
+  var WINECUR=[46,52,18,31,22];
+  var WINEPAR=[48,48,36,30,24];
+  function stockColor(cur,par,idx){var r=cur[idx]/par[idx];return r>=1?'#34d399':(r>=0.5?'#f59e0b':'#f87171')}
+  var TOPMEM=[396,216,97,79,72];
+  var TOPINC=['£277k','£27k','£17k','£44k','no fee'];
+  var EXPNAMES=['Bar & catering','Staffing','Utilities','Courts & grounds','Insurance','Gym & fitness','Marketing & events'];
+
+  /* ---- per-page KPI tables --------------------------------------------- */
+  var KPIS={};
+  KPIS.members={
+    month:{active:{v:'1,128',d:'▲ 1.7%',c:'up',s:'vs last month'},joins:{v:'24',d:'▲ 4%',c:'up',s:'vs last month'},renewals:{v:'130',d:'next',c:'flat',s:'90 days'},fee:{v:'£438',d:'across',c:'flat',s:'paid tiers'}},
+    quarter:{active:{v:'1,128',d:'▲ 4.3%',c:'up',s:'vs last quarter'},joins:{v:'65',d:'▲ 14%',c:'up',s:'vs last quarter'},renewals:{v:'130',d:'next',c:'flat',s:'90 days'},fee:{v:'£438',d:'across',c:'flat',s:'paid tiers'}},
+    year:{active:{v:'1,128',d:'▲ 13.8%',c:'up',s:'vs last year'},joins:{v:'196',d:'▲ 11%',c:'up',s:'vs last year'},renewals:{v:'≥400',d:'annual',c:'flat',s:'cycle'},fee:{v:'£438',d:'across',c:'flat',s:'paid tiers'}}
+  };
+  KPIS.finance={
+    week:{revenue:{v:'£29,700',d:'▲ 3.2%',c:'up',s:'vs last week'},expenses:{v:'£16,400',d:'▲ 4.2%',c:'up',s:'vs last week'},surplus:{v:'£13,300',d:'▲ 2%',c:'up',s:'vs last week',gold:true},cash:{v:'£284,000',d:'reserved',c:'flat',s:'courts & refurbs'}},
+    month:{revenue:{v:'£128,400',d:'▲ 6.4%',c:'up',s:'vs last month'},expenses:{v:'£71,200',d:'▲ 4.2%',c:'up',s:'vs last month'},surplus:{v:'£57,200',d:'▲ 9%',c:'up',s:'vs last month',gold:true},cash:{v:'£284,000',d:'reserved',c:'flat',s:'courts & refurbs'}},
+    quarter:{revenue:{v:'£358,000',d:'▲ 10.1%',c:'up',s:'vs last quarter'},expenses:{v:'£206,000',d:'▲ 5%',c:'up',s:'vs last quarter'},surplus:{v:'£152,000',d:'▲ 15%',c:'up',s:'vs last quarter',gold:true},cash:{v:'£284,000',d:'reserved',c:'flat',s:'courts & refurbs'}},
+    year:{revenue:{v:'£1,492,000',d:'▲ 14%',c:'up',s:'vs last year'},expenses:{v:'£860,000',d:'▲ 6.2%',c:'up',s:'vs last year'},surplus:{v:'£632,000',d:'▲ 21%',c:'up',s:'vs last year',gold:true},cash:{v:'£284,000',d:'reserved',c:'flat',s:'courts & refurbs'}}
+  };
+  KPIS.barevents={
+    week:{bar:{v:'£18,900',d:'▲ 11%',c:'up',s:'vs last week'},func:{v:'£4,960',d:'▲ 22%',c:'up',s:'next 30 days',gold:true},events:{v:'6',d:'incl.',c:'flat',s:'2 tournaments'},spend:{v:'£4.60',d:'▲ 8%',c:'up',s:'tournament weeks'}},
+    month:{bar:{v:'£74,000',d:'▲ 9%',c:'up',s:'vs last month'},func:{v:'£18,600',d:'▲ 18%',c:'up',s:'this month',gold:true},events:{v:'24',d:'incl.',c:'flat',s:'4 tournaments'},spend:{v:'£4.50',d:'▲ 6%',c:'up',s:'vs last month'}},
+    quarter:{bar:{v:'£216,000',d:'▲ 12%',c:'up',s:'vs last quarter'},func:{v:'£56,000',d:'▲ 21%',c:'up',s:'this quarter',gold:true},events:{v:'70',d:'incl.',c:'flat',s:'11 tournaments'},spend:{v:'£4.60',d:'▲ 5%',c:'up',s:'vs last quarter'}},
+    year:{bar:{v:'£862,000',d:'▲ 8%',c:'up',s:'vs last year'},func:{v:'£220,000',d:'▲ 15%',c:'up',s:'this year',gold:true},events:{v:'280',d:'incl.',c:'flat',s:'42 tournaments'},spend:{v:'£4.40',d:'▲ 4%',c:'up',s:'vs last year'}}
+  };
+  KPIS.sponsors={
+    quarter:{value:{v:'£13,500',d:'▲ 5%',c:'up',s:'vs last year',gold:true},active:{v:'6',d:'4 named campaigns',c:'flat',s:''},renewals:{v:'2',d:'within',c:'down',s:'60 days'},risk:{v:'1',d:'no contact',c:'flat',s:'this quarter'}},
+    year:{value:{v:'£13,500',d:'▲ 5%',c:'up',s:'vs last year',gold:true},active:{v:'6',d:'4 named campaigns',c:'flat',s:''},renewals:{v:'3',d:'this',c:'down',s:'year'},risk:{v:'1',d:'no contact',c:'flat',s:'this year'}}
+  };
+
+  var VIEW_CHARTS={
+    overview:['revExp','source','courts','bar','gym'],
+    members:['jlv'],
+    finance:['finRev','finSrc','margin','exp'],
+    barevents:['barB'],
+    sponsors:[]
+  };
+  var PAGES={
+    overview:['week','month','quarter','year'],
+    members:['month','quarter','year'],
+    finance:['week','month','quarter','year'],
+    barevents:['week','month','quarter','year'],
+    sponsors:['quarter','year']
+  };
+  var customOn={overview:true,members:true,finance:true,barevents:true,sponsors:false};
+  var pagePeriod={overview:'week',members:'month',finance:'week',barevents:'week',sponsors:'quarter'};
+  var currentView='overview';
+  var customSpan={start:'2026-08-01',end:'2026-08-31'};
+
+  /* ---- custom range synthesis ----------------------------------------- */
+  function rangeDays(){
+    return Math.max(1,Math.round((new Date(customSpan.end)-new Date(customSpan.start))/864e5)+1);
+  }
+  function bucketInfo(){
+    var days=rangeDays(),size,kind,n;
+    if(days<=35){size=7;n=Math.max(1,Math.min(10,Math.floor(days/7)));kind='week';}
+    else if(days<=400){size=30;n=Math.max(1,Math.min(14,Math.round(days/30)));kind='month';}
+    else{size=91;n=Math.max(1,Math.min(12,Math.round(days/91)));kind='quarter';}
+    var labels=[],t=new Date(customSpan.start);
+    for(var i=0;i<n;i++){
+      if(kind==='week')labels.push(t.toLocaleDateString('en-GB',{day:'numeric',month:'short'}));
+      else if(kind==='month')labels.push(t.toLocaleDateString('en-GB',{month:'short',year:'2-digit'}));
+      else labels.push('Q'+(Math.floor(t.getMonth()/3)+1)+" '"+String(t.getFullYear()).slice(2));
+      t=new Date(t.getTime()+size*864e5);
+    }
+    return {days:days,n:n,size:size,labels:labels};
+  }
+  function syn(baseDaily,n,days,seed){
+    var per=days/n,out=[];
+    for(var i=0;i<n;i++)out.push(Math.round(baseDaily*per*(1+0.22*Math.sin(i*2.3+seed))));
+    return out;
+  }
+  function chartsCustom(view){
+    var b=bucketInfo(),rev=syn(4.28,b.n,b.days,1),exp=syn(2.37,b.n,b.days,2);
+    return {
+      labels:b.labels,
+      rev:rev, exp:exp,
+      bar:syn(2.47,b.n,b.days,3),
+      gym:syn(166,b.n,b.days,4),
+      join:syn(0.6,b.n,b.days,5), leave:syn(0.2,b.n,b.days,6),
+      margin:rev.map(function(v,i){return v-exp[i]})
+    };
+  }
+  function kpiCustom(view){
+    var d=rangeDays(),C='flat',S=customSpan.start+' → '+customSpan.end;
+    var rev=Math.round(4.28*d*1000/100)*100,exp=Math.round(2.37*d*1000/100)*100;
+    var g=function(x){return {v:'£'+fmt(x),d:'range',c:C,s:S}};
+    var b={};
+    if(view==='overview'||view==='finance'){b.revenue=g(rev);b.expenses=g(exp);}
+    if(view==='overview'){
+      b.members={v:'1,128',d:'range',c:C,s:S};
+      b.court={v:'72%',d:'range',c:C,s:S,gold:true,dgreen:true};
+      b.bar=g(Math.round(2.47*d*1000/100)*100);
+      b.gym={v:fmt(Math.round(166*d)),d:'range',c:C,s:S};
+      b.function={v:String(Math.max(0,Math.round(d/30*18))),d:'bookings',c:'flat',s:'in range'};
+      b.sponsors={v:'6',d:'renewals',c:'flat',s:'in range',gold:true};
+    }
+    if(view==='finance'){b.surplus=g(rev-exp);b.cash={v:'£284,000',d:'reserved',c:'flat',s:'courts & refurbs'};}
+    if(view==='members'){
+      b.active={v:'1,128',d:'range',c:C,s:S};
+      b.joins={v:fmt(Math.round(0.6*d)),d:'range',c:C,s:S};
+      b.renewals={v:'130',d:'next',c:'flat',s:'90 days'};
+      b.fee={v:'£438',d:'across',c:'flat',s:'paid tiers'};
+    }
+    if(view==='barevents'){
+      b.bar=g(Math.round(2.47*d*1000/100)*100);
+      b.func=g(Math.round(18600*d/30/100)*100);
+      b.events={v:String(Math.max(0,Math.round(24*d/30))),d:'range',c:C,s:S};
+      b.spend={v:'£4.50',d:'range',c:C,s:S};
+    }
+    return b;
+  }
+
+  /* ---- render pipeline ------------------------------------------------ */
+  function periodData(view,p){
+    if(view==='overview')return {kpi:P[p].kpi,charts:P[p].charts};
+    var kpi=KPIS[view][p]||KPIS[view][PAGES[view][0]];
+    var charts={};
+    if(view==='finance'){charts.finRev=P[p].charts.revExp;charts.finSrc=P[p].charts.source;charts.margin=MARGIN[p];charts.exp=expData(p);}
+    if(view==='members'){charts.jlv=JLV[p]||JLV.month;}
+    if(view==='barevents'){charts.barB=P[p].charts.bar;}
+    return {kpi:kpi,charts:charts};
+  }
+  function setKpi(view,table){
+    var boxes=document.querySelectorAll('#view-'+view+' .kpi');
+    if(!boxes.length)return;
+    boxes.forEach(function(k){
+      var key=k.getAttribute('data-kpi');
+      if(!key||!table[key])return;
+      var v=table[key];
+      var val=k.querySelector('.k-val');
+      val.textContent=v.v;
+      val.classList.toggle('gold',!!v.gold);
+      var del=k.querySelector('.k-delta');
+      del.className='k-delta '+v.c;
+      var head=v.dgreen?'<span style="color:#34d399">'+v.d+'</span>':v.d;
+      del.innerHTML=head+' <span style="color:#7f93b3">'+v.s+'</span>';
+    });
+  }
+  function setChartData(name,labels,data){
+    var c=CH[name];if(!c)return;
+    c.data.labels=labels;
+    c.data.datasets.forEach(function(ds,i){if(data[i]!=null)ds.data=data[i]});
+    c.update();
+  }
+  function setChartsFrom(view,p,ch){
+    if(p==='custom'){
+      var labels=ch.labels;
+      if(view==='overview'){
+        setChartData('source',CH.source.data.labels,[[54,18,14,9,5]]);srcLegend('srcLegend',[54,18,14,9,5]);
+        setChartData('revExp',labels,[ch.rev,ch.exp]);
+        setChartData('courts',CH.courts.data.labels,[[73,78,60],[27,22,40]]);
+        setChartData('bar',labels,[ch.bar]);
+        setChartData('gym',labels,[ch.gym]);
+      }
+      if(view==='finance'){
+        setChartData('finSrc',CH.finSrc.data.labels,[[54,18,14,9,5]]);srcLegend('finSrcLegend',[54,18,14,9,5]);
+        setChartData('finRev',labels,[ch.rev,ch.exp]);
+        setChartData('margin',labels,[ch.margin]);
+        setChartData('exp',EXPNAMES,expData('custom').data);
+      }
+      if(view==='members')setChartData('jlv',labels,[ch.join,ch.leave]);
+      if(view==='barevents')setChartData('barB',labels,[ch.bar]);
+      return;
+    }
+    VIEW_CHARTS[view].forEach(function(name){
+      var d=ch[name];if(!d)return;
+      setChartData(name,d.labels||CH[name].data.labels,d.data);
+    });
+    if(view==='overview'&&ch.source)srcLegend('srcLegend',ch.source.data[0]);
+    if(view==='finance'&&ch.finSrc)srcLegend('finSrcLegend',ch.finSrc.data[0]);
+  }
+  var SUB={
+    overview:{head:'Club health',sub:{week:'Mon 24 – Sun 30 Aug · last complete week',month:'September 2026 · nearing the summer peak',quarter:'Q3 2026 · steady growth',year:'2026 · year to date'}},
+    members:{head:'Membership',sub:{month:'1,128 active · net +19 this month',quarter:'1,128 active members · +47 this quarter',year:'1,128 active · +137 this year'}},
+    finance:{head:'Finance',sub:{week:'This week · net surplus £13,300',month:'This month · £128,400 revenue vs £71,200 expenses',quarter:'This quarter · £358,000 revenue',year:'2026 · £1,492,000 revenue'}},
+    barevents:{head:'Bar & Events',sub:{week:'This week · £18,900 bar sales · 6 events',month:'This month · £74,000 bar sales',quarter:'This quarter · £216,000 bar sales',year:'2026 · £862,000 bar sales'}},
+    sponsors:{head:'Sponsors',sub:{quarter:'£13,500 sponsor value · 2 renewals due within 60 days',year:'£13,500 sponsor value · 3 renewals this year'}}
+  };
+  var PANEL_SUB={
+    overview:{
+      week:{revExpSub:'Daily revenue vs expenses · this week',srcSub:'This week · membership is the backbone',courtsSub:'Booked court-hours vs available · this week'},
+      month:{revExpSub:'Last 8 months · revenue holds its summer peak',srcSub:'September · membership is the backbone',courtsSub:'Booked court-hours vs available · this month'},
+      quarter:{revExpSub:'Last 4 quarters · steady growth',srcSub:'This quarter · membership is the backbone',courtsSub:'Booked court-hours vs available · this quarter'},
+      year:{revExpSub:'Last 5 years · steady growth',srcSub:'2026 · membership is the backbone',courtsSub:'Booked court-hours vs available · this year'},
+      custom:{revExpSub:'Custom range · revenue vs expenses',srcSub:'Custom range · income mix',courtsSub:'Booked vs available · custom range'}
+    },
+    members:{
+      month:{jlvSub:'Last 12 months · net growth every month'},
+      quarter:{jlvSub:'Last 4 quarters · net growth every quarter'},
+      year:{jlvSub:'Last 5 years · net growth every year'},
+      custom:{jlvSub:'Custom range · joiners vs leavers'}
+    },
+    finance:{
+      week:{finRevSub:'Daily revenue vs expenses · this week',expSub:'Biggest expense lines · this week',marginTitle:'Weekly net margin'},
+      month:{finRevSub:'Monthly revenue vs expenses · Sep–Aug',expSub:'Biggest expense lines · this month',marginTitle:'Monthly net margin'},
+      quarter:{finRevSub:'Quarterly revenue vs expenses · last 4 quarters',expSub:'Biggest expense lines · this quarter',marginTitle:'Quarterly net margin'},
+      year:{finRevSub:'Annual revenue vs expenses · last 5 years',expSub:'Biggest expense lines · this year',marginTitle:'Annual net margin'},
+      custom:{finRevSub:'Custom range · revenue vs expenses',expSub:'Biggest expense lines · custom range',marginTitle:'Net margin · custom range'}
+    },
+    sponsors:{
+      quarter:{spSub:'£13,500 sponsor value · 2 renewals due within 60 days'},
+      year:{spSub:'£13,500 sponsor value · 3 renewals this year'}
+    }
+  };
+  function setSub(view,p){
+    var s=SUB[view]||{head:'',sub:{}};
+    var base=p==='custom'?('custom range '+customSpan.start+' → '+customSpan.end):(s.sub[p]||s.sub[PAGES[view][0]]);
+    el('viewTitle').textContent=s.head;
+    el('viewSub').textContent=base;
+    var ps=((PANEL_SUB[view]||{})[p]||{});
+    Object.keys(ps).forEach(function(id){var t=el(id);if(t)t.textContent=ps[id]});
+  }
+  var EXP_BASE=[['Bar & catering supplies',22400],['Staffing',16800],['Utilities - gas, electric, water',8900],['Courts & grounds upkeep',7400],['Insurance',7100],['Gym equipment & fitness suite',4600],['Marketing & events',4000]];
+  var EXP_TOT={week:16400,month:71200,quarter:206000,year:860000};
+  function expData(p){
+    var tot=EXP_TOT[p];
+    if(p==='custom')tot=Math.round(2.37*rangeDays()*1000/100)*100;
+    var vals=EXP_BASE.map(function(r){return Math.round(r[1]/71200*tot/100)*100});
+    vals[vals.length-1]=Math.max(0,tot-vals.slice(0,-1).reduce(function(a,b){return a+b},0));
+    return {labels:EXPNAMES,data:[vals]};
+  }
+  function render(view,p){
+    var useCustom=(p==='custom'&&customOn[view]);
+    if(useCustom){
+      setKpi(view,kpiCustom(view));
+      setChartsFrom(view,p,chartsCustom(view));
+      setSub(view,'custom');
+      return;
+    }
+    var data=periodData(view,p);
+    setKpi(view,data.kpi);
+    setChartsFrom(view,p,data.charts);
+    setSub(view,p);
+  }
+  var PILL_TXT={week:'This week',month:'This month',quarter:'Quarter',year:'Year'};
+  function buildPills(){
+    var v=currentView;
+    var wrap=el('pills');
+    wrap.innerHTML='';
+    PAGES[v].forEach(function(pp){
+      var s=document.createElement('span');
+      s.className='pill'+(pagePeriod[v]===pp?' on':'');
+      s.textContent=PILL_TXT[pp];
+      s.onclick=function(){pagePeriod[v]=pp;buildPills();render(v,pp)};
+      wrap.appendChild(s);
+    });
+    if(customOn[v]){
+      var c=document.createElement('span');
+      c.className='pill'+(pagePeriod[v]==='custom'?' on':'');
+      c.textContent='Custom';
+      c.onclick=function(){pagePeriod[v]='custom';buildPills();render(v,'custom')};
+      wrap.appendChild(c);
+    }
+    el('rangeRow').style.display=(customOn[v]&&pagePeriod[v]==='custom')?'flex':'none';
+  }
+
+  /* ---- charts: overview ------------------------------------------------ */
+  var CH={};
+  CH.revExp=mk('cRevExp',{
+    type:'bar',
+    data:{labels:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug'],datasets:[
+      {label:'Revenue',data:[86,92,98,105,112,116,124,128],backgroundColor:GOLD,borderRadius:4,barPercentage:.55},
+      {label:'Expenses',data:[58,61,60,66,69,70,72,71],backgroundColor:'rgba(255,255,255,.14)',borderRadius:4,barPercentage:.55}]},
+    options:base({scales:{x:{grid:{display:false}},y:{grid:{color:gridColor()},ticks:{callback:function(v){return '£'+v+'k'}}}}})
+  });
+  CH.source=mk('cSource',{
+    type:'doughnut',
+    data:{labels:srcNames,datasets:[{data:srcData(100),backgroundColor:srcColors,borderWidth:2,borderColor:'#0a1830'}]},
+    options:base({cutout:'66%',plugins:{legend:{display:false},tooltip:{enabled:true}}})
+  });
+  srcLegend('srcLegend',srcData(100));
+  CH.courts=mk('cCourts',{
+    type:'bar',
+    data:{labels:['Tennis','Paddle','Squash'],datasets:[
+      {label:'Booked',data:[73,78,60],backgroundColor:GOLD,borderRadius:4},
+      {label:'Available',data:[27,22,40],backgroundColor:'rgba(255,255,255,.14)',borderRadius:4}]},
+    options:base({plugins:{legend:{position:'bottom'}},scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,grid:{color:gridColor()},ticks:{callback:function(v){return v+'%'}}}}})
+  });
+  mk('cMix',{
+    type:'bar',
+    data:{labels:['Standard (O29)','Juvenile (U15)','Junior (U18)','Senior (15+ yrs)','Junior Family','Life'],datasets:[
+      {label:'Members',data:[396,216,97,79,72,67],backgroundColor:function(ctx){return ctx.raw>=300?'#FCDC00':'rgba(255,255,255,.25)'},borderRadius:4,barPercentage:.65}]},
+    options:base({indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{grid:{color:gridColor()},ticks:{precision:0}},y:{grid:{display:false}}}})
+  });
+  CH.bar=mk('cBar',{
+    type:'line',
+    data:{labels:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],datasets:[
+      {label:'Bar sales',data:[1.5,1.2,1.7,2.2,3.6,5.1,4.0],borderColor:GOLD,backgroundColor:function(ctx){var c=ctx.chart.ctx,g=c.createLinearGradient(0,0,0,240);g.addColorStop(0,'rgba(252,220,0,.22)');g.addColorStop(1,'rgba(252,220,0,0)');return g},fill:true,tension:.35,pointRadius:0,borderWidth:2}]},
+    options:base({plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{color:gridColor()},ticks:{callback:function(v){return '£'+v+'k'}}}}})
+  });
+  CH.gym=mk('cGym',{
+    type:'bar',
+    data:{labels:['6a','7a','8a','9a','10a','11a','12p','1p','2p','3p','4p','5p','6p','7p','8p','9p'],datasets:[
+      {label:'Check-ins',data:[14,44,70,55,32,28,36,32,30,26,32,52,90,78,40,13],backgroundColor:function(ctx){return ctx.raw>=80?'#FCDC00':'rgba(255,255,255,.22)'},borderRadius:3}]},
+    options:base({plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{maxRotation:0,autoSkip:false,font:{size:9}}},y:{grid:{color:gridColor()}}}})
+  });
+
+  /* ---- charts: members ------------------------------------------------ */
+  CH.jlv=mk('cJlv',{
+    type:'line',
+    data:{labels:JLVM,datasets:[
+      {label:'Joiners',data:[16,14,18,13,19,15,21,17,19,18,23,24],borderColor:GOLD,backgroundColor:'rgba(252,220,0,.1)',fill:true,tension:.3,pointRadius:0,borderWidth:2},
+      {label:'Leavers',data:[7,7,6,7,5,6,5,6,6,6,6,5],borderColor:'rgba(255,255,255,.3)',tension:.3,pointRadius:0,borderWidth:2}]},
+    options:base({scales:{x:{grid:{display:false}},y:{grid:{color:gridColor()}}}})
+  });
+  mk('cTop',{
+    type:'bar',
+    data:{labels:TOPNAMES,datasets:[
+      {label:'Members',data:TOPMEM,backgroundColor:function(ctx){return ctx.dataIndex===0?'#FCDC00':'rgba(255,255,255,.28)'},borderRadius:4,barPercentage:.6}]},
+    options:base({indexAxis:'y',layout:{padding:{right:110}},plugins:{legend:{display:false}},scales:{x:{grid:{color:gridColor()},ticks:{precision:0,maxTicksLimit:6}},y:{grid:{display:false},ticks:{autoSkip:false,font:{size:11}}}}}),
+    plugins:[barValue(function(v,i){return fmt(v)+' · '+TOPINC[i]})]
+  });
+
+  /* ---- charts: finance ------------------------------------------------ */
+  CH.finRev=mk('cFinRev',{
+    type:'bar',
+    data:{labels:JLVM,datasets:[
+      {label:'Revenue',data:[101,98,99,104,112,108,118,121,124,126,129,128],backgroundColor:GOLD,borderRadius:4,barPercentage:.55},
+      {label:'Expenses',data:[62,59,64,71,68,66,70,71,69,70,73,72],backgroundColor:'rgba(255,255,255,.14)',borderRadius:4,barPercentage:.55}]},
+    options:base({scales:{x:{grid:{display:false}},y:{grid:{color:gridColor()},ticks:{callback:function(v){return '£'+v+'k'}}}}})
+  });
+  CH.finSrc=mk('cFinSrc',{
+    type:'doughnut',
+    data:{labels:srcNames,datasets:[{data:srcData(100),backgroundColor:srcColors,borderWidth:2,borderColor:'#0a1830'}]},
+    options:base({cutout:'66%',plugins:{legend:{display:false}}})
+  });
+  srcLegend('finSrcLegend',srcData(100));
+  CH.margin=mk('cMargin',{
+    type:'bar',
+    data:{labels:JLVM,datasets:[
+      {label:'Net',data:[43,41,35,29,39,38,46,46,57,60,54,57],backgroundColor:function(ctx){return ctx.raw>=45?'#FCDC00':'rgba(255,255,255,.28)'},borderRadius:4}]},
+    options:base({plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{color:gridColor()},ticks:{callback:function(v){return '£'+v+'k'}}}}}),
+    plugins:[barValue(function(v){return '£'+v+'k'})]
+  });
+  CH.exp=mk('cExp',{
+    type:'bar',
+    data:{labels:EXPNAMES,datasets:[
+      {label:'Spend',data:expData('month').data,backgroundColor:function(ctx){return ctx.dataIndex<2?'#FCDC00':'rgba(255,255,255,.28)'},borderRadius:4,barPercentage:.6}]},
+    options:base({plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{maxRotation:45,minRotation:45,font:{size:10}}},y:{grid:{color:gridColor()},ticks:{maxTicksLimit:6,callback:function(v){return v>=1000?'£'+Math.round(v/1000)+'k':'£'+v}}}}}),
+    plugins:[barValue(function(v){return v>=1000?'£'+(Math.round(v/100)/10)+'k':'£'+v})]
+  });
+
+  /* ---- charts: bar & events ------------------------------------------- */
+  CH.barB=mk('cBarB',{
+    type:'line',
+    data:{labels:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],datasets:[
+      {label:'Bar sales',data:[1.5,1.2,1.7,2.2,3.6,5.1,4.0],borderColor:GOLD,backgroundColor:function(ctx){var c=ctx.chart.ctx,g=c.createLinearGradient(0,0,0,240);g.addColorStop(0,'rgba(252,220,0,.22)');g.addColorStop(1,'rgba(252,220,0,0)');return g},fill:true,tension:.35,pointRadius:0,borderWidth:2}]},
+    options:base({plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{color:gridColor()},ticks:{callback:function(v){return '£'+v+'k'}}}}})
+  });
+  mk('cStockSofts',{
+    type:'bar',
+    data:{labels:SOFTNAMES,datasets:[
+      {label:'Cases',data:SOFTCUR,backgroundColor:function(ctx){return stockColor(SOFTCUR,SOFTPAR,ctx.dataIndex)},borderRadius:4,barPercentage:.6}]},
+    options:base({indexAxis:'y',layout:{padding:{left:12,right:96}},plugins:{legend:{display:false}},scales:{x:{grid:{color:gridColor()},ticks:{precision:0,maxTicksLimit:6},title:{display:true,text:'Cases',color:'#7f93b3',font:{size:10}}},y:{grid:{display:false},afterFit:function(ax){ax.width+=16},ticks:{autoSkip:false,font:{size:10}}}}}),
+    plugins:[barValue(function(v,i){return v+' · par '+SOFTPAR[i]})]
+  });
+  mk('cStockWine',{
+    type:'bar',
+    data:{labels:WINENAMES,datasets:[
+      {label:'Bottles',data:WINECUR,backgroundColor:function(ctx){return stockColor(WINECUR,WINEPAR,ctx.dataIndex)},borderRadius:4,barPercentage:.6}]},
+    options:base({indexAxis:'y',layout:{padding:{left:12,right:96}},plugins:{legend:{display:false}},scales:{x:{grid:{color:gridColor()},ticks:{precision:0,maxTicksLimit:6},title:{display:true,text:'Bottles',color:'#7f93b3',font:{size:10}}},y:{grid:{display:false},afterFit:function(ax){ax.width+=16},ticks:{autoSkip:false,font:{size:10}}}}}),
+    plugins:[barValue(function(v,i){return v+' · par '+WINEPAR[i]})]
+  });
+
+  /* ---- static list builders -------------------------------------------- */
+  /* membership categories now render as the merged top-5 chart */
+  /* expenses now render as cExp chart */
+  (function(){
+    var fn=[
+      {n:'Wedding Reception',sub:'Sat 13 Sep · 12:00–23:00',v:'£1,800',c:'#FCDC00'},
+      {n:'Mixer & Curry Night',sub:'Fri 20 Sep · 19:30–23:00',v:'£1,250',c:'#a3e635'},
+      {n:'Corporate Away-Day',sub:'Thu 25 Sep · 9:00–17:00',v:'£720',c:'#38bdf8'},
+      {n:'Club AGM',sub:'Wed 1 Oct · 18:30–20:30',v:'£0',c:'rgba(255,255,255,.35)'},
+      {n:'Autumn Supper',sub:'Fri 10 Oct · 19:00–23:00',v:'£840',c:'#f59e0b'},
+      {n:'Halloween Social',sub:'Sat 31 Oct · 20:00–late',v:'£350',c:'#c084fc'}
+    ];
+    ['fnRows','fnRows2'].forEach(function(id){
+      var t=el(id);
+      fn.forEach(function(x){
+        var d=document.createElement('div');d.className='row';
+        d.innerHTML='<span class="dot" style="background:'+x.c+'"></span>'+
+          '<div class="r-name">'+x.n+'<div class="r-sub">'+x.sub+'</div></div>'+
+          '<div><div class="r-val">'+x.v+'</div><div class="r-sub2">forecast</div></div>';
+        t.appendChild(d);
+      });
+    });
+    var ev=[
+      ['Junior Tournament','Sat 14 Sep · 3 courts all day','▲ 34% bar lift','ok'],
+      ['Mixer & Curry Night','Fri 20 Sep · members + guests','▲ 41% food night','ok'],
+      ['Padel League Final','Sat 27 Sep · bring your own racket','▲ 28% evening trade','warn'],
+      ['Club AGM','Wed 1 Oct · function room','- quiet night','ok'],
+      ['Autumn Supper','Fri 10 Oct · ticketed','▲ 19%','warn'],
+      ['Halloween Social','Sat 31 Oct · themed night','▲ 46% bar lift','ok']
+    ];
+    var t=el('evRows');
+    ev.forEach(function(e){
+      var tr=document.createElement('tr');
+      tr.innerHTML='<td><b>'+e[0]+'</b></td><td>'+e[1]+'</td><td>'+e[2]+'</td>'+
+        '<td><span class="tag '+(e[3]==='ok'?'ok':'warn')+'">'+(e[3]==='ok'?'On track':'Watch')+'</span></td>';
+      t.appendChild(tr);
+    });
+  })();
+  (function(){
+    var sp=[
+      ['Fetherstons','£4,000 · 1 yr · expires 10 Sep',40,63,'warn','Naming rights C2 · banner · 2 corporate socials'],
+      ['Nicholas Residential','£2,500 · 2 yr · expires 16 Oct',59,100,'warn','Naming rights CA · 8 staff socials · meeting room ×10'],
+      ['Haffners','£4,000 · to Apr + £2k ext.',0,55,'ok','Centre court banners'],
+      ['Juice Jar','£1,000 · tournament',72,35,'bad','Ulster Junior Open · no written agreement'],
+      ['Knightsbridge Wealth Mgt','amount tbc · tournament',30,41,'warn','August tournament · no written agreement'],
+      ['Marlborough Clinic','£2,000 · tournament',55,48,'warn','Open tournament · no written agreement']
+    ];
+    var t=el('spTable');
+    sp.forEach(function(s){
+      var tr=document.createElement('tr');
+      var tag=s[4]==='ok'?'ok':(s[4]==='bad'?'bad':'warn');
+      var tagTxt=s[4]==='ok'?'On track':(s[4]==='bad'?'At risk':'Renewal');
+      tr.innerHTML='<td><b>'+s[0]+'</b><div class="r-sub">'+s[5]+'</div></td>'+
+        '<td>'+s[1]+'</td><td>'+s[2]+'</td>'+
+        '<td><span class="tag '+tag+'">'+tagTxt+'</span></td>'+
+        '<td><div class="bar"><i style="width:'+s[3]+'%"></i></div></td>';
+      t.appendChild(tr);
+    });
+  })();
+  (function(){
+    var heat=[{d:'Mon',v:1160,c:'rgba(255,255,255,.4)'},{d:'Tue',v:1670,c:'#FCDC00'},{d:'Wed',v:990,c:'rgba(255,255,255,.3)'},{d:'Thu',v:1290,c:'rgba(255,255,255,.55)'},{d:'Fri',v:1560,c:'#FCDC00'},{d:'Sat',v:1405,c:'rgba(255,255,255,.55)'},{d:'Sun',v:880,c:'rgba(255,255,255,.3)'}];
+    var max=Math.max.apply(null,heat.map(function(x){return x.v}));
+    var t=el('heat');
+    heat.forEach(function(x){
+      var d=document.createElement('div');d.className='d';
+      d.innerHTML='<b>'+x.d+'</b><span class="c">'+x.v+'</span><div class="bar-mini"><i style="width:'+(x.v/max*100)+'%;background:'+x.c+'"></i></div>';
+      t.appendChild(d);
+    });
+  })();
+  (function(){
+    var sp=[
+      {n:'Fetherstons',sub:'£4,000/yr · expires 10 Sep',v:'Renewals',v2:'due in 10 days',c:'#f59e0b',b:'63%',bg:'#f59e0b'},
+      {n:'Nicholas Residential',sub:'£2,500/yr · expires 16 Oct',v:'Renewals',v2:'due in 45 days',c:'#FCDC00',b:'100%',bg:'#FCDC00'},
+      {n:'Juice Jar',sub:'£1,000 · tournament',v:'At risk',v2:'no written agreement',c:'#f87171',b:'35%',bg:'#f87171'},
+      {n:'Knightsbridge Wealth',sub:'amount tbc · tournament',v:'Watch',v2:'no written agreement',c:'#38bdf8',b:'41%',bg:'#38bdf8'}
+    ];
+    var t=el('spRows');
+    sp.forEach(function(x){
+      var d=document.createElement('div');d.className='row';
+      d.innerHTML='<span class="dot" style="background:'+x.c+'"></span>'+
+        '<div style="flex:1"><div class="r-name">'+x.n+'</div><div class="r-sub">'+x.sub+'</div><div class="bar"><i style="width:'+x.b+';background:'+x.bg+'"></i></div></div>'+
+        '<div><div class="r-val">'+x.v+'</div><div class="r-sub2">'+x.v2+'</div></div>';
+      t.appendChild(d);
+    });
+  })();
+
+  /* ---- nav / pills / range wiring -------------------------------------- */
+  document.querySelectorAll('.nav-item').forEach(function(n){
+    n.addEventListener('click',function(){
+      document.querySelectorAll('.nav-item').forEach(function(x){x.classList.remove('active')});
+      n.classList.add('active');
+      currentView=n.getAttribute('data-view');
+      document.querySelectorAll('.view').forEach(function(s){s.classList.remove('on')});
+      el('view-'+currentView).classList.add('on');
+      buildPills();
+      render(currentView,pagePeriod[currentView]);
+    });
+  });
+  el('rStart').value=customSpan.start;
+  el('rEnd').value=customSpan.end;
+  el('rApply').addEventListener('click',function(){
+    var s=el('rStart').value,e=el('rEnd').value;
+    if(!s||!e||e<s){alert('Pick a valid date range');return;}
+    customSpan.start=s;customSpan.end=e;
+    pagePeriod[currentView]='custom';
+    buildPills();
+    render(currentView,'custom');
+  });
+  buildPills();
+  render(currentView,pagePeriod[currentView]);
+})();
+</script></body>
+</html>

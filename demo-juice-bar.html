@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Harbour Juice Co. - Weekly pack (sample demo)</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}body{background:#081426;color:#e8edf6;font-family:system-ui,sans-serif;font-size:14px;min-height:100vh}
+.layout{display:flex;min-height:100vh}.side{width:220px;flex-shrink:0;background:#0a1830;border-right:1px solid rgba(255,255,255,.06);padding:22px 14px;position:sticky;top:0;height:100vh}
+.brand{display:flex;align-items:center;gap:12px;padding-bottom:18px;border-bottom:1px solid rgba(255,255,255,.06);margin-bottom:12px}
+.badge{width:42px;height:42px;border-radius:12px;background:#FCDC00;color:#0a1830;font-weight:800;font-size:20px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.bname{font-size:15px;font-weight:700}.nav{font-size:10px;color:#5d739a;text-transform:uppercase;letter-spacing:.12em;padding:12px 8px 6px}
+.ni{padding:9px 10px;border-radius:9px;color:#9db1d0;font-size:13px;cursor:pointer}.ni.on{background:#FCDC00;color:#0a1830;font-weight:700}
+.main{flex:1;padding:26px 30px;max-width:1200px}.top h1{font-size:22px}.date{font-size:12px;color:#7f93b3}
+.pill{display:inline-block;background:rgba(252,220,0,.15);border:1px solid #FCDC00;color:#FCDC00;border-radius:999px;padding:2px 12px;font-size:12px;font-weight:700}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin:20px 0}
+.kpi{background:#0a1830;border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:16px 18px}
+.kpi .l{font-size:11px;color:#7f93b3;text-transform:uppercase;letter-spacing:.08em;font-weight:600}
+.kpi .v{font-size:26px;font-weight:800}.up{color:#34d399}.down{color:#f87171}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+.panel{background:#0a1830;border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:18px 20px;margin-bottom:14px}
+.panel h3{font-size:13px;margin-bottom:2px}.panel .sub{font-size:11px;color:#7f93b3;margin-bottom:12px}
+.s8{grid-column:span 8}.s4{grid-column:span 4}.s6{grid-column:span 6}.s12{grid-column:span 12}
+@media(max-width:800px){.s8,.s4,.s6{grid-column:span 12}.side{display:none}}
+.bars{display:flex;align-items:flex-end;gap:8px;height:150px;padding-top:10px}
+.bar{flex:1;background:linear-gradient(180deg,#FCDC00,#8a7600);border-radius:6px 6px 0 0;position:relative;min-height:8px}
+.bar span{position:absolute;bottom:-20px;left:0;right:0;text-align:center;font-size:10px;color:#7f93b3}
+.row{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:13px}
+.row:last-child{border:none}.warn{color:#FCDC00;font-weight:700}.act{background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.3);border-radius:10px;padding:10px 12px;margin:8px 0;font-size:13px}
+.foot{font-size:11px;color:#5d739a;margin-top:16px}
+</style>
+</head>
+<body>
+<div class="layout">
+<aside class="side"><div class="brand"><div class="badge">H</div><div class="bname">Harbour Juice Co.</div></div>
+<div class="nav">Sample demo</div><div class="ni on" data-v="all">Overview</div><div class="ni" data-v="sales">Sales</div><div class="ni" data-v="stock">Stock</div><div class="ni" data-v="rota">Rota (extra)</div></aside>
+<div class="main">
+<div class="top"><h1>Week 34 <span class="pill">SAMPLE · mock numbers</span></h1><div class="date">Board-ready Monday · auto-feeds, no uploads</div></div>
+<div class="kpis">
+<div class="kpi"><div class="l">Revenue</div><div class="v">£8,420</div><div class="up">▲ 4.1% vs last week</div></div>
+<div class="kpi"><div class="l">Avg transaction</div><div class="v">£6.80</div><div class="up">▲ 2.0%</div></div>
+<div class="kpi"><div class="l">Wastage</div><div class="v">6.2%</div><div class="up">▼ 1.1pts - good</div></div>
+<div class="kpi"><div class="l">Staff hours</div><div class="v">212</div><div class="down">▲ 6 vs rota plan</div></div>
+</div>
+<div class="grid"><div class="s8" data-view="sales"><div class="panel"><h3>Sales by day</h3><div class="sub">Till export · Saturday carries the week</div>
+<div class="bars">
+<div class="bar" style="height:38%"><span>Mon</span></div><div class="bar" style="height:42%"><span>Tue</span></div><div class="bar" style="height:47%"><span>Wed</span></div><div class="bar" style="height:55%"><span>Thu</span></div><div class="bar" style="height:72%"><span>Fri</span></div><div class="bar" style="height:100%"><span>Sat</span></div><div class="bar" style="height:80%"><span>Sun</span></div>
+</div><div style="height:26px"></div></div></div>
+<div class="s4" data-view="sales"><div class="panel"><h3>Top drinks</h3><div class="sub">Revenue this week</div>
+<div class="row"><span>Mango Tango</span><b>£1,240</b></div>
+<div class="row"><span>Green Machine</span><b>£980</b></div>
+<div class="row"><span>Berry Boost</span><b>£860</b></div>
+<div class="row"><span>Oat Flat White</span><b>£720</b></div></div></div></div>
+<div class="grid"><div class="s6" data-view="stock"><div class="panel"><h3>Stock gaps</h3><div class="sub">Supplier sheet · cover at current pace</div>
+<div class="row"><span>Oat milk</span><b class="warn">2 days - reorder Tue</b></div>
+<div class="row"><span>Strawberries</span><b class="warn">3 days - watch</b></div>
+<div class="row"><span>Mango pulp</span><b>9 days - fine</b></div>
+<div class="row"><span>Cups &amp; lids</span><b>14 days - fine</b></div></div></div>
+<div class="s6" data-view="rota"><div class="panel"><h3>Rota vs actuals <span class="pill">extra £195/mo</span></h3><div class="sub">What the add-on looks like</div>
+<div class="row"><span>Friday close overstaffed 4h</span><b class="warn">≈ £52</b></div>
+<div class="row"><span>Saturday peak understaffed</span><b>queue 11 min</b></div>
+<div class="act"><b>3 actions:</b> ① reorder oat milk Tue ② trim Friday close by one ③ push Green Machine promo (margin 71%).</div></div></div></div>
+<div class="foot">DEMO - all figures invented for illustration. Your pack fills itself in from till, Stripe, bank and sheets.</div>
+</div></div>
+<script>
+document.querySelectorAll('.ni').forEach(function(n){n.addEventListener('click',function(){document.querySelectorAll('.ni').forEach(function(x){x.classList.remove('on')});n.classList.add('on');var v=n.getAttribute('data-v');document.querySelectorAll('[data-view]').forEach(function(p){p.style.display=(v==='all'||p.getAttribute('data-view')===v)?'':'none';});});});
+</script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Clearhead Social - Weekly pack (sample demo)</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}body{background:#081426;color:#e8edf6;font-family:system-ui,sans-serif;font-size:14px;min-height:100vh}
+.layout{display:flex;min-height:100vh}.side{width:220px;flex-shrink:0;background:#0a1830;border-right:1px solid rgba(255,255,255,.06);padding:22px 14px;position:sticky;top:0;height:100vh}
+.brand{display:flex;align-items:center;gap:12px;padding-bottom:18px;border-bottom:1px solid rgba(255,255,255,.06);margin-bottom:12px}
+.badge{width:42px;height:42px;border-radius:12px;background:#00ADF1;color:#0a1830;font-weight:800;font-size:20px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.bname{font-size:15px;font-weight:700}.nav{font-size:10px;color:#5d739a;text-transform:uppercase;letter-spacing:.12em;padding:12px 8px 6px}
+.ni{padding:9px 10px;border-radius:9px;color:#9db1d0;font-size:13px;cursor:pointer}.ni.on{background:#00ADF1;color:#0a1830;font-weight:700}
+.main{flex:1;padding:26px 30px;max-width:1200px}.top h1{font-size:22px}.date{font-size:12px;color:#7f93b3}
+.pill{display:inline-block;background:rgba(0,173,241,.15);border:1px solid #00ADF1;color:#7fd4f7;border-radius:999px;padding:2px 12px;font-size:12px;font-weight:700}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin:20px 0}
+.kpi{background:#0a1830;border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:16px 18px}
+.kpi .l{font-size:11px;color:#7f93b3;text-transform:uppercase;letter-spacing:.08em;font-weight:600}
+.kpi .v{font-size:26px;font-weight:800}.up{color:#34d399}.down{color:#f87171}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+.panel{background:#0a1830;border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:18px 20px;margin-bottom:14px}
+.panel h3{font-size:13px;margin-bottom:2px}.panel .sub{font-size:11px;color:#7f93b3;margin-bottom:12px}
+.s8{grid-column:span 8}.s4{grid-column:span 4}.s6{grid-column:span 6}.s12{grid-column:span 12}
+@media(max-width:800px){.s8,.s4,.s6{grid-column:span 12}.side{display:none}}
+.row{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:13px}
+.row:last-child{border:none}.warn{color:#FCDC00;font-weight:700}
+.funnel{display:flex;align-items:center;gap:8px;margin:12px 0}.fstep{flex:1;background:rgba(0,173,241,.12);border:1px solid rgba(0,173,241,.4);border-radius:10px;padding:10px;text-align:center;font-size:12px}
+.fstep b{display:block;font-size:18px}.arr{color:#5d739a;font-weight:800}
+.act{background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.3);border-radius:10px;padding:10px 12px;margin:8px 0;font-size:13px}
+.foot{font-size:11px;color:#5d739a;margin-top:16px}
+</style>
+</head>
+<body>
+<div class="layout">
+<aside class="side"><div class="brand"><div class="badge">C</div><div class="bname">Clearhead Social</div></div>
+<div class="nav">Sample demo</div><div class="ni on" data-v="all">Overview</div><div class="ni" data-v="events">Events</div><div class="ni" data-v="members">Members</div><div class="ni" data-v="pipeline">Pipeline (extra)</div></aside>
+<div class="main">
+<div class="top"><h1>Week 34 <span class="pill">SAMPLE · mock numbers</span></h1><div class="date">Board-ready Monday · ticketing + Circle + Instagram auto-feeds</div></div>
+<div class="kpis">
+<div class="kpi"><div class="l">Ticket sales</div><div class="v">£3,150</div><div class="up">▲ 12% vs last week</div></div>
+<div class="kpi"><div class="l">Active members</div><div class="v">486</div><div class="up">+18 this week</div></div>
+<div class="kpi"><div class="l">Instagram reach</div><div class="v">21.4k</div><div class="up">▲ 8%</div></div>
+<div class="kpi"><div class="l">No-show rate</div><div class="v">9%</div><div class="up">▼ 2pts - good</div></div>
+</div>
+<div class="grid"><div class="s6" data-view="events"><div class="panel"><h3>Ticket sales by event</h3><div class="sub">Ticketing export · last 4 events</div>
+<div class="row"><span>Sunrise hike + coffee</span><b>£940 · 88 sold</b></div>
+<div class="row"><span>Quiz night (dry bar)</span><b>£810 · 96 sold</b></div>
+<div class="row"><span>Run club + brunch</span><b>£760 · 74 sold</b></div>
+<div class="row"><span>Life-drawing evening</span><b class="warn">£640 · 51 sold - soft</b></div></div></div>
+<div class="s6" data-view="members"><div class="panel"><h3>Where members talk</h3><div class="sub">Circle + Instagram exports</div>
+<div class="row"><span>Circle posts / comments</span><b>64 / 412</b></div>
+<div class="row"><span>New trial guests</span><b>47</b></div>
+<div class="row"><span>Trial → paid converted</span><b class="warn">12 of 47 - chase 35</b></div>
+<div class="row"><span>Reel saves (recap)</span><b>1,180</b></div></div></div></div>
+<div class="grid"><div class="s12" data-view="pipeline"><div class="panel"><h3>Guest pipeline <span class="pill">extra £195/mo</span></h3><div class="sub">What the add-on looks like</div>
+<div class="funnel"><div class="fstep"><b>47</b>trial guests</div><div class="arr">→</div><div class="fstep"><b>12</b>converted</div><div class="arr">→</div><div class="fstep"><b>35</b>to chase</div></div>
+<div class="act"><b>3 actions:</b> ① message the 35 warm trials this week ② repeat the quiz-night format (best £/head) ③ rest life-drawing for a month.</div></div></div></div>
+<div class="foot">DEMO - all figures invented for illustration. Your pack fills itself in from ticketing, Stripe, Circle and Instagram.</div>
+</div></div>
+<script>
+document.querySelectorAll('.ni').forEach(function(n){n.addEventListener('click',function(){document.querySelectorAll('.ni').forEach(function(x){x.classList.remove('on')});n.classList.add('on');var v=n.getAttribute('data-v');document.querySelectorAll('[data-view]').forEach(function(p){p.style.display=(v==='all'||p.getAttribute('data-view')===v)?'':'none';});});});
+</script>
+</body>
+</html>

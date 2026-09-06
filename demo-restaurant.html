@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Olive &amp; Ash - Weekly pack (sample demo)</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}body{background:#081426;color:#e8edf6;font-family:system-ui,sans-serif;font-size:14px;min-height:100vh}
+.layout{display:flex;min-height:100vh}.side{width:220px;flex-shrink:0;background:#0a1830;border-right:1px solid rgba(255,255,255,.06);padding:22px 14px;position:sticky;top:0;height:100vh}
+.brand{display:flex;align-items:center;gap:12px;padding-bottom:18px;border-bottom:1px solid rgba(255,255,255,.06);margin-bottom:12px}
+.badge{width:42px;height:42px;border-radius:12px;background:#BD322C;color:#fff;font-weight:800;font-size:20px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.bname{font-size:15px;font-weight:700}.nav{font-size:10px;color:#5d739a;text-transform:uppercase;letter-spacing:.12em;padding:12px 8px 6px}
+.ni{padding:9px 10px;border-radius:9px;color:#9db1d0;font-size:13px;cursor:pointer}.ni.on{background:#BD322C;color:#fff;font-weight:700}
+.main{flex:1;padding:26px 30px;max-width:1200px}.top h1{font-size:22px}.date{font-size:12px;color:#7f93b3}
+.pill{display:inline-block;background:rgba(189,50,44,.18);border:1px solid #BD322C;color:#f0a09b;border-radius:999px;padding:2px 12px;font-size:12px;font-weight:700}
+.gold{background:rgba(252,220,0,.15);border-color:#FCDC00;color:#FCDC00}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin:20px 0}
+.kpi{background:#0a1830;border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:16px 18px}
+.kpi .l{font-size:11px;color:#7f93b3;text-transform:uppercase;letter-spacing:.08em;font-weight:600}
+.kpi .v{font-size:26px;font-weight:800}.up{color:#34d399}.down{color:#f87171}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+.panel{background:#0a1830;border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:18px 20px;margin-bottom:14px}
+.panel h3{font-size:13px;margin-bottom:2px}.panel .sub{font-size:11px;color:#7f93b3;margin-bottom:12px}
+.s8{grid-column:span 8}.s4{grid-column:span 4}.s6{grid-column:span 6}.s12{grid-column:span 12}
+@media(max-width:800px){.s8,.s4,.s6{grid-column:span 12}.side{display:none}}
+.bars{display:flex;align-items:flex-end;gap:8px;height:150px;padding-top:10px}
+.bar{flex:1;background:linear-gradient(180deg,#e0685f,#7a201b);border-radius:6px 6px 0 0;position:relative;min-height:8px}
+.bar span{position:absolute;bottom:-20px;left:0;right:0;text-align:center;font-size:10px;color:#7f93b3}
+.row{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:13px}
+.row:last-child{border:none}.warn{color:#FCDC00;font-weight:700}
+.act{background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.3);border-radius:10px;padding:10px 12px;margin:8px 0;font-size:13px}
+.foot{font-size:11px;color:#5d739a;margin-top:16px}
+</style>
+</head>
+<body>
+<div class="layout">
+<aside class="side"><div class="brand"><div class="badge">O</div><div class="bname">Olive &amp; Ash</div></div>
+<div class="nav">Sample demo</div><div class="ni on" data-v="all">Overview</div><div class="ni" data-v="covers">Covers</div><div class="ni" data-v="promos">Promos (extra)</div><div class="ni" data-v="stock">Stock</div></aside>
+<div class="main">
+<div class="top"><h1>Week 34 <span class="pill">SAMPLE · mock numbers</span></h1><div class="date">Board-ready Monday · till + bookings + supplier sheets</div></div>
+<div class="kpis">
+<div class="kpi"><div class="l">Covers</div><div class="v">612</div><div class="up">▲ 5% vs last week</div></div>
+<div class="kpi"><div class="l">Avg spend / head</div><div class="v">£28.40</div><div class="up">▲ 3%</div></div>
+<div class="kpi"><div class="l">Food cost</div><div class="v">29.1%</div><div class="down">▲ 0.8pts - watch</div></div>
+<div class="kpi"><div class="l">Promo uplift</div><div class="v">+£1,120</div><div class="up">Tue offer working</div></div>
+</div>
+<div class="grid"><div class="s8" data-view="covers"><div class="panel"><h3>Covers by day</h3><div class="sub">Bookings export · weekends carry the week</div>
+<div class="bars">
+<div class="bar" style="height:30%"><span>Mon</span></div><div class="bar" style="height:52%"><span>Tue</span></div><div class="bar" style="height:40%"><span>Wed</span></div><div class="bar" style="height:55%"><span>Thu</span></div><div class="bar" style="height:85%"><span>Fri</span></div><div class="bar" style="height:100%"><span>Sat</span></div><div class="bar" style="height:70%"><span>Sun</span></div>
+</div><div style="height:26px"></div></div></div>
+<div class="s4" data-view="promos"><div class="panel"><h3>Promo performance <span class="pill gold">extra £195/mo</span></h3><div class="sub">What the add-on looks like</div>
+<div class="row"><span>2-for-1 Tue</span><b class="warn">+£640 net</b></div>
+<div class="row"><span>Set lunch</span><b>+£310 net</b></div>
+<div class="row"><span>Wine Wed −20%</span><b>+£170 net</b></div>
+<div class="row"><span>Bottomless Sun</span><b class="warn">−£90 - kill?</b></div></div></div></div>
+<div class="grid"><div class="s6" data-view="stock"><div class="panel"><h3>Stock gaps</h3><div class="sub">Supplier sheet · cover at current pace</div>
+<div class="row"><span>Beef fillet</span><b class="warn">3 days - renegotiate?</b></div>
+<div class="row"><span>House red</span><b>6 days - fine</b></div>
+<div class="row"><span>Olive oil</span><b>11 days - fine</b></div></div></div>
+<div class="s6" data-view="covers"><div class="panel"><h3>Staffing note</h3><div class="sub">Rota sheet vs covers</div>
+<div class="row"><span>Sunday lunch overstaffed 5h</span><b class="warn">≈ £65</b></div>
+<div class="act"><b>3 actions:</b> ① extend Tue offer one week ② kill Bottomless Sun ③ trim Sunday shift by one.</div></div></div></div>
+<div class="foot">DEMO - all figures invented for illustration. Your pack fills itself in from till, bookings, bank and sheets.</div>
+</div></div>
+<script>
+document.querySelectorAll('.ni').forEach(function(n){n.addEventListener('click',function(){document.querySelectorAll('.ni').forEach(function(x){x.classList.remove('on')});n.classList.add('on');var v=n.getAttribute('data-v');document.querySelectorAll('[data-view]').forEach(function(p){p.style.display=(v==='all'||p.getAttribute('data-view')===v)?'':'none';});});});
+</script>
+</body>
+</html>
