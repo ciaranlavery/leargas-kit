@@ -52,9 +52,6 @@ ul.ticks li::before{content:'✓ ';color:var(--success);font-weight:800}
 .sample{display:inline-block;background:var(--highlight);border:1px solid var(--warn);color:var(--deep-warn);border-radius:999px;padding:2px 12px;font-size:12px;font-weight:700}
 .wordmark{text-align:center;font-size:11px;font-weight:800;letter-spacing:.2em;color:var(--yellow);margin-top:6px}
 .contact{background:var(--navy);color:#fff;border-radius:10px;padding:13px 16px;margin-top:18px;font-size:15px}
-.seller{margin-top:26px;border:2px dashed #b39200;border-radius:var(--radius);padding:16px 18px;background:#fff}
-.seller h2{color:var(--deep-warn);margin-top:0}
-table{width:100%;border-collapse:collapse;font-size:13.5px}td{padding:7px 8px;border-bottom:1px solid #eee;vertical-align:top}
 .mut{color:var(--muted);font-size:12.5px}
 @media(prefers-reduced-motion:no-preference){
 @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
@@ -64,7 +61,7 @@ table{width:100%;border-collapse:collapse;font-size:13.5px}td{padding:7px 8px;bo
 @page{margin:14mm}
 @media print{
 body{background:#fff}.wrap{padding:0;max-width:none}.page{box-shadow:none;border:none;border-radius:0}
-.seller{display:none}.wrap{padding-bottom:0}
+.wrap{padding-bottom:0}
 .hero{background:#fff;color:var(--ink);border:1px solid var(--navy);-webkit-print-color-adjust:exact;print-color-adjust:exact}.hero h1{color:var(--navy)}.hero .lede{color:var(--body)}
 .hero .madein{color:var(--deep-warn)}.hero a.cta{background:#fff;border:2px solid var(--navy);color:var(--navy)}
 .hero .wordmark{color:var(--navy)}
@@ -128,19 +125,6 @@ body{background:#fff}.wrap{padding:0;max-width:none}.page{box-shadow:none;border
 <div class="step"><div class="n">3</div><div><b>First pack within 10 days of setup.</b> Lands on the first Monday after everything's connected and checked. You review a single page to start the week.</div></div>
 <div class="contact"><b>[Your name]</b> · [phone] · [email]</div>
 <p class="mut">Mock data throughout - your pack shows your numbers. Léargas · All your data sources in one place, every Monday - down to daily detail.</p>
-</div>
-
-<div class="seller">
-<h2>For you only - don't print this bit (hidden when printing)</h2>
-<table>
-<tr><td><b>0:00</b></td><td>Hook: "Four systems, four stories, one page." Ask which login eats most time.</td></tr>
-<tr><td><b>1:00</b></td><td>Money cards above. "Which of these took longest last month?"</td></tr>
-<tr><td><b>2:30</b></td><td>Point at bank cover: "Five weeks - would you have known that Monday?"</td></tr>
-<tr><td><b>3:30</b></td><td>Amber line, then microscope: "Anything amber needs a look - and this layer is what your accountant never reaches."</td></tr>
-<tr><td><b>4:30</b></td><td>Price + trial. "One paid month, not twelve. You keep everything."</td></tr>
-<tr><td><b>5:00</b></td><td>Ask: "Who else should see this? What can you screenshare next week?" Book setup.</td></tr>
-</table>
-<p class="mut">Full mock KPIs + modules deck: <code>dist/modules-proto.html</code> (generic). Ticket: <code>wayfinding/tickets/ca3-anonymized-proof-kit.md</code>.</p>
 </div>
 </div>
 </body>

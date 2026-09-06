@@ -93,7 +93,10 @@ button.pill{font-family:inherit}
 /* ---------- tables ---------- */
 .ttable{width:100%;border-collapse:collapse;font-size:12.5px;font-variant-numeric:tabular-nums}
 .ttable th{text-align:left;font-size:10px;color:#8fa3c2;text-transform:uppercase;letter-spacing:.08em;padding:8px;border-bottom:1px solid rgba(255,255,255,.07)}
-.ttable td{padding:9px 8px;border-bottom:1px solid rgba(255,255,255,.05)}
+.ttable td{padding:9px 8px;border-bottom:1px solid rgba(255,255,255,.05);vertical-align:middle}
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -20px;padding:4px 20px 10px}
+.table-scroll .ttable{min-width:600px}
+.table-scroll .ttable .bar{min-width:90px;margin-top:0}
 .ttable tr:last-child td{border-bottom:none}
 .tag{font-size:10px;font-weight:700;padding:3px 9px;border-radius:999px;white-space:nowrap}
 .tag.ok{background:rgba(52,211,153,.15);color:#34d399}
@@ -384,10 +387,10 @@ button.pill{font-family:inherit}
         <div class="panel span12">
           <h3>Upcoming events</h3>
           <div class="sub">Every event has a bar story</div>
-          <table class="ttable">
+          <div class="table-scroll"><table class="ttable">
             <thead><tr><th>Event</th><th>When</th><th>Bar lift</th><th>Status</th></tr></thead>
             <tbody id="evRows"></tbody>
-          </table>
+          </table></div>
         </div>
         <div class="panel span6">
           <h3>Softs · Coca-Cola range</h3>
@@ -407,7 +410,7 @@ button.pill{font-family:inherit}
       <div class="kpis">
         <div class="kpi" data-kpi="value">
           <div class="k-top"><span class="k-label">Sponsor value</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3 6 6 .5-4.5 4 1.5 6-6-3.5L6 18.5l1.5-6L3 8.5 9 8z"/></svg></div>
-          <div class="k-val gold">£13,500</div>
+          <div class="k-val gold">£10,800</div>
           <div class="k-delta up">▲ 5% <span style="color:#7f93b3">vs last year</span></div>
         </div>
         <div class="kpi" data-kpi="active">
@@ -429,11 +432,11 @@ button.pill{font-family:inherit}
       <div class="grid">
         <div class="panel span12">
           <h3>Sponsor portfolio</h3>
-          <div class="sub" id="spSub">Real sponsor names · terms from the sponsorship position</div>
-          <table class="ttable">
+          <div class="sub" id="spSub">Sample sponsors · illustrative terms</div>
+          <div class="table-scroll"><table class="ttable">
             <thead><tr><th>Sponsor</th><th>Value</th><th>Terms</th><th>Watch</th><th style="width:24%">Progress</th></tr></thead>
             <tbody id="spTable"></tbody>
-          </table>
+          </table></div>
         </div>
       </div>
     </section>
@@ -622,8 +625,8 @@ button.pill{font-family:inherit}
     year:{bar:{v:'£862,000',d:'▲ 8%',c:'up',s:'vs last year'},func:{v:'£220,000',d:'▲ 15%',c:'up',s:'this year',gold:true},events:{v:'280',d:'incl.',c:'flat',s:'42 tournaments'},spend:{v:'£4.40',d:'▲ 4%',c:'up',s:'vs last year'}}
   };
   KPIS.sponsors={
-    quarter:{value:{v:'£13,500',d:'▲ 5%',c:'up',s:'vs last year',gold:true},active:{v:'6',d:'4 named campaigns',c:'flat',s:''},renewals:{v:'2',d:'within',c:'down',s:'60 days'},risk:{v:'1',d:'no contact',c:'flat',s:'this quarter'}},
-    year:{value:{v:'£13,500',d:'▲ 5%',c:'up',s:'vs last year',gold:true},active:{v:'6',d:'4 named campaigns',c:'flat',s:''},renewals:{v:'3',d:'this',c:'down',s:'year'},risk:{v:'1',d:'no contact',c:'flat',s:'this year'}}
+    quarter:{value:{v:'£10,800',d:'▲ 5%',c:'up',s:'vs last year',gold:true},active:{v:'6',d:'4 named campaigns',c:'flat',s:''},renewals:{v:'2',d:'within',c:'down',s:'60 days'},risk:{v:'1',d:'no contact',c:'flat',s:'this quarter'}},
+    year:{value:{v:'£10,800',d:'▲ 5%',c:'up',s:'vs last year',gold:true},active:{v:'6',d:'4 named campaigns',c:'flat',s:''},renewals:{v:'3',d:'this',c:'down',s:'year'},risk:{v:'1',d:'no contact',c:'flat',s:'this year'}}
   };
 
   var VIEW_CHARTS={
@@ -773,7 +776,7 @@ button.pill{font-family:inherit}
     members:{head:'Membership',sub:{month:'1,128 active · net +19 this month',quarter:'1,128 active members · +47 this quarter',year:'1,128 active · +137 this year'}},
     finance:{head:'Finance',sub:{week:'This week · net surplus £13,300',month:'This month · £128,400 revenue vs £71,200 expenses',quarter:'This quarter · £358,000 revenue',year:'2026 · £1,492,000 revenue'}},
     barevents:{head:'Bar & Events',sub:{week:'This week · £18,900 bar sales · 6 events',month:'This month · £74,000 bar sales',quarter:'This quarter · £216,000 bar sales',year:'2026 · £862,000 bar sales'}},
-    sponsors:{head:'Sponsors',sub:{quarter:'£13,500 sponsor value · 2 renewals due within 60 days',year:'£13,500 sponsor value · 3 renewals this year'}}
+    sponsors:{head:'Sponsors',sub:{quarter:'£10,800 sponsor value · 2 renewals due within 60 days',year:'£10,800 sponsor value · 3 renewals this year'}}
   };
   var PANEL_SUB={
     overview:{
@@ -797,8 +800,8 @@ button.pill{font-family:inherit}
       custom:{finRevSub:'Custom range · revenue vs expenses',expSub:'Biggest expense lines · custom range',marginTitle:'Net margin · custom range'}
     },
     sponsors:{
-      quarter:{spSub:'£13,500 sponsor value · 2 renewals due within 60 days'},
-      year:{spSub:'£13,500 sponsor value · 3 renewals this year'}
+      quarter:{spSub:'£10,800 sponsor value · 2 renewals due within 60 days'},
+      year:{spSub:'£10,800 sponsor value · 3 renewals this year'}
     }
   };
   function setSub(view,p){
@@ -1003,12 +1006,12 @@ button.pill{font-family:inherit}
   })();
   (function(){
     var sp=[
-      ['Fetherstons','£4,000 · 1 yr · expires 10 Sep',40,63,'warn','Naming rights C2 · banner · 2 corporate socials'],
-      ['Nicholas Residential','£2,500 · 2 yr · expires 16 Oct',59,100,'warn','Naming rights CA · 8 staff socials · meeting room ×10'],
-      ['Haffners','£4,000 · to Apr + £2k ext.',0,55,'ok','Centre court banners'],
-      ['Juice Jar','£1,000 · tournament',72,35,'bad','Ulster Junior Open · no written agreement'],
-      ['Knightsbridge Wealth Mgt','amount tbc · tournament',30,41,'warn','August tournament · no written agreement'],
-      ['Marlborough Clinic','£2,000 · tournament',55,48,'warn','Open tournament · no written agreement']
+      ['Harbour Coffee Co.','£3,000 · 1 yr · expires 12 Sep',40,63,'warn','Naming rights C2 · banner · 2 corporate socials'],
+      ['Lagan Estate Agents','£2,000 · 2 yr · expires 24 Oct',59,100,'warn','Naming rights CA · 8 staff socials · meeting room ×10'],
+      ['Cavehill Builders','£3,500 · to Apr + £2k ext.',0,55,'ok','Centre court banners'],
+      ['Botanic Juice Bar','£800 · tournament',72,35,'bad','Junior Open · no written agreement'],
+      ['Ormeau Wealth Planning','amount tbc · tournament',30,41,'warn','August tournament · no written agreement'],
+      ['Stranmillis Dental','£1,500 · tournament',55,48,'warn','Open tournament · no written agreement']
     ];
     var t=el('spTable');
     sp.forEach(function(s){
@@ -1034,16 +1037,16 @@ button.pill{font-family:inherit}
   })();
   (function(){
     var sp=[
-      {n:'Fetherstons',sub:'£4,000/yr · expires 10 Sep',v:'Renewals',v2:'due in 10 days',c:'#f59e0b',b:'63%',bg:'#f59e0b'},
-      {n:'Nicholas Residential',sub:'£2,500/yr · expires 16 Oct',v:'Renewals',v2:'due in 45 days',c:'#FCDC00',b:'100%',bg:'#FCDC00'},
-      {n:'Juice Jar',sub:'£1,000 · tournament',v:'At risk',v2:'no written agreement',c:'#f87171',b:'35%',bg:'#f87171'},
-      {n:'Knightsbridge Wealth',sub:'amount tbc · tournament',v:'Watch',v2:'no written agreement',c:'#38bdf8',b:'41%',bg:'#38bdf8'}
+      {n:'Harbour Coffee Co.',sub:'£3,000/yr · expires 12 Sep',v:'Renewals',v2:'due in 12 days',c:'#f59e0b',b:'63%',bg:'#f59e0b'},
+      {n:'Lagan Estate Agents',sub:'£2,000/yr · expires 24 Oct',v:'Renewals',v2:'due in 54 days',c:'#FCDC00',b:'100%',bg:'#FCDC00'},
+      {n:'Botanic Juice Bar',sub:'£800 · tournament',v:'At risk',v2:'no written agreement',c:'#f87171',b:'35%',bg:'#f87171'},
+      {n:'Ormeau Wealth',sub:'amount tbc · tournament',v:'Watch',v2:'no written agreement',c:'#38bdf8',b:'41%',bg:'#38bdf8'}
     ];
     var t=el('spRows');
     sp.forEach(function(x){
       var d=document.createElement('div');d.className='row';
       d.innerHTML='<span class="dot" style="background:'+x.c+'"></span>'+
-        '<div style="flex:1"><div class="r-name">'+x.n+'</div><div class="r-sub">'+x.sub+'</div><div class="bar"><i style="width:'+x.b+';background:'+x.bg+'"></i></div></div>'+
+        '<div style="flex:1;min-width:0"><div class="r-name">'+x.n+'</div><div class="r-sub">'+x.sub+'</div><div class="bar"><i style="width:'+x.b+';background:'+x.bg+'"></i></div></div>'+
         '<div><div class="r-val">'+x.v+'</div><div class="r-sub2">'+x.v2+'</div></div>';
       t.appendChild(d);
     });
