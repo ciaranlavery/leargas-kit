@@ -6,131 +6,128 @@
 <meta name="description" content="Sample leisure club dashboard demo — membership, courts, bar and sponsors. Léargas mock data.">
 <title>Sample Leisure Club - Dashboard (demo)</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <style>
+:root{--bg:#081426;--surface:#0e2140;--surface-hi:#122647;--surface-2:#0a1830;--ink:#e8edf6;--muted:#a9bcd6;--faint:#8fa3c2;--line:rgba(255,255,255,.09);--accent:#FCDC00;--accent-ink:#0a1830;--success:#34d399;--danger:#f87171;--radius:1rem;--shadow:inset 0 1px 0 rgba(255,255,255,.07),0 .75rem 1.75rem -1rem rgb(0 0 0/.6);--sunken:inset 0 2px 4px 0 rgb(0 0 0/.45),inset 0 -1px 0 0 rgba(255,255,255,.06)}
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#081426;color:#e8edf6;font-family:'Inter',system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh;font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
-::selection{background:#FCDC00;color:#0a1830}
-:focus-visible{outline:2px solid #FCDC00;outline-offset:2px;border-radius:6px}
+body{background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh;font-size:.875rem;line-height:1.55;-webkit-font-smoothing:antialiased}
+::selection{background:var(--accent);color:var(--accent-ink)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:.375rem}
 .layout{display:flex;min-height:100vh;align-items:flex-start}
 
 /* ---------- sidebar ---------- */
-.side{width:240px;flex-shrink:0;background:#0a1830;border-right:1px solid rgba(255,255,255,.06);padding:22px 14px;display:flex;flex-direction:column;gap:4px;position:sticky;top:0;height:100vh}
-.brand{display:flex;align-items:center;gap:12px;padding:0 8px 20px;border-bottom:1px solid rgba(255,255,255,.06);margin-bottom:14px}
-.brand-badge{width:42px;height:42px;border-radius:12px;overflow:hidden;flex-shrink:0;background:#fff}
+.side{width:15rem;flex-shrink:0;background:var(--surface-2);border-right:1px solid var(--line);padding:1.5rem 1rem;display:flex;flex-direction:column;gap:.25rem;position:sticky;top:0;height:100vh}
+.brand{display:flex;align-items:center;gap:.75rem;padding:0 .5rem 1.25rem;border-bottom:1px solid var(--line);margin-bottom:1rem}
+.brand-badge{width:2.625rem;height:2.625rem;border-radius:.75rem;overflow:hidden;flex-shrink:0;background:#fff}
 .brand-badge img{width:100%;height:100%;object-fit:cover}
-.brand-name{font-size:15px;font-weight:800;letter-spacing:-.01em;line-height:1.25}
-.nav-label{font-size:10px;color:#8fa3c2;text-transform:uppercase;letter-spacing:.12em;padding:14px 8px 6px;font-weight:700}
-.nav-item{display:flex;align-items:center;gap:10px;width:100%;text-align:left;font:inherit;background:none;border:1px solid transparent;padding:9px 10px;border-radius:9px;color:#a9bcd6;font-weight:500;font-size:13.5px;cursor:pointer}
+.brand-name{font-size:1rem;font-weight:800;letter-spacing:-.01em;line-height:1.25}
+.nav-label{font-size:.6875rem;color:var(--faint);text-transform:uppercase;letter-spacing:.12em;padding:1rem .5rem .5rem;font-weight:700}
+.nav-item{display:flex;align-items:center;gap:.5rem;width:100%;text-align:left;font:inherit;background:none;border:1px solid transparent;padding:.5rem .75rem;border-radius:.5rem;color:var(--muted);font-weight:500;font-size:.875rem;cursor:pointer}
 button.nav-item{font-family:inherit}
-.nav-item svg{width:16px;height:16px;flex-shrink:0;opacity:.85}
-.nav-item:hover{background:rgba(255,255,255,.05);color:#e8edf6}
-.nav-item.active{background:#FCDC00;color:#0a1830;font-weight:600}
+.nav-item svg{width:1rem;height:1rem;flex-shrink:0;opacity:.85}
+.nav-item:hover{background:rgba(255,255,255,.06);color:var(--ink)}
+.nav-item.active{background:var(--accent);color:var(--accent-ink);font-weight:700}
 .nav-item.active svg{opacity:1}
-.side-foot{margin-top:auto;padding:12px 8px 4px;font-size:11px;color:#8fa3c2;border-top:1px solid rgba(255,255,255,.06)}
-.side-foot b{color:#a9bcd6}
+.side-foot{margin-top:auto;padding:.75rem .5rem .25rem;font-size:.75rem;color:var(--faint);border-top:1px solid var(--line)}
+.side-foot b{color:var(--muted)}
 
 /* ---------- main ---------- */
-.main{flex:1;min-width:0;padding:28px 32px 40px;max-width:1500px}
-.top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:22px;flex-wrap:wrap}
-.top h1{font-size:24px;font-weight:800;letter-spacing:-.02em}
-.top .date{font-size:13px;color:#8fa3c2;margin-top:4px}
-.controls{display:flex;gap:8px;flex-wrap:wrap}
+.main{flex:1;min-width:0;padding:1.75rem 2rem 2.5rem;max-width:94rem}
+.top{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.top h1{font-size:clamp(1.25rem,4vw,1.5rem);font-weight:800;letter-spacing:-.02em}
+.top .date{font-size:.875rem;color:var(--faint);margin-top:.25rem}
+.controls{display:flex;gap:.5rem;flex-wrap:wrap}
 button.pill{font-family:inherit}
-.pill{background:#0a1830;border:1px solid rgba(255,255,255,.14);color:#a9bcd6;padding:8px 14px;border-radius:999px;font-size:12.5px;font-weight:600;cursor:pointer}
-.pill:hover{border-color:rgba(255,255,255,.3);color:#e8edf6}
-.pill.on{background:#FCDC00;color:#0a1830;border-color:transparent}
-.ranges{display:none;align-items:center;gap:8px;margin:12px 0 22px;flex-wrap:wrap}
-.ranges input{background:#0a1830;border:1px solid rgba(255,255,255,.15);color:#e8edf6;border-radius:8px;padding:7px 10px;font-size:12px;font-family:'Inter',sans-serif;color-scheme:dark}
-.ranges .lab{font-size:11px;color:#7f93b3}
-.ranges .go{background:#FCDC00;color:#0a1830;border:none;border-radius:8px;padding:7px 14px;font-weight:700;font-size:12px;cursor:pointer}
+.pill{background:var(--surface-2);border:1px solid rgba(255,255,255,.14);color:var(--muted);padding:.5rem 1rem;border-radius:999px;font-size:.75rem;font-weight:600;cursor:pointer}
+.pill:hover{border-color:rgba(255,255,255,.3);color:var(--ink)}
+.pill.on{background:var(--accent);color:var(--accent-ink);border-color:transparent}
+.ranges{display:none;align-items:center;gap:.5rem;margin:.75rem 0 1.5rem;flex-wrap:wrap}
+.ranges input{background:var(--surface-2);border:1px solid rgba(255,255,255,.15);color:var(--ink);border-radius:.5rem;padding:.5rem .75rem;font-size:.75rem;font-family:inherit;color-scheme:dark}
+.ranges .lab{font-size:.75rem;color:var(--faint)}
+.ranges .go{background:var(--accent);color:var(--accent-ink);border:none;border-radius:.5rem;padding:.5rem 1rem;font-weight:700;font-size:.75rem;cursor:pointer}
 .ranges .go:hover{opacity:.9}
 
 /* ---------- KPI cards ---------- */
-.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px}
-.kpi{background:#0a1830;border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:16px 18px}
-.kpi .k-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
-.kpi .k-label{font-size:11px;color:#8fa3c2;text-transform:uppercase;letter-spacing:.08em;font-weight:700}
-.kpi svg{width:16px;height:16px;opacity:.6}
-.kpi .k-val{font-size:27px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
-.kpi .k-delta{font-size:12px;margin-top:6px;display:flex;align-items:center;gap:5px;font-weight:600}
-.up{color:#34d399}.down{color:#f87171}.flat{color:#9db1d0}.gold{color:#FCDC00}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(10rem,1fr));gap:1rem;margin-bottom:1.5rem}
+.kpi{background:linear-gradient(180deg,var(--surface-hi),var(--surface));border-radius:var(--radius);padding:1rem;box-shadow:var(--shadow)}
+.kpi .k-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem}
+.kpi .k-label{font-size:.6875rem;color:var(--faint);text-transform:uppercase;letter-spacing:.08em;font-weight:700}
+.kpi svg{width:1rem;height:1rem;opacity:.6}
+.kpi .k-val{font-size:1.75rem;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.kpi .k-delta{font-size:.75rem;margin-top:.5rem;display:flex;align-items:center;gap:.25rem;font-weight:600}
+.up{color:var(--success)}.down{color:var(--danger)}.flat{color:var(--muted)}.gold{color:var(--accent)}
 
 /* ---------- grid & panels ---------- */
-.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
-.panel{background:#0a1830;border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:20px 20px}
-.panel h3{font-size:14px;font-weight:700;margin-bottom:2px;letter-spacing:-.01em}
-.panel .sub{font-size:12px;color:#8fa3c2;margin-bottom:14px}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:1rem}
+.panel{background:linear-gradient(180deg,var(--surface-hi),var(--surface));border-radius:var(--radius);padding:1.25rem;box-shadow:var(--shadow)}
+.panel h3{font-size:.875rem;font-weight:700;margin-bottom:.25rem;letter-spacing:-.01em}
+.panel .sub{font-size:.75rem;color:var(--faint);margin-bottom:1rem}
 .span8{grid-column:span 8}.span4{grid-column:span 4}.span6{grid-column:span 6}.span3{grid-column:span 3}.span12{grid-column:span 12}
-.chartbox{position:relative;height:240px}
-.chartbox.tall{height:300px}
+.chartbox{position:relative;height:15rem}
+.chartbox.tall{height:18.75rem}
 
 /* view switching */
 .view{display:none}
 .view.on{display:block}
 
 /* ---------- rows ---------- */
-.row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.05)}
-.row:last-child{border-bottom:none;padding-bottom:2px}
-.dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
-.r-name{flex:1;font-size:13px;font-weight:600}
-.r-sub{font-size:11px;color:#7f93b3;margin-top:2px}
-.r-val{font-size:13px;font-weight:700;text-align:right}
-.r-sub2{font-size:10px;color:#7f93b3;text-align:right}
-.bar{height:6px;border-radius:4px;background:rgba(255,255,255,.07);overflow:hidden;margin-top:8px}
-.bar i{display:block;height:100%;border-radius:4px;background:#FCDC00}
-.srcline{display:flex;align-items:center;gap:10px;padding:6px 0;font-size:12px}
-.srcline .sw{width:10px;height:10px;border-radius:3px;flex-shrink:0}
-.srcline .nm{flex:1;color:#9db1d0}
-.heat{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
-.heat .d{background:rgba(255,255,255,.04);border-radius:8px;padding:8px 4px;text-align:center}
-.heat .d b{display:block;font-size:11px;margin-bottom:4px;color:#9db1d0}
-.heat .c{font-size:11px;font-weight:700}
-.bar-mini{height:4px;border-radius:2px;background:rgba(255,255,255,.08);margin-top:6px}
-.bar-mini i{display:block;height:100%;border-radius:2px}
+.row{display:flex;align-items:center;gap:.5rem;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.row:last-child{border-bottom:none;padding-bottom:.25rem}
+.dot{width:.5625rem;height:.5625rem;border-radius:50%;flex-shrink:0}
+.r-name{flex:1;min-width:0;font-size:.875rem;font-weight:600}
+.r-sub{font-size:.75rem;color:var(--faint);margin-top:.25rem}
+.r-val{font-size:.875rem;font-weight:700;text-align:right;font-variant-numeric:tabular-nums}
+.r-sub2{font-size:.6875rem;color:var(--faint);text-align:right}
+.bar{height:.375rem;border-radius:.25rem;background:rgba(2,6,16,.55);box-shadow:var(--sunken);overflow:hidden;margin-top:.5rem}
+.bar i{display:block;height:100%;border-radius:.25rem;background:var(--accent)}
+.srcline{display:flex;align-items:center;gap:.5rem;padding:.5rem 0;font-size:.75rem}
+.srcline .sw{width:.625rem;height:.625rem;border-radius:.25rem;flex-shrink:0}
+.srcline .nm{flex:1;color:var(--muted)}
+.heat{display:grid;grid-template-columns:repeat(7,1fr);gap:.5rem}
+.heat .d{background:rgba(255,255,255,.04);border-radius:.5rem;padding:.5rem .25rem;text-align:center}
+.heat .d b{display:block;font-size:.75rem;margin-bottom:.25rem;color:var(--muted)}
+.heat .c{font-size:.75rem;font-weight:700}
+.bar-mini{height:.25rem;border-radius:.125rem;background:rgba(2,6,16,.55);box-shadow:var(--sunken);margin-top:.5rem}
+.bar-mini i{display:block;height:100%;border-radius:.125rem}
 
 /* ---------- tables ---------- */
-.ttable{width:100%;border-collapse:collapse;font-size:12.5px;font-variant-numeric:tabular-nums}
-.ttable th{text-align:left;font-size:10px;color:#8fa3c2;text-transform:uppercase;letter-spacing:.08em;padding:8px;border-bottom:1px solid rgba(255,255,255,.07)}
-.ttable td{padding:9px 8px;border-bottom:1px solid rgba(255,255,255,.05);vertical-align:middle}
-.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -20px;padding:4px 20px 10px}
-.table-scroll .ttable{min-width:600px}
-.table-scroll .ttable .bar{min-width:90px;margin-top:0}
+.ttable{width:100%;border-collapse:collapse;font-size:.875rem;font-variant-numeric:tabular-nums}
+.ttable th{text-align:left;font-size:.6875rem;color:var(--faint);text-transform:uppercase;letter-spacing:.08em;padding:.5rem;border-bottom:1px solid rgba(255,255,255,.07)}
+.ttable td{padding:.5rem;border-bottom:1px solid rgba(255,255,255,.05);vertical-align:middle}
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -1.25rem;padding:.25rem 1.25rem .75rem}
+.table-scroll .ttable{min-width:37.5rem}
+.table-scroll .ttable .bar{min-width:5.625rem;margin-top:0}
 .ttable tr:last-child td{border-bottom:none}
-.tag{font-size:10px;font-weight:700;padding:3px 9px;border-radius:999px;white-space:nowrap}
-.tag.ok{background:rgba(52,211,153,.15);color:#34d399}
-.tag.warn{background:rgba(252,220,0,.15);color:#FCDC00}
-.tag.bad{background:rgba(248,113,113,.15);color:#f87171}
+.tag{font-size:.6875rem;font-weight:700;padding:.25rem .5rem;border-radius:999px;white-space:nowrap}
+.tag.ok{background:rgba(52,211,153,.15);color:var(--success)}
+.tag.warn{background:rgba(252,220,0,.15);color:var(--accent)}
+.tag.bad{background:rgba(248,113,113,.15);color:var(--danger)}
 
-@media (max-width:1100px){
+@media (max-width:68.75rem){
   .layout{display:block}
-  .side{width:auto;height:auto;position:static;padding:14px 14px 10px;border-right:none;border-bottom:1px solid rgba(255,255,255,.09)}
-  .brand{padding-bottom:10px;margin-bottom:6px}
-  .nav-label{padding:6px 8px 4px}
-  .nav-item{width:auto;display:inline-flex;margin:0 6px 6px 0;border-color:rgba(255,255,255,.12)}
+  .side{width:auto;height:auto;position:static;padding:1rem 1rem .75rem;border-right:none;border-bottom:1px solid var(--line)}
+  .brand{padding-bottom:.75rem;margin-bottom:.5rem}
+  .nav-label{padding:.5rem .5rem .25rem}
+  .nav-item{width:auto;display:inline-flex;margin:0 .5rem .5rem 0;border-color:rgba(255,255,255,.12)}
   .side-foot{display:none}
-  .main{padding:20px 16px 40px}
-  .kpis{grid-template-columns:repeat(2,1fr)}
+  .main{padding:1.25rem 1rem 2.5rem}
   .span8,.span4,.span6,.span3{grid-column:span 12}
 }
-@media (max-width:560px){
-  .kpis{grid-template-columns:1fr 1fr;gap:10px}
-  .kpi .k-val{font-size:23px}
-  .heat{gap:4px}
-  .heat .d{padding:6px 2px}
-  .ttable{font-size:11.5px}
+@media (max-width:35rem){
+  .kpis{gap:.75rem}
+  .kpi .k-val{font-size:1.5rem}
+  .heat{gap:.25rem}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
-<body><div style="position:fixed;right:12px;bottom:12px;z-index:99;background:#FCDC00;color:#0a1830;font:700 12px system-ui,sans-serif;padding:8px 14px;border-radius:999px;box-shadow:0 2px 8px rgba(0,0,0,.4)">DEMO · sample leisure-club figures</div>
+<body><div style="position:fixed;right:.75rem;bottom:.75rem;z-index:99;background:var(--accent);color:var(--accent-ink);font:700 .75rem system-ui,sans-serif;padding:.5rem 1rem;border-radius:999px;box-shadow:0 2px 8px rgba(0,0,0,.4)">DEMO · sample leisure-club figures</div>
 <div class="layout">
 
   <!-- ======= SIDEBAR ======= -->
   <aside class="side">
     <div class="brand">
-      <div class="brand-badge" style="display:flex;align-items:center;justify-content:center;font-weight:800;font-size:20px;color:#0a1830;">S</div>
+      <div class="brand-badge" style="display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.25rem;color:var(--accent-ink);">S</div>
       <div class="brand-name">Sample Leisure Club</div>
     </div>
     <nav aria-label="Club views"><div class="nav-label">Club</div>
@@ -173,42 +170,42 @@ button.pill{font-family:inherit}
         <div class="kpi" data-kpi="revenue">
           <div class="k-top"><span class="k-label">Revenue</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M13 9l3 3-3 3"/></svg></div>
           <div class="k-val">£29,700</div>
-          <div class="k-delta up">▲ 3.2% <span style="color:#7f93b3">vs last week</span></div>
+          <div class="k-delta up">▲ 3.2% <span style="color:var(--faint)">vs last week</span></div>
         </div>
         <div class="kpi" data-kpi="expenses">
           <div class="k-top"><span class="k-label">Expenses</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M13 9l3 3-3 3"/></svg></div>
           <div class="k-val">£16,400</div>
-          <div class="k-delta up">▲ 4.2% <span style="color:#7f93b3">vs last week</span></div>
+          <div class="k-delta up">▲ 4.2% <span style="color:var(--faint)">vs last week</span></div>
         </div>
         <div class="kpi" data-kpi="members">
           <div class="k-top"><span class="k-label">Active members</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3.5"/><path d="M3.5 20c.8-3.4 3-5 5.5-5s4.7 1.6 5.5 5M16 5.5a3.5 3.5 0 010 4M18 15c1.8.7 2.7 2.4 3 5"/></svg></div>
           <div class="k-val">1,128</div>
-          <div class="k-delta up">+4 <span style="color:#7f93b3">net this week</span></div>
+          <div class="k-delta up">+4 <span style="color:var(--faint)">net this week</span></div>
         </div>
         <div class="kpi" data-kpi="court">
           <div class="k-top"><span class="k-label">Court utilisation</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M8 12h8"/></svg></div>
           <div class="k-val gold">73%</div>
-          <div class="k-delta"><span style="color:#34d399">▲ 5%</span> <span style="color:#7f93b3">vs last week</span></div>
+          <div class="k-delta"><span style="color:var(--success)">▲ 5%</span> <span style="color:var(--faint)">vs last week</span></div>
         </div>
         <div class="kpi" data-kpi="bar">
           <div class="k-top"><span class="k-label">Bar sales</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3h12M6 3v6a4 4 0 008 0V3M10 3v18M6 21h12"/></svg></div>
           <div class="k-val">£18,900</div>
-          <div class="k-delta up">▲ 11% <span style="color:#7f93b3">vs last week</span></div>
+          <div class="k-delta up">▲ 11% <span style="color:var(--faint)">vs last week</span></div>
         </div>
         <div class="kpi" data-kpi="gym">
           <div class="k-top"><span class="k-label">Gym sessions</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 4v16M18 4v16M4 6h16M4 18h16"/></svg></div>
           <div class="k-val">1,240</div>
-          <div class="k-delta up">▲ 7% <span style="color:#7f93b3">this week</span></div>
+          <div class="k-delta up">▲ 7% <span style="color:var(--faint)">this week</span></div>
         </div>
         <div class="kpi" data-kpi="function">
           <div class="k-top"><span class="k-label">Function room</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 7h.01M11 7h.01M7 13h.01M11 13h.01M7 17h.01"/></svg></div>
           <div class="k-val">6</div>
-          <div class="k-delta flat">bookings <span style="color:#7f93b3">next 30 days</span></div>
+          <div class="k-delta flat">bookings <span style="color:var(--faint)">next 30 days</span></div>
         </div>
         <div class="kpi" data-kpi="sponsors">
           <div class="k-top"><span class="k-label">Sponsors</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3 6 6 .5-4.5 4 1.5 6-6-3.5L6 18.5l1.5-6L3 8.5 9 8z"/></svg></div>
           <div class="k-val gold">6</div>
-          <div class="k-delta down">2 renewals due <span style="color:#7f93b3">in 60 days</span></div>
+          <div class="k-delta down">2 renewals due <span style="color:var(--faint)">in 60 days</span></div>
         </div>
       </div>
 
@@ -221,8 +218,8 @@ button.pill{font-family:inherit}
         <div class="panel span4">
           <h3>Income by source</h3>
           <div class="sub" id="srcSub">September · membership is the backbone</div>
-          <div class="chartbox" style="height:170px"><canvas id="cSource"></canvas></div>
-          <div id="srcLegend" style="margin-top:6px"></div>
+          <div class="chartbox" style="height:10.625rem"><canvas id="cSource"></canvas></div>
+          <div id="srcLegend" style="margin-top:.5rem"></div>
         </div>
         <div class="panel span6">
           <h3>Court utilisation</h3>
@@ -268,22 +265,22 @@ button.pill{font-family:inherit}
         <div class="kpi" data-kpi="active">
           <div class="k-top"><span class="k-label">Active members</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3.5"/></svg></div>
           <div class="k-val">1,128</div>
-          <div class="k-delta up">▲ 1.7% <span style="color:#7f93b3">vs last month</span></div>
+          <div class="k-delta up">▲ 1.7% <span style="color:var(--faint)">vs last month</span></div>
         </div>
         <div class="kpi" data-kpi="joins">
           <div class="k-top"><span class="k-label">New joins</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3.5"/><path d="M3.5 20c.8-3.4 3-5 5.5-5s4.7 1.6 5.5 5"/></svg></div>
           <div class="k-val">24</div>
-          <div class="k-delta up">▲ 4% <span style="color:#7f93b3">vs last month</span></div>
+          <div class="k-delta up">▲ 4% <span style="color:var(--faint)">vs last month</span></div>
         </div>
         <div class="kpi" data-kpi="renewals">
           <div class="k-top"><span class="k-label">Renewals due</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
           <div class="k-val">130</div>
-          <div class="k-delta flat">next <span style="color:#7f93b3">90 days</span></div>
+          <div class="k-delta flat">next <span style="color:var(--faint)">90 days</span></div>
         </div>
         <div class="kpi" data-kpi="fee">
           <div class="k-top"><span class="k-label">Avg annual fee</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><rect x="7" y="9" width="3" height="6"/></svg></div>
           <div class="k-val">£438</div>
-          <div class="k-delta flat">across <span style="color:#7f93b3">paid tiers</span></div>
+          <div class="k-delta flat">across <span style="color:var(--faint)">paid tiers</span></div>
         </div>
       </div>
       <div class="grid">
@@ -306,22 +303,22 @@ button.pill{font-family:inherit}
         <div class="kpi" data-kpi="revenue">
           <div class="k-top"><span class="k-label">Revenue</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg></div>
           <div class="k-val">£29,700</div>
-          <div class="k-delta up">▲ 3.2% <span style="color:#7f93b3">vs last week</span></div>
+          <div class="k-delta up">▲ 3.2% <span style="color:var(--faint)">vs last week</span></div>
         </div>
         <div class="kpi" data-kpi="expenses">
           <div class="k-top"><span class="k-label">Expenses</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg></div>
           <div class="k-val">£16,400</div>
-          <div class="k-delta up">▲ 4.2% <span style="color:#7f93b3">vs last week</span></div>
+          <div class="k-delta up">▲ 4.2% <span style="color:var(--faint)">vs last week</span></div>
         </div>
         <div class="kpi" data-kpi="surplus">
           <div class="k-top"><span class="k-label">Net surplus</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M13 9l3 3-3 3"/></svg></div>
           <div class="k-val gold">£13,300</div>
-          <div class="k-delta up">▲ 2% <span style="color:#7f93b3">vs last week</span></div>
+          <div class="k-delta up">▲ 2% <span style="color:var(--faint)">vs last week</span></div>
         </div>
         <div class="kpi" data-kpi="cash">
           <div class="k-top"><span class="k-label">Cash at bank</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M7 15h4"/></svg></div>
           <div class="k-val">£284,000</div>
-          <div class="k-delta flat">reserved <span style="color:#7f93b3">for courts &amp; refurbs</span></div>
+          <div class="k-delta flat">reserved <span style="color:var(--faint)">for courts &amp; refurbs</span></div>
         </div>
       </div>
       <div class="grid">
@@ -333,8 +330,8 @@ button.pill{font-family:inherit}
         <div class="panel span4">
           <h3>Income by source</h3>
           <div class="sub">Where the money comes from</div>
-          <div class="chartbox" style="height:170px"><canvas id="cFinSrc"></canvas></div>
-          <div id="finSrcLegend" style="margin-top:6px"></div>
+          <div class="chartbox" style="height:10.625rem"><canvas id="cFinSrc"></canvas></div>
+          <div id="finSrcLegend" style="margin-top:.5rem"></div>
         </div>
         <div class="panel span6">
           <h3 id="marginTitle">Monthly net margin</h3>
@@ -355,22 +352,22 @@ button.pill{font-family:inherit}
         <div class="kpi" data-kpi="bar">
           <div class="k-top"><span class="k-label">Bar sales</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3h12M6 3v6a4 4 0 008 0V3M10 3v18M6 21h12"/></svg></div>
           <div class="k-val">£18,900</div>
-          <div class="k-delta up">▲ 11% <span style="color:#7f93b3">vs last week</span></div>
+          <div class="k-delta up">▲ 11% <span style="color:var(--faint)">vs last week</span></div>
         </div>
         <div class="kpi" data-kpi="func">
           <div class="k-top"><span class="k-label">Function income</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></svg></div>
           <div class="k-val gold">£4,960</div>
-          <div class="k-delta up">▲ 22% <span style="color:#7f93b3">next 30 days</span></div>
+          <div class="k-delta up">▲ 22% <span style="color:var(--faint)">next 30 days</span></div>
         </div>
         <div class="kpi" data-kpi="events">
           <div class="k-top"><span class="k-label">Events</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h3l2-7 4 14 2-7h5"/></svg></div>
           <div class="k-val">6</div>
-          <div class="k-delta flat">incl. <span style="color:#7f93b3">2 tournaments</span></div>
+          <div class="k-delta flat">incl. <span style="color:var(--faint)">2 tournaments</span></div>
         </div>
         <div class="kpi" data-kpi="spend">
           <div class="k-top"><span class="k-label">Avg spend / head</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 9h10M7 13h10"/></svg></div>
           <div class="k-val">£4.60</div>
-          <div class="k-delta up">▲ 8% <span style="color:#7f93b3">tournament weeks</span></div>
+          <div class="k-delta up">▲ 8% <span style="color:var(--faint)">tournament weeks</span></div>
         </div>
       </div>
       <div class="grid">
@@ -395,12 +392,12 @@ button.pill{font-family:inherit}
         <div class="panel span6">
           <h3>Softs · Coca-Cola range</h3>
           <div class="sub">Cases on hand · green ok · amber watch · red order</div>
-          <div class="chartbox" style="height:260px"><canvas id="cStockSofts"></canvas></div>
+          <div class="chartbox" style="height:16.25rem"><canvas id="cStockSofts"></canvas></div>
         </div>
         <div class="panel span6">
           <h3>Wines</h3>
           <div class="sub">Bottles on hand · Prosecco needs ordering before the weekend</div>
-          <div class="chartbox" style="height:260px"><canvas id="cStockWine"></canvas></div>
+          <div class="chartbox" style="height:16.25rem"><canvas id="cStockWine"></canvas></div>
         </div>
       </div>
     </section>
@@ -411,7 +408,7 @@ button.pill{font-family:inherit}
         <div class="kpi" data-kpi="value">
           <div class="k-top"><span class="k-label">Sponsor value</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3 6 6 .5-4.5 4 1.5 6-6-3.5L6 18.5l1.5-6L3 8.5 9 8z"/></svg></div>
           <div class="k-val gold">£10,800</div>
-          <div class="k-delta up">▲ 5% <span style="color:#7f93b3">vs last year</span></div>
+          <div class="k-delta up">▲ 5% <span style="color:var(--faint)">vs last year</span></div>
         </div>
         <div class="kpi" data-kpi="active">
           <div class="k-top"><span class="k-label">Active sponsors</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></div>
@@ -421,12 +418,12 @@ button.pill{font-family:inherit}
         <div class="kpi" data-kpi="renewals">
           <div class="k-top"><span class="k-label">Renewals due</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
           <div class="k-val">2</div>
-          <div class="k-delta down">within <span style="color:#7f93b3">60 days</span></div>
+          <div class="k-delta down">within <span style="color:var(--faint)">60 days</span></div>
         </div>
         <div class="kpi" data-kpi="risk">
           <div class="k-top"><span class="k-label">At risk</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg></div>
           <div class="k-val down">1</div>
-          <div class="k-delta flat">no contact <span style="color:#7f93b3">this quarter</span></div>
+          <div class="k-delta flat">no contact <span style="color:var(--faint)">this quarter</span></div>
         </div>
       </div>
       <div class="grid">
@@ -450,8 +447,9 @@ button.pill{font-family:inherit}
   var GOLD='#FCDC00', TICK='#8fa3c2';
   var gridColor=function(){return 'rgba(255,255,255,.05)'};
   Chart.defaults.color=TICK;
-  Chart.defaults.font.family="'Inter',sans-serif";
+  Chart.defaults.font.family="system-ui,-apple-system,'Segoe UI',sans-serif";
   Chart.defaults.font.size=11;
+  if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches){Chart.defaults.animation=false;}
   function mk(id,cfg){return new Chart(document.getElementById(id),cfg)}
   function base(extra){
     return Object.assign({responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{boxWidth:8,boxHeight:8,padding:14}}}},extra);
@@ -472,7 +470,7 @@ button.pill{font-family:inherit}
           if(v==null)return;
           ctx.save();
           ctx.fillStyle='#e8edf6';
-          ctx.font='600 10px Inter, sans-serif';
+          ctx.font='600 11px system-ui, sans-serif';
           if(chart.config.options&&chart.config.options.indexAxis==='y'){
             ctx.textAlign='left';ctx.textBaseline='middle';
             ctx.fillText(fmtFn(v,i),bar.x+6,bar.y);
@@ -734,8 +732,8 @@ button.pill{font-family:inherit}
       val.classList.toggle('gold',!!v.gold);
       var del=k.querySelector('.k-delta');
       del.className='k-delta '+v.c;
-      var head=v.dgreen?'<span style="color:#34d399">'+v.d+'</span>':v.d;
-      del.innerHTML=head+' <span style="color:#7f93b3">'+v.s+'</span>';
+      var head=v.dgreen?'<span style="color:var(--success)">'+v.d+'</span>':v.d;
+      del.innerHTML=head+' <span style="color:var(--faint)">'+v.s+'</span>';
     });
   }
   function setChartData(name,labels,data){
@@ -955,14 +953,14 @@ button.pill{font-family:inherit}
     type:'bar',
     data:{labels:SOFTNAMES,datasets:[
       {label:'Cases',data:SOFTCUR,backgroundColor:function(ctx){return stockColor(SOFTCUR,SOFTPAR,ctx.dataIndex)},borderRadius:4,barPercentage:.6}]},
-    options:base({indexAxis:'y',layout:{padding:{left:12,right:96}},plugins:{legend:{display:false}},scales:{x:{grid:{color:gridColor()},ticks:{precision:0,maxTicksLimit:6},title:{display:true,text:'Cases',color:'#7f93b3',font:{size:10}}},y:{grid:{display:false},afterFit:function(ax){ax.width+=16},ticks:{autoSkip:false,font:{size:10}}}}}),
+    options:base({indexAxis:'y',layout:{padding:{left:12,right:96}},plugins:{legend:{display:false}},scales:{x:{grid:{color:gridColor()},ticks:{precision:0,maxTicksLimit:6},title:{display:true,text:'Cases',color:'#8fa3c2',font:{size:10}}},y:{grid:{display:false},afterFit:function(ax){ax.width+=16},ticks:{autoSkip:false,font:{size:10}}}}}),
     plugins:[barValue(function(v,i){return v+' · par '+SOFTPAR[i]})]
   });
   mk('cStockWine',{
     type:'bar',
     data:{labels:WINENAMES,datasets:[
       {label:'Bottles',data:WINECUR,backgroundColor:function(ctx){return stockColor(WINECUR,WINEPAR,ctx.dataIndex)},borderRadius:4,barPercentage:.6}]},
-    options:base({indexAxis:'y',layout:{padding:{left:12,right:96}},plugins:{legend:{display:false}},scales:{x:{grid:{color:gridColor()},ticks:{precision:0,maxTicksLimit:6},title:{display:true,text:'Bottles',color:'#7f93b3',font:{size:10}}},y:{grid:{display:false},afterFit:function(ax){ax.width+=16},ticks:{autoSkip:false,font:{size:10}}}}}),
+    options:base({indexAxis:'y',layout:{padding:{left:12,right:96}},plugins:{legend:{display:false}},scales:{x:{grid:{color:gridColor()},ticks:{precision:0,maxTicksLimit:6},title:{display:true,text:'Bottles',color:'#8fa3c2',font:{size:10}}},y:{grid:{display:false},afterFit:function(ax){ax.width+=16},ticks:{autoSkip:false,font:{size:10}}}}}),
     plugins:[barValue(function(v,i){return v+' · par '+WINEPAR[i]})]
   });
 
@@ -1040,7 +1038,7 @@ button.pill{font-family:inherit}
       {n:'Harbour Coffee Co.',sub:'£3,000/yr · expires 12 Sep',v:'Renewals',v2:'due in 12 days',c:'#f59e0b',b:'63%',bg:'#f59e0b'},
       {n:'Lagan Estate Agents',sub:'£2,000/yr · expires 24 Oct',v:'Renewals',v2:'due in 54 days',c:'#FCDC00',b:'100%',bg:'#FCDC00'},
       {n:'Botanic Juice Bar',sub:'£800 · tournament',v:'At risk',v2:'no written agreement',c:'#f87171',b:'35%',bg:'#f87171'},
-      {n:'Ormeau Wealth',sub:'amount tbc · tournament',v:'Watch',v2:'no written agreement',c:'#38bdf8',b:'41%',bg:'#38bdf8'}
+      {n:'Ormeau Wealth',sub:'amount tbc · tournament',v:'Watch',v2:'no written agreement',c:'#a9bcd6',b:'41%',bg:'#a9bcd6'}
     ];
     var t=el('spRows');
     sp.forEach(function(x){
