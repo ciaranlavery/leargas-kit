@@ -8,7 +8,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <style>
-:root{--bg:#05010f;--surface:#0e061b;--surface-hi:#191127;--surface-2:#05010f;--ink:#fbe5ff;--muted:#baa4e2;--faint:#9783be;--line:rgba(255,255,255,.09);--accent:#c099ff;--accent-ink:#101014;--success:#6ab08b;--danger:#d0897d;--radius:1rem;--shadow:inset 0 1px 0 rgba(255,255,255,.07),0 .75rem 1.75rem -1rem rgb(0 0 0/.6);--sunken:inset 0 2px 4px 0 rgb(0 0 0/.45),inset 0 -1px 0 0 rgba(255,255,255,.06)}
+:root{--bg:#05010f;--surface:#0e061b;--surface-hi:#191127;--surface-2:#05010f;--ink:#fbe5ff;--muted:#baa4e2;--faint:#9783be;--line:rgba(255,255,255,.09);--accent:#c099ff;--accent-ink:#101014;--success:#dbcafc;--danger:#c099ff;--ink-hi:#ffefff;--radius:1rem;--shadow:inset 0 1px 0 rgba(255,255,255,.07),0 .75rem 1.75rem -1rem rgb(0 0 0/.6);--sunken:inset 0 2px 4px 0 rgb(0 0 0/.45),inset 0 -1px 0 0 rgba(255,255,255,.06)}
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh;font-size:.875rem;line-height:1.55;-webkit-font-smoothing:antialiased}
 ::selection{background:var(--accent);color:var(--accent-ink)}
@@ -35,6 +35,7 @@ button.nav-item{font-family:inherit}
 .main{flex:1;min-width:0;padding:1.75rem 2rem 2.5rem;max-width:94rem}
 .top{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap}
 .top h1{font-size:clamp(1.25rem,4vw,1.5rem);font-weight:800;letter-spacing:-.02em}
+.top h1,.kpi .k-val,.panel h3{color:var(--ink-hi)}
 .top .date{font-size:.875rem;color:var(--faint);margin-top:.25rem}
 .controls{display:flex;gap:.5rem;flex-wrap:wrap}
 button.pill{font-family:inherit}
@@ -99,9 +100,9 @@ button.pill{font-family:inherit}
 .table-scroll .ttable .bar{min-width:5.625rem;margin-top:0}
 .ttable tr:last-child td{border-bottom:none}
 .tag{font-size:.6875rem;font-weight:700;padding:.25rem .5rem;border-radius:999px;white-space:nowrap}
-.tag.ok{background:rgba(52,211,153,.15);color:var(--success)}
-.tag.warn{background:rgba(252,220,0,.15);color:var(--accent)}
-.tag.bad{background:rgba(248,113,113,.15);color:var(--danger)}
+.tag.ok{background:rgba(219,202,252,.12);color:var(--success)}
+.tag.warn{background:rgba(192,153,255,.16);color:var(--accent)}
+.tag.bad{background:var(--accent);color:var(--accent-ink)}
 
 @media (max-width:68.75rem){
   .layout{display:block}
@@ -598,7 +599,7 @@ button.pill{font-family:inherit}
   var WINENAMES=['Malbec (house red)','Sauvignon Blanc','Prosecco','Pinot Grigio Rosé','Pinot Grigio'];
   var WINECUR=[46,52,18,31,22];
   var WINEPAR=[48,48,36,30,24];
-  function stockColor(cur,par,idx){var r=cur[idx]/par[idx];return r>=1?'#6ab08b':(r>=0.5?'#aba05c':'#d0897d')}
+  function stockColor(cur,par,idx){var r=cur[idx]/par[idx];return r>=1?'#baa4e2':(r>=0.5?'#c099ff':'#ffffff')}
   var TOPMEM=[396,216,97,79,72];
   var TOPINC=['£277k','£27k','£17k','£44k','no fee'];
   var EXPNAMES=['Bar & catering','Staffing','Utilities','Courts & grounds','Insurance','Gym & fitness','Marketing & events'];
@@ -887,7 +888,7 @@ button.pill{font-family:inherit}
   CH.bar=mk('cBar',{
     type:'line',
     data:{labels:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],datasets:[
-      {label:'Bar sales',data:[1.5,1.2,1.7,2.2,3.6,5.1,4.0],borderColor:GOLD,backgroundColor:function(ctx){var c=ctx.chart.ctx,g=c.createLinearGradient(0,0,0,240);g.addColorStop(0,'rgba(252,220,0,.22)');g.addColorStop(1,'rgba(252,220,0,0)');return g},fill:true,tension:.35,pointRadius:0,borderWidth:2}]},
+      {label:'Bar sales',data:[1.5,1.2,1.7,2.2,3.6,5.1,4.0],borderColor:GOLD,backgroundColor:function(ctx){var c=ctx.chart.ctx,g=c.createLinearGradient(0,0,0,240);g.addColorStop(0,'rgba(192,153,255,.22)');g.addColorStop(1,'rgba(192,153,255,0)');return g},fill:true,tension:.35,pointRadius:0,borderWidth:2}]},
     options:base({plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{color:gridColor()},ticks:{callback:function(v){return '£'+v+'k'}}}}})
   });
   CH.gym=mk('cGym',{
@@ -901,7 +902,7 @@ button.pill{font-family:inherit}
   CH.jlv=mk('cJlv',{
     type:'line',
     data:{labels:JLVM,datasets:[
-      {label:'Joiners',data:[16,14,18,13,19,15,21,17,19,18,23,24],borderColor:GOLD,backgroundColor:'rgba(252,220,0,.1)',fill:true,tension:.3,pointRadius:0,borderWidth:2},
+      {label:'Joiners',data:[16,14,18,13,19,15,21,17,19,18,23,24],borderColor:GOLD,backgroundColor:'rgba(192,153,255,.1)',fill:true,tension:.3,pointRadius:0,borderWidth:2},
       {label:'Leavers',data:[7,7,6,7,5,6,5,6,6,6,6,5],borderColor:'rgba(255,255,255,.3)',tension:.3,pointRadius:0,borderWidth:2}]},
     options:base({scales:{x:{grid:{display:false}},y:{grid:{color:gridColor()}}}})
   });
@@ -946,7 +947,7 @@ button.pill{font-family:inherit}
   CH.barB=mk('cBarB',{
     type:'line',
     data:{labels:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],datasets:[
-      {label:'Bar sales',data:[1.5,1.2,1.7,2.2,3.6,5.1,4.0],borderColor:GOLD,backgroundColor:function(ctx){var c=ctx.chart.ctx,g=c.createLinearGradient(0,0,0,240);g.addColorStop(0,'rgba(252,220,0,.22)');g.addColorStop(1,'rgba(252,220,0,0)');return g},fill:true,tension:.35,pointRadius:0,borderWidth:2}]},
+      {label:'Bar sales',data:[1.5,1.2,1.7,2.2,3.6,5.1,4.0],borderColor:GOLD,backgroundColor:function(ctx){var c=ctx.chart.ctx,g=c.createLinearGradient(0,0,0,240);g.addColorStop(0,'rgba(192,153,255,.22)');g.addColorStop(1,'rgba(192,153,255,0)');return g},fill:true,tension:.35,pointRadius:0,borderWidth:2}]},
     options:base({plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{color:gridColor()},ticks:{callback:function(v){return '£'+v+'k'}}}}})
   });
   mk('cStockSofts',{
@@ -970,11 +971,11 @@ button.pill{font-family:inherit}
   (function(){
     var fn=[
       {n:'Wedding Reception',sub:'Sat 13 Sep · 12:00–23:00',v:'£1,800',c:'#c099ff'},
-      {n:'Mixer & Curry Night',sub:'Fri 20 Sep · 19:30–23:00',v:'£1,250',c:'#a3e635'},
-      {n:'Corporate Away-Day',sub:'Thu 25 Sep · 9:00–17:00',v:'£720',c:'#38bdf8'},
-      {n:'Club AGM',sub:'Wed 1 Oct · 18:30–20:30',v:'£0',c:'rgba(255,255,255,.35)'},
-      {n:'Autumn Supper',sub:'Fri 10 Oct · 19:00–23:00',v:'£840',c:'#f59e0b'},
-      {n:'Halloween Social',sub:'Sat 31 Oct · 20:00–late',v:'£350',c:'#c084fc'}
+      {n:'Mixer & Curry Night',sub:'Fri 20 Sep · 19:30–23:00',v:'£1,250',c:'#c099ff'},
+      {n:'Corporate Away-Day',sub:'Thu 25 Sep · 9:00–17:00',v:'£720',c:'#c099ff'},
+      {n:'Club AGM',sub:'Wed 1 Oct · 18:30–20:30',v:'£0',c:'#c099ff'},
+      {n:'Autumn Supper',sub:'Fri 10 Oct · 19:00–23:00',v:'£840',c:'#c099ff'},
+      {n:'Halloween Social',sub:'Sat 31 Oct · 20:00–late',v:'£350',c:'#c099ff'}
     ];
     ['fnRows','fnRows2'].forEach(function(id){
       var t=el(id);
@@ -1035,10 +1036,10 @@ button.pill{font-family:inherit}
   })();
   (function(){
     var sp=[
-      {n:'Harbour Coffee Co.',sub:'£3,000/yr · expires 12 Sep',v:'Renewals',v2:'due in 12 days',c:'#f59e0b',b:'63%',bg:'#f59e0b'},
+      {n:'Harbour Coffee Co.',sub:'£3,000/yr · expires 12 Sep',v:'Renewals',v2:'due in 12 days',c:'#c099ff',b:'63%',bg:'#c099ff'},
       {n:'Lagan Estate Agents',sub:'£2,000/yr · expires 24 Oct',v:'Renewals',v2:'due in 54 days',c:'#c099ff',b:'100%',bg:'#c099ff'},
-      {n:'Botanic Juice Bar',sub:'£800 · tournament',v:'At risk',v2:'no written agreement',c:'#d0897d',b:'35%',bg:'#d0897d'},
-      {n:'Ormeau Wealth',sub:'amount tbc · tournament',v:'Watch',v2:'no written agreement',c:'#baa4e2',b:'41%',bg:'#baa4e2'}
+      {n:'Botanic Juice Bar',sub:'£800 · tournament',v:'At risk',v2:'no written agreement',c:'#c099ff',b:'35%',bg:'#c099ff'},
+      {n:'Ormeau Wealth',sub:'amount tbc · tournament',v:'Watch',v2:'no written agreement',c:'#c099ff',b:'41%',bg:'#c099ff'}
     ];
     var t=el('spRows');
     sp.forEach(function(x){
