@@ -6,7 +6,7 @@
 <meta name="description" content="Sample one-page Monday pack for a restaurant — revenue, costs and actions. Léargas mock data.">
 <title>Your Monday numbers, on one page (sample - restaurant)</title>
 <style>
-:root{--bg:#ffdad3;--surface:#fff;--ink:#260000;--muted:#703229;--card:#f8fafc;--card-line:#e4cac6;--success:#2b7351;--warn:#6f641d;--info-bg:#eef1f5;--primary:#742f25;--primary-hi:#621e16;--pale:#ffd0c7;--pricebg:#ffe0d8;--radius:.75rem}
+:root{--bg:#fab8ac;--surface:#ffdad3;--ink:#260000;--muted:#703229;--card:#ffffff;--card-line:#e4cac6;--success:#2b7351;--warn:#6f641d;--info-bg:#eef1f5;--primary:#742f25;--primary-hi:#621e16;--hero:#f7a597;--radius:.75rem}
 *{box-sizing:border-box}
 body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;margin:0;background:var(--bg);color:var(--ink);font-size:1rem;line-height:1.6;-webkit-font-smoothing:antialiased}
 ::selection{background:var(--primary);color:#fff}
@@ -15,7 +15,7 @@ body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;margin:0;backgrou
 .page{background:var(--surface);border:1px solid var(--card-line);border-radius:1rem;padding:1.5rem;box-shadow:0 .125rem .625rem rgb(30 34 43/.1)}
 h1{font-size:1.5rem;margin:.2em 0;letter-spacing:-.02em}.lede{color:var(--muted);max-width:35rem}
 h2{font-size:1rem;margin:1.5rem 0 .5rem;color:var(--ink);border-left:.3125rem solid var(--primary);padding-left:.75rem;letter-spacing:-.01em}
-.hero{background:var(--pale);color:var(--ink);border-radius:var(--radius);padding:1.5rem;margin-bottom:.25rem}
+.hero{background:var(--hero);color:var(--ink);border-radius:var(--radius);padding:1.5rem;margin-bottom:.25rem}
 .hero h1{color:var(--ink);font-size:clamp(1.5rem,5vw,1.875rem);line-height:1.2;text-wrap:balance}
 .hero .lede{color:var(--muted)}
 .madein{font-size:.6875rem;color:var(--primary);font-weight:800;letter-spacing:.14em;margin:.75rem 0 0}
@@ -32,7 +32,7 @@ a.cta:hover{background:var(--primary-hi)}
 .kpi .l{font-size:.75rem;color:var(--muted)}
 .up{color:var(--success);font-size:.75rem;font-weight:700}.warn{color:var(--warn);font-size:.75rem;font-weight:700}
 .note{font-size:.875rem;color:var(--muted);background:var(--card);border:1px solid var(--card-line);border-radius:.5rem;padding:.75rem 1rem;margin:0}
-.spot{background:var(--surface);border:1px solid var(--card-line);border-left:.3125rem solid var(--primary);border-radius:var(--radius);padding:1rem 1.25rem;margin:.25rem 0 0}
+.spot{background:var(--card);border:1px solid var(--card-line);border-left:.3125rem solid var(--primary);border-radius:var(--radius);padding:1rem 1.25rem;margin:.25rem 0 0}
 .spot-row{display:flex;justify-content:space-between;align-items:baseline;gap:.5rem .75rem;padding:.75rem 0;border-bottom:1px solid var(--card-line);font-size:.875rem}
 .spot-row:last-of-type{border:none}
 .spot-row>span{flex:1;min-width:0;color:var(--ink)}
@@ -42,13 +42,13 @@ a.cta:hover{background:var(--primary-hi)}
 ul.ticks{list-style:none;padding:0;margin:.75rem 0}
 ul.ticks li{background:var(--info-bg);border:1px solid var(--card-line);border-radius:.5rem;padding:.5rem .75rem;margin:.5rem 0;font-size:.875rem}
 ul.ticks li::before{content:'✓ ';color:var(--success);font-weight:800}
-.price{background:var(--pricebg);border:1px solid var(--primary);border-radius:var(--radius);padding:1rem}
+.price{background:var(--card);border:1px solid var(--primary);border-radius:var(--radius);padding:1rem}
 .p-big{font-size:1.875rem;font-weight:800;color:var(--ink);font-variant-numeric:tabular-nums}.p-big span{font-size:.875rem;font-weight:400;color:var(--muted)}
-.quote{border:2px dashed var(--primary);border-radius:var(--radius);padding:1rem;margin:1rem 0;background:var(--surface)}
+.quote{border:2px dashed var(--primary);border-radius:var(--radius);padding:1rem;margin:1rem 0;background:var(--card)}
 .quote .stars{color:var(--primary);font-weight:800;letter-spacing:.1875rem}
 .quote p{margin:.3em 0;font-size:.875rem}
 .step{display:flex;gap:.75rem;margin:.75rem 0;font-size:.875rem}.n{flex-shrink:0;width:1.625rem;height:1.625rem;border-radius:50%;background:var(--primary);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:.875rem}
-.sample{display:inline-block;background:var(--pale);border:1px solid var(--primary);color:var(--ink);border-radius:999px;padding:.25rem .75rem;font-size:.75rem;font-weight:700}
+.sample{display:inline-block;background:var(--card);border:1px solid var(--primary);color:var(--ink);border-radius:999px;padding:.25rem .75rem;font-size:.75rem;font-weight:700}
 .wordmark{text-align:center;font-size:.6875rem;font-weight:800;letter-spacing:.2em;color:var(--primary);margin-top:.5rem}
 .contact{background:var(--primary);color:#fff;border-radius:.625rem;padding:.75rem 1rem;margin-top:1.25rem;font-size:1rem}
 .mut{color:var(--muted);font-size:.75rem}
