@@ -8,7 +8,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <style>
-:root{--bg:#081426;--surface:#0e2140;--surface-hi:#122647;--surface-2:#0a1830;--ink:#e8edf6;--muted:#a9bcd6;--faint:#8fa3c2;--line:rgba(255,255,255,.09);--accent:#FCDC00;--accent-ink:#0a1830;--success:#34d399;--danger:#f87171;--radius:1rem;--shadow:inset 0 1px 0 rgba(255,255,255,.07),0 .75rem 1.75rem -1rem rgb(0 0 0/.6);--sunken:inset 0 2px 4px 0 rgb(0 0 0/.45),inset 0 -1px 0 0 rgba(255,255,255,.06)}
+:root{--bg:#000212;--surface:#020a1e;--surface-hi:#09162a;--surface-2:#000212;--ink:#cff4ff;--muted:#90b2eb;--faint:#6f90c6;--line:rgba(255,255,255,.09);--accent:#FCDC00;--accent-ink:#0a1830;--success:#6ab08b;--danger:#d0897d;--radius:1rem;--shadow:inset 0 1px 0 rgba(255,255,255,.07),0 .75rem 1.75rem -1rem rgb(0 0 0/.6);--sunken:inset 0 2px 4px 0 rgb(0 0 0/.45),inset 0 -1px 0 0 rgba(255,255,255,.06)}
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh;font-size:.875rem;line-height:1.55;-webkit-font-smoothing:antialiased}
 ::selection{background:var(--accent);color:var(--accent-ink)}
@@ -444,7 +444,7 @@ button.pill{font-family:inherit}
 <script>
 (function(){
   'use strict';
-  var GOLD='#FCDC00', TICK='#8fa3c2';
+  var GOLD='#FCDC00', TICK='#90b2eb';
   var gridColor=function(){return 'rgba(255,255,255,.05)'};
   Chart.defaults.color=TICK;
   Chart.defaults.font.family="system-ui,-apple-system,'Segoe UI',sans-serif";
@@ -469,7 +469,7 @@ button.pill{font-family:inherit}
           var v=ds.data[i];
           if(v==null)return;
           ctx.save();
-          ctx.fillStyle='#e8edf6';
+          ctx.fillStyle='#cff4ff';
           ctx.font='600 11px system-ui, sans-serif';
           if(chart.config.options&&chart.config.options.indexAxis==='y'){
             ctx.textAlign='left';ctx.textBaseline='middle';
@@ -598,7 +598,7 @@ button.pill{font-family:inherit}
   var WINENAMES=['Malbec (house red)','Sauvignon Blanc','Prosecco','Pinot Grigio Rosé','Pinot Grigio'];
   var WINECUR=[46,52,18,31,22];
   var WINEPAR=[48,48,36,30,24];
-  function stockColor(cur,par,idx){var r=cur[idx]/par[idx];return r>=1?'#34d399':(r>=0.5?'#f59e0b':'#f87171')}
+  function stockColor(cur,par,idx){var r=cur[idx]/par[idx];return r>=1?'#6ab08b':(r>=0.5?'#aba05c':'#d0897d')}
   var TOPMEM=[396,216,97,79,72];
   var TOPINC=['£277k','£27k','£17k','£44k','no fee'];
   var EXPNAMES=['Bar & catering','Staffing','Utilities','Courts & grounds','Insurance','Gym & fitness','Marketing & events'];
@@ -953,14 +953,14 @@ button.pill{font-family:inherit}
     type:'bar',
     data:{labels:SOFTNAMES,datasets:[
       {label:'Cases',data:SOFTCUR,backgroundColor:function(ctx){return stockColor(SOFTCUR,SOFTPAR,ctx.dataIndex)},borderRadius:4,barPercentage:.6}]},
-    options:base({indexAxis:'y',layout:{padding:{left:12,right:96}},plugins:{legend:{display:false}},scales:{x:{grid:{color:gridColor()},ticks:{precision:0,maxTicksLimit:6},title:{display:true,text:'Cases',color:'#8fa3c2',font:{size:10}}},y:{grid:{display:false},afterFit:function(ax){ax.width+=16},ticks:{autoSkip:false,font:{size:10}}}}}),
+    options:base({indexAxis:'y',layout:{padding:{left:12,right:96}},plugins:{legend:{display:false}},scales:{x:{grid:{color:gridColor()},ticks:{precision:0,maxTicksLimit:6},title:{display:true,text:'Cases',color:'#90b2eb',font:{size:10}}},y:{grid:{display:false},afterFit:function(ax){ax.width+=16},ticks:{autoSkip:false,font:{size:10}}}}}),
     plugins:[barValue(function(v,i){return v+' · par '+SOFTPAR[i]})]
   });
   mk('cStockWine',{
     type:'bar',
     data:{labels:WINENAMES,datasets:[
       {label:'Bottles',data:WINECUR,backgroundColor:function(ctx){return stockColor(WINECUR,WINEPAR,ctx.dataIndex)},borderRadius:4,barPercentage:.6}]},
-    options:base({indexAxis:'y',layout:{padding:{left:12,right:96}},plugins:{legend:{display:false}},scales:{x:{grid:{color:gridColor()},ticks:{precision:0,maxTicksLimit:6},title:{display:true,text:'Bottles',color:'#8fa3c2',font:{size:10}}},y:{grid:{display:false},afterFit:function(ax){ax.width+=16},ticks:{autoSkip:false,font:{size:10}}}}}),
+    options:base({indexAxis:'y',layout:{padding:{left:12,right:96}},plugins:{legend:{display:false}},scales:{x:{grid:{color:gridColor()},ticks:{precision:0,maxTicksLimit:6},title:{display:true,text:'Bottles',color:'#90b2eb',font:{size:10}}},y:{grid:{display:false},afterFit:function(ax){ax.width+=16},ticks:{autoSkip:false,font:{size:10}}}}}),
     plugins:[barValue(function(v,i){return v+' · par '+WINEPAR[i]})]
   });
 
@@ -1037,8 +1037,8 @@ button.pill{font-family:inherit}
     var sp=[
       {n:'Harbour Coffee Co.',sub:'£3,000/yr · expires 12 Sep',v:'Renewals',v2:'due in 12 days',c:'#f59e0b',b:'63%',bg:'#f59e0b'},
       {n:'Lagan Estate Agents',sub:'£2,000/yr · expires 24 Oct',v:'Renewals',v2:'due in 54 days',c:'#FCDC00',b:'100%',bg:'#FCDC00'},
-      {n:'Botanic Juice Bar',sub:'£800 · tournament',v:'At risk',v2:'no written agreement',c:'#f87171',b:'35%',bg:'#f87171'},
-      {n:'Ormeau Wealth',sub:'amount tbc · tournament',v:'Watch',v2:'no written agreement',c:'#a9bcd6',b:'41%',bg:'#a9bcd6'}
+      {n:'Botanic Juice Bar',sub:'£800 · tournament',v:'At risk',v2:'no written agreement',c:'#d0897d',b:'35%',bg:'#d0897d'},
+      {n:'Ormeau Wealth',sub:'amount tbc · tournament',v:'Watch',v2:'no written agreement',c:'#90b2eb',b:'41%',bg:'#90b2eb'}
     ];
     var t=el('spRows');
     sp.forEach(function(x){

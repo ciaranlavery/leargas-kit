@@ -6,7 +6,7 @@
 <meta name="description" content="Sample weekly dashboard demo for a restaurant — covers, promos and food cost. Léargas mock data.">
 <title>Olive &amp; Ash - Weekly pack (sample demo)</title>
 <style>
-:root{--bg:#081426;--surface:#0e2140;--surface-hi:#122647;--surface-2:#0a1830;--ink:#eaf0fa;--muted:#a9bcd6;--faint:#8fa3c2;--line:rgba(255,255,255,.09);--accent:#FCDC00;--accent-ink:#0a1830;--yellow-deep:#8a7600;--success:#34d399;--danger:#f87171;--radius:1rem;--shadow:inset 0 1px 0 rgba(255,255,255,.07),0 .75rem 1.75rem -1rem rgb(0 0 0/.6);--sunken:inset 0 2px 4px 0 rgb(0 0 0/.45),inset 0 -1px 0 0 rgba(255,255,255,.06)}
+:root{--bg:#000212;--surface:#020a1e;--surface-hi:#09162a;--surface-2:#000212;--ink:#cff4ff;--muted:#90b2eb;--faint:#6f90c6;--line:rgba(255,255,255,.09);--accent:#FCDC00;--accent-ink:#0a1830;--yellow-deep:#8a7600;--success:#6ab08b;--danger:#d0897d;--radius:1rem;--shadow:inset 0 1px 0 rgba(255,255,255,.07),0 .75rem 1.75rem -1rem rgb(0 0 0/.6);--sunken:inset 0 2px 4px 0 rgb(0 0 0/.45),inset 0 -1px 0 0 rgba(255,255,255,.06)}
 *{margin:0;padding:0;box-sizing:border-box}body{background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:.875rem;line-height:1.55;min-height:100vh;-webkit-font-smoothing:antialiased}
 ::selection{background:var(--accent);color:var(--accent-ink)}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:.375rem}
@@ -69,7 +69,9 @@ button.ni{font-family:inherit}.ni:hover{background:rgba(255,255,255,.06);color:v
 <div class="foot">DEMO - all figures invented for illustration. Your pack fills itself in from till, bookings, bank and sheets.</div>
 </main></div>
 <script>
-document.querySelectorAll('.ni').forEach(function(n){n.addEventListener('click',function(){document.querySelectorAll('.ni').forEach(function(x){x.classList.remove('on')});n.classList.add('on');var v=n.getAttribute('data-v');document.querySelectorAll('[data-view]').forEach(function(p){p.style.display=(v==='all'||p.getAttribute('data-view')===v)?'':'none';});});});
+function rebalance(){document.querySelectorAll('.grid').forEach(function(g){var vis=Array.prototype.filter.call(g.children,function(c){return c.style.display!=='none'});vis.forEach(function(c){c.style.gridColumn=(vis.length===1)?'1 / -1':'';});});}
+document.querySelectorAll('.ni').forEach(function(n){n.addEventListener('click',function(){document.querySelectorAll('.ni').forEach(function(x){x.classList.remove('on')});n.classList.add('on');var v=n.getAttribute('data-v');document.querySelectorAll('[data-view]').forEach(function(p){p.style.display=(v==='all'||p.getAttribute('data-view')===v)?'':'none';});rebalance();});});
+rebalance();
 </script>
 </body>
 </html>
