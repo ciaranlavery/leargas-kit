@@ -8,7 +8,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <style>
-:root{--bg:#000212;--surface:#020a1e;--surface-hi:#09162a;--surface-2:#000212;--ink:#cff4ff;--muted:#90b2eb;--faint:#6f90c6;--line:rgba(255,255,255,.09);--accent:#FCDC00;--accent-ink:#0a1830;--success:#6ab08b;--danger:#d0897d;--radius:1rem;--shadow:inset 0 1px 0 rgba(255,255,255,.07),0 .75rem 1.75rem -1rem rgb(0 0 0/.6);--sunken:inset 0 2px 4px 0 rgb(0 0 0/.45),inset 0 -1px 0 0 rgba(255,255,255,.06)}
+:root{--bg:#05010f;--surface:#0e061b;--surface-hi:#191127;--surface-2:#05010f;--ink:#fbe5ff;--muted:#baa4e2;--faint:#9783be;--line:rgba(255,255,255,.09);--accent:#c099ff;--accent-ink:#101014;--success:#6ab08b;--danger:#d0897d;--radius:1rem;--shadow:inset 0 1px 0 rgba(255,255,255,.07),0 .75rem 1.75rem -1rem rgb(0 0 0/.6);--sunken:inset 0 2px 4px 0 rgb(0 0 0/.45),inset 0 -1px 0 0 rgba(255,255,255,.06)}
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh;font-size:.875rem;line-height:1.55;-webkit-font-smoothing:antialiased}
 ::selection{background:var(--accent);color:var(--accent-ink)}
@@ -444,7 +444,7 @@ button.pill{font-family:inherit}
 <script>
 (function(){
   'use strict';
-  var GOLD='#FCDC00', TICK='#90b2eb';
+  var GOLD='#c099ff', TICK='#baa4e2';
   var gridColor=function(){return 'rgba(255,255,255,.05)'};
   Chart.defaults.color=TICK;
   Chart.defaults.font.family="system-ui,-apple-system,'Segoe UI',sans-serif";
@@ -469,7 +469,7 @@ button.pill{font-family:inherit}
           var v=ds.data[i];
           if(v==null)return;
           ctx.save();
-          ctx.fillStyle='#cff4ff';
+          ctx.fillStyle='#fbe5ff';
           ctx.font='600 11px system-ui, sans-serif';
           if(chart.config.options&&chart.config.options.indexAxis==='y'){
             ctx.textAlign='left';ctx.textBaseline='middle';
@@ -484,7 +484,7 @@ button.pill{font-family:inherit}
     }};
   }
 
-  var srcColors=['#FCDC00','#f59e0b','#38bdf8','#a3e635','#c084fc'];
+  var srcColors=['#c099ff','#f59e0b','#38bdf8','#a3e635','#c084fc'];
   var srcNames=['Membership','Bar','Court fees','Gym','Function room'];
   function srcData(s){return [54,18,14,9,5].map(function(v,i){return Math.round(v*s)});}
   function srcLegend(id,data){
@@ -867,7 +867,7 @@ button.pill{font-family:inherit}
   });
   CH.source=mk('cSource',{
     type:'doughnut',
-    data:{labels:srcNames,datasets:[{data:srcData(100),backgroundColor:srcColors,borderWidth:2,borderColor:'#0a1830'}]},
+    data:{labels:srcNames,datasets:[{data:srcData(100),backgroundColor:srcColors,borderWidth:2,borderColor:'#0e061b'}]},
     options:base({cutout:'66%',plugins:{legend:{display:false},tooltip:{enabled:true}}})
   });
   srcLegend('srcLegend',srcData(100));
@@ -881,7 +881,7 @@ button.pill{font-family:inherit}
   mk('cMix',{
     type:'bar',
     data:{labels:['Standard (O29)','Juvenile (U15)','Junior (U18)','Senior (15+ yrs)','Junior Family','Life'],datasets:[
-      {label:'Members',data:[396,216,97,79,72,67],backgroundColor:function(ctx){return ctx.raw>=300?'#FCDC00':'rgba(255,255,255,.25)'},borderRadius:4,barPercentage:.65}]},
+      {label:'Members',data:[396,216,97,79,72,67],backgroundColor:function(ctx){return ctx.raw>=300?'#c099ff':'rgba(255,255,255,.25)'},borderRadius:4,barPercentage:.65}]},
     options:base({indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{grid:{color:gridColor()},ticks:{precision:0}},y:{grid:{display:false}}}})
   });
   CH.bar=mk('cBar',{
@@ -893,7 +893,7 @@ button.pill{font-family:inherit}
   CH.gym=mk('cGym',{
     type:'bar',
     data:{labels:['6a','7a','8a','9a','10a','11a','12p','1p','2p','3p','4p','5p','6p','7p','8p','9p'],datasets:[
-      {label:'Check-ins',data:[14,44,70,55,32,28,36,32,30,26,32,52,90,78,40,13],backgroundColor:function(ctx){return ctx.raw>=80?'#FCDC00':'rgba(255,255,255,.22)'},borderRadius:3}]},
+      {label:'Check-ins',data:[14,44,70,55,32,28,36,32,30,26,32,52,90,78,40,13],backgroundColor:function(ctx){return ctx.raw>=80?'#c099ff':'rgba(255,255,255,.22)'},borderRadius:3}]},
     options:base({plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{maxRotation:0,autoSkip:false,font:{size:9}}},y:{grid:{color:gridColor()}}}})
   });
 
@@ -908,7 +908,7 @@ button.pill{font-family:inherit}
   mk('cTop',{
     type:'bar',
     data:{labels:TOPNAMES,datasets:[
-      {label:'Members',data:TOPMEM,backgroundColor:function(ctx){return ctx.dataIndex===0?'#FCDC00':'rgba(255,255,255,.28)'},borderRadius:4,barPercentage:.6}]},
+      {label:'Members',data:TOPMEM,backgroundColor:function(ctx){return ctx.dataIndex===0?'#c099ff':'rgba(255,255,255,.28)'},borderRadius:4,barPercentage:.6}]},
     options:base({indexAxis:'y',layout:{padding:{right:110}},plugins:{legend:{display:false}},scales:{x:{grid:{color:gridColor()},ticks:{precision:0,maxTicksLimit:6}},y:{grid:{display:false},ticks:{autoSkip:false,font:{size:11}}}}}),
     plugins:[barValue(function(v,i){return fmt(v)+' · '+TOPINC[i]})]
   });
@@ -923,21 +923,21 @@ button.pill{font-family:inherit}
   });
   CH.finSrc=mk('cFinSrc',{
     type:'doughnut',
-    data:{labels:srcNames,datasets:[{data:srcData(100),backgroundColor:srcColors,borderWidth:2,borderColor:'#0a1830'}]},
+    data:{labels:srcNames,datasets:[{data:srcData(100),backgroundColor:srcColors,borderWidth:2,borderColor:'#0e061b'}]},
     options:base({cutout:'66%',plugins:{legend:{display:false}}})
   });
   srcLegend('finSrcLegend',srcData(100));
   CH.margin=mk('cMargin',{
     type:'bar',
     data:{labels:JLVM,datasets:[
-      {label:'Net',data:[43,41,35,29,39,38,46,46,57,60,54,57],backgroundColor:function(ctx){return ctx.raw>=45?'#FCDC00':'rgba(255,255,255,.28)'},borderRadius:4}]},
+      {label:'Net',data:[43,41,35,29,39,38,46,46,57,60,54,57],backgroundColor:function(ctx){return ctx.raw>=45?'#c099ff':'rgba(255,255,255,.28)'},borderRadius:4}]},
     options:base({plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{color:gridColor()},ticks:{callback:function(v){return '£'+v+'k'}}}}}),
     plugins:[barValue(function(v){return '£'+v+'k'})]
   });
   CH.exp=mk('cExp',{
     type:'bar',
     data:{labels:EXPNAMES,datasets:[
-      {label:'Spend',data:expData('month').data,backgroundColor:function(ctx){return ctx.dataIndex<2?'#FCDC00':'rgba(255,255,255,.28)'},borderRadius:4,barPercentage:.6}]},
+      {label:'Spend',data:expData('month').data,backgroundColor:function(ctx){return ctx.dataIndex<2?'#c099ff':'rgba(255,255,255,.28)'},borderRadius:4,barPercentage:.6}]},
     options:base({plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{maxRotation:45,minRotation:45,font:{size:10}}},y:{grid:{color:gridColor()},ticks:{maxTicksLimit:6,callback:function(v){return v>=1000?'£'+Math.round(v/1000)+'k':'£'+v}}}}}),
     plugins:[barValue(function(v){return v>=1000?'£'+(Math.round(v/100)/10)+'k':'£'+v})]
   });
@@ -953,14 +953,14 @@ button.pill{font-family:inherit}
     type:'bar',
     data:{labels:SOFTNAMES,datasets:[
       {label:'Cases',data:SOFTCUR,backgroundColor:function(ctx){return stockColor(SOFTCUR,SOFTPAR,ctx.dataIndex)},borderRadius:4,barPercentage:.6}]},
-    options:base({indexAxis:'y',layout:{padding:{left:12,right:96}},plugins:{legend:{display:false}},scales:{x:{grid:{color:gridColor()},ticks:{precision:0,maxTicksLimit:6},title:{display:true,text:'Cases',color:'#90b2eb',font:{size:10}}},y:{grid:{display:false},afterFit:function(ax){ax.width+=16},ticks:{autoSkip:false,font:{size:10}}}}}),
+    options:base({indexAxis:'y',layout:{padding:{left:12,right:96}},plugins:{legend:{display:false}},scales:{x:{grid:{color:gridColor()},ticks:{precision:0,maxTicksLimit:6},title:{display:true,text:'Cases',color:'#baa4e2',font:{size:10}}},y:{grid:{display:false},afterFit:function(ax){ax.width+=16},ticks:{autoSkip:false,font:{size:10}}}}}),
     plugins:[barValue(function(v,i){return v+' · par '+SOFTPAR[i]})]
   });
   mk('cStockWine',{
     type:'bar',
     data:{labels:WINENAMES,datasets:[
       {label:'Bottles',data:WINECUR,backgroundColor:function(ctx){return stockColor(WINECUR,WINEPAR,ctx.dataIndex)},borderRadius:4,barPercentage:.6}]},
-    options:base({indexAxis:'y',layout:{padding:{left:12,right:96}},plugins:{legend:{display:false}},scales:{x:{grid:{color:gridColor()},ticks:{precision:0,maxTicksLimit:6},title:{display:true,text:'Bottles',color:'#90b2eb',font:{size:10}}},y:{grid:{display:false},afterFit:function(ax){ax.width+=16},ticks:{autoSkip:false,font:{size:10}}}}}),
+    options:base({indexAxis:'y',layout:{padding:{left:12,right:96}},plugins:{legend:{display:false}},scales:{x:{grid:{color:gridColor()},ticks:{precision:0,maxTicksLimit:6},title:{display:true,text:'Bottles',color:'#baa4e2',font:{size:10}}},y:{grid:{display:false},afterFit:function(ax){ax.width+=16},ticks:{autoSkip:false,font:{size:10}}}}}),
     plugins:[barValue(function(v,i){return v+' · par '+WINEPAR[i]})]
   });
 
@@ -969,7 +969,7 @@ button.pill{font-family:inherit}
   /* expenses now render as cExp chart */
   (function(){
     var fn=[
-      {n:'Wedding Reception',sub:'Sat 13 Sep · 12:00–23:00',v:'£1,800',c:'#FCDC00'},
+      {n:'Wedding Reception',sub:'Sat 13 Sep · 12:00–23:00',v:'£1,800',c:'#c099ff'},
       {n:'Mixer & Curry Night',sub:'Fri 20 Sep · 19:30–23:00',v:'£1,250',c:'#a3e635'},
       {n:'Corporate Away-Day',sub:'Thu 25 Sep · 9:00–17:00',v:'£720',c:'#38bdf8'},
       {n:'Club AGM',sub:'Wed 1 Oct · 18:30–20:30',v:'£0',c:'rgba(255,255,255,.35)'},
@@ -1024,7 +1024,7 @@ button.pill{font-family:inherit}
     });
   })();
   (function(){
-    var heat=[{d:'Mon',v:1160,c:'rgba(255,255,255,.4)'},{d:'Tue',v:1670,c:'#FCDC00'},{d:'Wed',v:990,c:'rgba(255,255,255,.3)'},{d:'Thu',v:1290,c:'rgba(255,255,255,.55)'},{d:'Fri',v:1560,c:'#FCDC00'},{d:'Sat',v:1405,c:'rgba(255,255,255,.55)'},{d:'Sun',v:880,c:'rgba(255,255,255,.3)'}];
+    var heat=[{d:'Mon',v:1160,c:'rgba(255,255,255,.4)'},{d:'Tue',v:1670,c:'#c099ff'},{d:'Wed',v:990,c:'rgba(255,255,255,.3)'},{d:'Thu',v:1290,c:'rgba(255,255,255,.55)'},{d:'Fri',v:1560,c:'#c099ff'},{d:'Sat',v:1405,c:'rgba(255,255,255,.55)'},{d:'Sun',v:880,c:'rgba(255,255,255,.3)'}];
     var max=Math.max.apply(null,heat.map(function(x){return x.v}));
     var t=el('heat');
     heat.forEach(function(x){
@@ -1036,9 +1036,9 @@ button.pill{font-family:inherit}
   (function(){
     var sp=[
       {n:'Harbour Coffee Co.',sub:'£3,000/yr · expires 12 Sep',v:'Renewals',v2:'due in 12 days',c:'#f59e0b',b:'63%',bg:'#f59e0b'},
-      {n:'Lagan Estate Agents',sub:'£2,000/yr · expires 24 Oct',v:'Renewals',v2:'due in 54 days',c:'#FCDC00',b:'100%',bg:'#FCDC00'},
+      {n:'Lagan Estate Agents',sub:'£2,000/yr · expires 24 Oct',v:'Renewals',v2:'due in 54 days',c:'#c099ff',b:'100%',bg:'#c099ff'},
       {n:'Botanic Juice Bar',sub:'£800 · tournament',v:'At risk',v2:'no written agreement',c:'#d0897d',b:'35%',bg:'#d0897d'},
-      {n:'Ormeau Wealth',sub:'amount tbc · tournament',v:'Watch',v2:'no written agreement',c:'#90b2eb',b:'41%',bg:'#90b2eb'}
+      {n:'Ormeau Wealth',sub:'amount tbc · tournament',v:'Watch',v2:'no written agreement',c:'#baa4e2',b:'41%',bg:'#baa4e2'}
     ];
     var t=el('spRows');
     sp.forEach(function(x){
