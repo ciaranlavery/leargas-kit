@@ -42,6 +42,8 @@ section.block:last-of-type{padding-bottom:4rem}
 h2.title{font-size:clamp(1.5rem,3.5vw,2rem);letter-spacing:-.02em;line-height:1.2;margin:0 0 .5rem;text-wrap:balance}
 p.standfirst{color:var(--muted);margin:0 0 1.5rem;max-width:38rem;font-size:1.0625rem}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:1rem}
+.grid.cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:40rem){.grid.cols-2{grid-template-columns:1fr}}
 a.card{display:block;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:1.25rem;text-decoration:none;color:var(--ink);box-shadow:var(--shadow);transition:transform .15s ease-out,box-shadow .15s ease-out}
 a.card:hover{transform:translateY(-2px);box-shadow:var(--shadow-big)}
 a.card:focus-visible{transform:translateY(-2px)}
@@ -102,7 +104,7 @@ footer.site .wrap{display:flex;gap:.5rem 1.5rem;flex-wrap:wrap;align-items:cente
 <p class="kicker">Live demos</p>
 <h2 class="title">Click through a dashboard.</h2>
 <p class="standfirst">Each demo shows the tabs, charts and extras exactly as your pack would work.</p>
-<div class="grid">
+<div class="grid cols-2">
 <a class="card" href="demo-juice-bar.html"><span class="k">Demo</span><b>Juice bar dashboard</b><span class="d">Sales by day, stock gaps, rota</span></a>
 <a class="card" href="demo-restaurant.html"><span class="k">Demo</span><b>Restaurant dashboard</b><span class="d">Covers, promo profit, food cost</span></a>
 <a class="card" href="demo-social-group.html"><span class="k">Demo</span><b>Social group dashboard</b><span class="d">Tickets, engagement, pipeline</span></a>
