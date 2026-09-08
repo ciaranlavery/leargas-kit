@@ -123,7 +123,7 @@ button.pill{font-family:inherit}
   .heat{gap:.25rem}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
-[data-theme="light"]{--bg:#d1e7ff;--surface:#fff;--surface-hi:#fff;--surface-2:#d1e7ff;--ink:#00062f;--muted:#234877;--faint:#5a7394;--line:rgba(20,25,45,.14);--accent:#1d487c;--accent-ink:#fff;--success:#00062f;--danger:#1d487c;--ink-hi:#00062f;--shadow:0 .125rem .625rem rgb(20 25 45/.12)}
+[data-theme="light"]{--bg:#d1e7ff;--surface:#deedff;--surface-hi:#ebf4ff;--surface-2:#d1e7ff;--ink:#00062f;--muted:#234877;--faint:#5a7394;--line:rgba(20,25,45,.14);--accent:#1d487c;--accent-ink:#fff;--success:#00062f;--danger:#1d487c;--ink-hi:#00062f;--shadow:0 .125rem .625rem rgb(20 25 45/.12)}
 [data-theme="light"] .row{border-bottom-color:rgba(20,25,45,.09)}
 [data-theme="light"] .brand,[data-theme="light"] .side-foot{border-color:rgba(20,25,45,.14)}
 [data-theme="light"] .nav-item:hover{background:rgba(20,25,45,.06)}
@@ -132,10 +132,11 @@ button.pill{font-family:inherit}
 [data-theme="light"] .heat .d{background:rgba(20,30,50,.06)}
 [data-theme="light"] .bar,[data-theme="light"] .bar-mini{background:rgba(20,30,50,.14)}
 [data-theme="light"] .ranges input{background:#fff;color:var(--ink);border-color:rgba(20,25,45,.2);color-scheme:light}
-[data-theme="light"] .pill{background:#fff}
+[data-theme="light"] .pill:not(.on){background:#fff}
 @media(max-width:68.75rem){[data-theme="light"] .nav-item{border-color:rgba(20,25,45,.2)}}
 .theme-toggle{position:fixed;right:.75rem;bottom:.75rem;z-index:99;background:var(--surface-2);border:1px solid var(--line);color:var(--ink);border-radius:999px;padding:.5rem .8rem;font-size:.9rem;line-height:1;cursor:pointer;box-shadow:var(--shadow)}
 .theme-toggle:hover{border-color:var(--accent);color:var(--accent)}
+.nav-item.active:hover{background:var(--accent);color:var(--accent-ink)}
 </style>
 </head>
 <body><div style="position:fixed;left:.75rem;bottom:.75rem;z-index:99;background:var(--accent);color:var(--accent-ink);font:700 .75rem system-ui,sans-serif;padding:.5rem 1rem;border-radius:999px;box-shadow:0 2px 8px rgba(0,0,0,.4)">DEMO · sample leisure-club figures</div>
@@ -482,8 +483,8 @@ button.pill{font-family:inherit}
         if(ax.title)ax.title.color=light?'#234877':TICK;
       });
       (ch.data.datasets||[]).forEach(function(ds){
-        if(ds.borderColor===SURF_D)ds.borderColor='#ffffff';
-        else if(ds.borderColor==='#ffffff')ds.borderColor=SURF_D;
+        if(ds.borderColor===SURF_D)ds.borderColor='#ebf4ff';
+        else if(ds.borderColor==='#ebf4ff')ds.borderColor=SURF_D;
         if(typeof ds.backgroundColor==='string'&&ds.backgroundColor.indexOf('255,255,255')!==-1){
           if(!ds._darkBg)ds._darkBg=ds.backgroundColor;
           ds.backgroundColor=light?'rgba(20,30,50,.18)':ds._darkBg;
