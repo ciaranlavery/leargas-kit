@@ -3,59 +3,179 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Léargas — all your data sources in one place, every Monday. Sample printouts and live dashboard demos.">
+<meta name="description" content="Léargas — every Monday, your numbers on one page. Revenue, costs, cash and what needs attention, compiled automatically. Sample packs and live demos.">
 <title>Léargas · Monday numbers in one place</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231c7448'/%3E%3Crect x='14' y='34' width='8' height='16' rx='2' fill='%23fff'/%3E%3Crect x='28' y='24' width='8' height='26' rx='2' fill='%23fff'/%3E%3Crect x='42' y='14' width='8' height='36' rx='2' fill='%23fff'/%3E%3C/svg+xml">
 <style>
-:root{--bg:#f4f3ec;--surface:#fff;--surface-lo:#faf9f4;--ink:#17233a;--muted:#57637a;--line:#e7e2cf;--navy:#0b1c3f;--navy-2:#08274a;--navy-3:#0C2340;--yellow:#fcdc00;--yellow-hi:#ffe433;--yellow-ink:#0a1830;--hero-muted:#cdd8ea;--kicker:#796100;--highlight-line:#d9b900;--radius:1rem;--shadow:0 .125rem .625rem rgb(11 28 63/.08)}
-*{box-sizing:border-box}body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;margin:0;background:var(--bg);color:var(--ink);font-size:1rem;line-height:1.6;-webkit-font-smoothing:antialiased}
-::selection{background:var(--yellow);color:var(--yellow-ink)}
-.hero{background:linear-gradient(135deg,var(--navy-2),var(--navy-3));color:#fff;padding:3.5rem 1.25rem 3rem;text-align:center}
-.badge{display:inline-block;background:var(--yellow);color:var(--yellow-ink);font-weight:800;letter-spacing:.18em;font-size:.75rem;padding:.5rem 1.5rem .5rem 1.625rem;border-radius:999px}
-.hero h1{font-size:clamp(1.75rem,4vw,2.375rem);line-height:1.15;margin:1.5rem auto .5rem;max-width:41rem;letter-spacing:-.02em;text-wrap:balance}
-.hero p{color:var(--hero-muted);margin:0 auto;max-width:34rem;font-size:1rem}
-.hero a.cta{display:inline-block;margin-top:1.25rem;background:var(--yellow);color:var(--yellow-ink);font-weight:800;font-size:1rem;padding:.75rem 1.5rem;border-radius:.625rem;text-decoration:none}
-.hero a.cta:hover{background:var(--yellow-hi)}.hero a.cta:focus-visible{outline-color:#fff;outline-offset:3px}
-.wrap{max-width:54rem;margin:0 auto;padding:.5rem 1.25rem 4rem}
-h2{font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);margin:2rem 0 .25rem;font-weight:800}
-.sub{font-size:.875rem;color:var(--muted);margin:0 0 .25rem}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}
-@media(max-width:37.5rem){.grid{grid-template-columns:1fr}.hero{padding:2.75rem 1.125rem 2.5rem}}
-a.card{position:relative;display:block;background:linear-gradient(180deg,var(--surface),var(--surface-lo));border:1px solid var(--line);border-top:.25rem solid var(--navy);border-radius:var(--radius);padding:1.25rem;text-decoration:none;color:var(--ink);box-shadow:var(--shadow);transition:transform .12s ease,box-shadow .12s ease,border-top-color .12s ease}
-a.card:hover{transform:translateY(-2px);box-shadow:0 .625rem 1.5rem rgb(11 28 63/.14);border-top-color:var(--highlight-line)}
-a.card:focus-visible{outline:3px solid var(--navy);outline-offset:2px;transform:translateY(-2px);box-shadow:0 .625rem 1.5rem rgb(11 28 63/.14)}
-a.card:active{transform:translateY(0)}
-a.card .k{display:block;font-size:.6875rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--kicker);margin-bottom:.25rem}
-a.card b{font-size:1.125rem;color:var(--navy);letter-spacing:-.01em}
+:root{--bg:#faf7f0;--surface:#fff;--ink:#1e1b16;--muted:#6f675c;--line:#e9e1d2;--primary:#1c7448;--primary-hi:#16603b;--on-primary:#fff;--radius:1rem;--shadow:0 .125rem .625rem rgb(30 27 22/.08);--shadow-big:0 1.5rem 3rem -1rem rgb(30 27 22/.22)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;margin:0;background:var(--bg);color:var(--ink);font-size:1rem;line-height:1.6;-webkit-font-smoothing:antialiased}
+::selection{background:var(--primary);color:var(--on-primary)}
+:focus-visible{outline:3px solid var(--primary);outline-offset:2px;border-radius:.375rem}
+.wrap{max-width:60rem;margin:0 auto;padding:0 1.25rem}
+.topbar{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.topbar .wrap{display:flex;align-items:center;justify-content:space-between;padding-top:.75rem;padding-bottom:.75rem}
+.brand{font-weight:800;letter-spacing:.14em;font-size:.875rem;text-decoration:none;color:var(--ink)}
+.btn{display:inline-block;background:var(--primary);color:var(--on-primary);font-weight:700;font-size:1rem;padding:.75rem 1.5rem;border-radius:.625rem;text-decoration:none;border:none;cursor:pointer;transition:background .15s ease-out,transform .15s ease-out}
+.btn:hover{background:var(--primary-hi)}.btn:active{transform:translateY(1px)}
+.btn.small{font-size:.875rem;padding:.5rem 1rem}
+.link-more{font-weight:600;font-size:1rem;color:var(--primary)}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:2rem;align-items:center;padding-top:3.5rem;padding-bottom:3rem}
+.eyebrow{display:inline-block;font-size:.75rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--primary);margin-bottom:1rem}
+.hero h1{font-size:clamp(2rem,5vw,3.25rem);line-height:1.1;letter-spacing:-.02em;margin:0 0 1rem;text-wrap:balance}
+.hero .lede{font-size:1.125rem;color:var(--muted);margin:0 0 1.5rem;max-width:32rem}
+.cta-row{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.micro{font-size:.875rem;color:var(--muted);margin:.75rem 0 0}
+.pack{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow-big);overflow:hidden}
+.pack-head{display:flex;justify-content:space-between;align-items:baseline;gap:.75rem;padding:1rem 1.25rem;border-bottom:1px solid var(--line)}
+.pack-head b{font-size:1rem;letter-spacing:-.01em}.pack-head span{font-size:.75rem;font-weight:700;color:var(--primary);white-space:nowrap}
+.pack-row{display:flex;justify-content:space-between;align-items:baseline;gap:.75rem;padding:.75rem 1.25rem;border-bottom:1px solid var(--line);font-size:.875rem}
+.pack-row:last-child{border-bottom:none}
+.pack-row .k{color:var(--muted)}.pack-row .n{font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap}
+.pack-row .good{color:var(--primary);font-weight:700}.pack-row .flag{color:#8a5a00;font-weight:700}
+.pack-act{margin:.75rem 1.25rem 1.25rem;background:#eef5ef;border:1px solid #cfe3d3;border-radius:.5rem;padding:.75rem 1rem;font-size:.875rem}
+.trust{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--surface)}
+.trust .wrap{display:flex;gap:.5rem 2rem;flex-wrap:wrap;align-items:center;justify-content:center;padding-top:1rem;padding-bottom:1rem;font-size:.875rem;color:var(--muted)}
+.trust b{color:var(--ink)}
+section.block{padding:3rem 0 0}
+section.block:last-of-type{padding-bottom:4rem}
+.kicker{font-size:.75rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--primary);margin:0 0 .5rem}
+h2.title{font-size:clamp(1.5rem,3.5vw,2rem);letter-spacing:-.02em;line-height:1.2;margin:0 0 .5rem;text-wrap:balance}
+p.standfirst{color:var(--muted);margin:0 0 1.5rem;max-width:38rem;font-size:1.0625rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:1rem}
+a.card{display:block;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:1.25rem;text-decoration:none;color:var(--ink);box-shadow:var(--shadow);transition:transform .15s ease-out,box-shadow .15s ease-out}
+a.card:hover{transform:translateY(-2px);box-shadow:var(--shadow-big)}
+a.card:focus-visible{transform:translateY(-2px)}
+a.card .k{display:block;font-size:.6875rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--primary);margin-bottom:.25rem}
+a.card b{font-size:1.125rem;letter-spacing:-.01em}
 a.card span.d{display:block;font-size:.875rem;color:var(--muted);margin-top:.25rem}
-a.card .go{position:absolute;top:1rem;right:1.25rem;color:var(--kicker);font-weight:800}
-.mut{font-size:.75rem;color:var(--muted);margin-top:2rem;text-align:center}
+.feat{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:1.25rem;box-shadow:var(--shadow)}
+.feat .n{display:inline-flex;align-items:center;justify-content:center;width:2rem;height:2rem;border-radius:.625rem;background:var(--primary);color:var(--on-primary);font-weight:800;margin-bottom:.75rem}
+.feat b{display:block;font-size:1.0625rem;margin-bottom:.25rem;letter-spacing:-.01em}
+.feat p{margin:0;font-size:.9375rem;color:var(--muted)}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:1rem;counter-reset:step}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:1.25rem}
+.step .n{flex-shrink:0;width:1.625rem;height:1.625rem;border-radius:50%;background:var(--primary);color:var(--on-primary);font-weight:800;display:inline-flex;align-items:center;justify-content:center;font-size:.875rem;margin-bottom:.75rem}
+.step b{display:block;margin-bottom:.25rem}.step p{margin:0;font-size:.9375rem;color:var(--muted)}
+.price-card{background:var(--surface);border:1px solid var(--line);border-top:.3125rem solid var(--primary);border-radius:var(--radius);padding:1.5rem;box-shadow:var(--shadow-big);max-width:38rem}
+.p-big{font-size:2.5rem;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums}.p-big span{font-size:1rem;font-weight:400;color:var(--muted)}
+.price-card ul{margin:1rem 0;padding:0;list-style:none;font-size:.9375rem}
+.price-card li{padding:.4rem 0 .4rem 1.5rem;position:relative}
+.price-card li::before{content:'✓';position:absolute;left:0;color:var(--primary);font-weight:800}
+details.faq{background:var(--surface);border:1px solid var(--line);border-radius:.75rem;padding:1rem 1.25rem;margin-bottom:.75rem}
+details.faq summary{font-weight:700;cursor:pointer;font-size:1rem}
+details.faq p{margin:.5rem 0 0;color:var(--muted);font-size:.9375rem}
+.final{background:var(--primary);color:var(--on-primary);border-radius:var(--radius);padding:2.5rem 2rem;text-align:center;margin-top:3rem}
+.final h2{font-size:clamp(1.5rem,4vw,2.25rem);letter-spacing:-.02em;margin:0 0 .5rem;text-wrap:balance}
+.final p{margin:0 0 1.5rem;opacity:.85}
+.final .btn{background:var(--on-primary);color:var(--primary)}
+.final .btn:hover{background:#e9f2ec}
+footer.site{border-top:1px solid var(--line);margin-top:4rem}
+footer.site .wrap{display:flex;gap:.5rem 1.5rem;flex-wrap:wrap;align-items:center;justify-content:space-between;padding-top:1.5rem;padding-bottom:2rem;font-size:.875rem;color:var(--muted)}
+@media(max-width:56rem){.hero .wrap{grid-template-columns:1fr;padding-top:2.5rem}.pack{max-width:28rem}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
-<div class="hero">
-<div class="badge">LÉARGAS</div>
-<h1>All your data sources in one place, every Monday.</h1>
-<p>Sample packs and live demos.</p>
-<a class="cta" href="tel:[phone]">Book a 30-min chat</a>
+<header class="topbar"><div class="wrap"><a class="brand" href="index.html">LÉARGAS</a><a class="btn small" href="tel:[phone]">Book a 30-min chat</a></div></header>
+
+<div class="hero"><div class="wrap">
+<div>
+<div class="eyebrow">Made in Belfast · For independent hospitality</div>
+<h1>Every Monday, your numbers on one page.</h1>
+<p class="lede">Revenue, costs, cash and what needs attention — pulled automatically from the systems you already use. No new software. No manual entry. No Monday spreadsheet.</p>
+<div class="cta-row"><a class="btn" href="tel:[phone]">Book a 30-min chat</a><a class="link-more" href="#samples">See a sample pack ↓</a></div>
+<p class="micro">Free 30-minute chat. If it's not a fit, we'll say so.</p>
 </div>
+<div class="pack" aria-label="Sample Monday pack preview">
+<div class="pack-head"><b>Monday pack · Week 34</b><span>SAMPLE</span></div>
+<div class="pack-row"><span class="k">Total revenue</span><span class="n">£8,420 <span class="good">▲ 4%</span></span></div>
+<div class="pack-row"><span class="k">Gross profit · 71% margin</span><span class="n">£5,980</span></div>
+<div class="pack-row"><span class="k">Cash at bank</span><span class="n">£31,000 <span class="flag">≈ 5 wks</span></span></div>
+<div class="pack-act"><b>3 actions:</b> reorder oat milk Tue · trim Friday close by one · push Green Machine promo.</div>
+</div>
+</div></div>
+
+<div class="trust"><div class="wrap"><span><b>Built for</b> cafés · restaurants · social groups · leisure clubs</span><span>Sample data throughout</span></div></div>
+
 <div class="wrap">
-<h2>Printouts</h2>
-<p class="sub">One page each. Print or save as PDF.</p>
+<section class="block" id="samples">
+<p class="kicker">Sample packs</p>
+<h2 class="title">What last Monday would have looked like.</h2>
+<p class="standfirst">One page each. Print it or save as PDF — this replaces the manual consolidation, not your systems.</p>
 <div class="grid">
-<a class="card" href="printout-juice-bar.html"><span class="k">Cafes and bars</span><b>Juice bar</b><span class="d">Sales, stock and rota on one page</span><span class="go">→</span></a>
-<a class="card" href="printout-restaurant.html"><span class="k">Dinner spots</span><b>Restaurant</b><span class="d">Covers, promos and food cost</span><span class="go">→</span></a>
-<a class="card" href="printout-social-group.html"><span class="k">Events and classes</span><b>Social group</b><span class="d">Tickets, members and pipeline</span><span class="go">→</span></a>
-<a class="card" href="printout-leisure-club.html"><span class="k">Clubs and gyms</span><b>Leisure club</b><span class="d">Membership, courts and bar</span><span class="go">→</span></a>
+<a class="card" href="printout-juice-bar.html"><span class="k">Cafes and bars</span><b>Juice bar</b><span class="d">Sales, stock and rota on one page</span></a>
+<a class="card" href="printout-restaurant.html"><span class="k">Dinner spots</span><b>Restaurant</b><span class="d">Covers, promos and food cost</span></a>
+<a class="card" href="printout-social-group.html"><span class="k">Events and classes</span><b>Social group</b><span class="d">Tickets, members and pipeline</span></a>
+<a class="card" href="printout-leisure-club.html"><span class="k">Clubs and gyms</span><b>Leisure club</b><span class="d">Membership, courts and bar</span></a>
 </div>
-<h2>Live dashboard demos</h2>
-<p class="sub">Click through the tabs.</p>
+</section>
+
+<section class="block">
+<p class="kicker">Live demos</p>
+<h2 class="title">Click through a dashboard.</h2>
+<p class="standfirst">Each demo shows the tabs, charts and extras exactly as your pack would work.</p>
 <div class="grid">
-<a class="card" href="demo-juice-bar.html"><span class="k">Demo</span><b>Juice bar dashboard</b><span class="d">Sales by day, stock gaps, rota</span><span class="go">→</span></a>
-<a class="card" href="demo-restaurant.html"><span class="k">Demo</span><b>Restaurant dashboard</b><span class="d">Covers, promo profit, food cost</span><span class="go">→</span></a>
-<a class="card" href="demo-social-group.html"><span class="k">Demo</span><b>Social group dashboard</b><span class="d">Tickets, engagement, pipeline</span><span class="go">→</span></a>
-<a class="card" href="demo-leisure-club.html"><span class="k">Demo</span><b>Leisure club dashboard</b><span class="d">Membership, courts, bar</span><span class="go">→</span></a>
+<a class="card" href="demo-juice-bar.html"><span class="k">Demo</span><b>Juice bar dashboard</b><span class="d">Sales by day, stock gaps, rota</span></a>
+<a class="card" href="demo-restaurant.html"><span class="k">Demo</span><b>Restaurant dashboard</b><span class="d">Covers, promo profit, food cost</span></a>
+<a class="card" href="demo-social-group.html"><span class="k">Demo</span><b>Social group dashboard</b><span class="d">Tickets, engagement, pipeline</span></a>
+<a class="card" href="demo-leisure-club.html"><span class="k">Demo</span><b>Leisure club dashboard</b><span class="d">Membership, courts, bar</span></a>
 </div>
-<p class="mut">Léargas · Made in Belfast · Mock data throughout</p>
+</section>
+
+<section class="block">
+<p class="kicker">Why Léargas</p>
+<h2 class="title">Below what the accounts ever reach.</h2>
+<p class="standfirst">Monthly accounts tell you what happened. Your Monday pack shows what's happening — down to daily detail.</p>
+<div class="grid">
+<div class="feat"><span class="n">1</span><b>One page, every Monday</b><p>Revenue, costs, cash position and anything amber — compiled automatically, reviewed in a minute.</p></div>
+<div class="feat"><span class="n">2</span><b>Daily detail, not monthly fog</b><p>Promo profit, fastest movers, waste flags, quiet-hour gaps — recorded daily in your systems, displayed daily here.</p></div>
+<div class="feat"><span class="n">3</span><b>No work on your side</b><p>No new software or hardware. No manual entry. Duplicates, gaps and odd lines caught before you ever see them.</p></div>
 </div>
+</section>
+
+<section class="block">
+<p class="kicker">How it works</p>
+<h2 class="title">Three steps to your first pack.</h2>
+<div class="steps">
+<div class="step"><span class="n">1</span><b>30-minute chat, free</b><p>We look at where your numbers live. If it's not a fit, we'll say so.</p></div>
+<div class="step"><span class="n">2</span><b>Half-day setup on video (£150)</b><p>We connect everything once. Comes straight off your first bill if you start within a month.</p></div>
+<div class="step"><span class="n">3</span><b>First pack within 10 days</b><p>Lands on the first Monday after everything's connected and checked.</p></div>
+</div>
+</section>
+
+<section class="block">
+<p class="kicker">Pricing</p>
+<h2 class="title">One price. One paid month to decide.</h2>
+<div class="price-card">
+<div class="p-big">£595 <span>a month +VAT</span></div>
+<ul>
+<li>Rolling monthly, cancel with 30 days</li>
+<li>Month one is a trial — same pack, counts as month one if you stay</li>
+<li>Optional extras at £195 a month each — Promo, Rota and Pipeline checks, built around your data, only if you want them</li>
+</ul>
+<div class="cta-row"><a class="btn" href="tel:[phone]">Book a 30-min chat</a></div>
+</div>
+</section>
+
+<section class="block">
+<p class="kicker">Questions</p>
+<h2 class="title">Asked before you ask.</h2>
+<details class="faq" open><summary>Do I need new software or hardware?</summary><p>No. The pack is built from the systems you already hold — till, bookings, bank, sheets. Nothing to install, nothing to learn.</p></details>
+<details class="faq"><summary>What if it's not a fit?</summary><p>Then we tell you on the free 30-minute chat, before any money changes hands. The setup only happens when the fit is obvious.</p></details>
+<details class="faq"><summary>How do the £195 extras work?</summary><p>Each extra answers one money question your accounts can't — did the promo profit, are busy hours covered without idle ones, who's close to buying. Built around your data, one at a time, cancel anytime.</p></details>
+<details class="faq"><summary>When do I get my first pack?</summary><p>On the first Monday within 10 days of setup, once everything's connected and checked. You review a single page to start the week.</p></details>
+<details class="faq"><summary>What happens after month one?</summary><p>Rolling monthly at £595 +VAT, cancel with 30 days. The trial month counts as month one if you stay — you keep everything either way.</p></details>
+</section>
+
+<section class="block">
+<div class="final">
+<h2>Start next Monday knowing your numbers.</h2>
+<p>One free chat. One page. Zero spreadsheet.</p>
+<a class="btn" href="tel:[phone]">Book a 30-min chat</a>
+</div>
+</section>
+</div>
+
+<footer class="site"><div class="wrap"><span><b>Léargas</b> · Made in Belfast</span><span>Mock data throughout — your pack shows your numbers</span></div></footer>
 </body>
 </html>
