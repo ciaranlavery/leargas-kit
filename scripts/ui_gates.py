@@ -63,8 +63,13 @@ def main() -> int:
           "hero button + proof text link + final band, nothing else")
     check("works-strip", all(k in land for k in (
         "Square", "Zettle", "SumUp", "Lightspeed", "Xero", "Open Banking",
-        "Don't see yours?")),
-          "compatibility self-qualification")
+        "Don't see yours?", "if it exports, we can use it"))
+          and "probably packs" not in land
+          and "@keyframes mq" in land
+          and land.count('class="mq-half"') == 2
+          and (ROOT / "previews" / "logos" / "square.svg").exists()
+          and (ROOT / "previews" / "logos" / "xero.svg").exists(),
+          "logo marquee + escape hatch, marks vendored")
     check("one-voice", "Book a 30-min chat" not in land
           and land.count("Book the free 30-min chat") == 2,
           "every CTA reads exactly 'Book the free 30-min chat'")
