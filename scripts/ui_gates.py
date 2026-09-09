@@ -69,14 +69,12 @@ def main() -> int:
           and land.count('class="mq-half"') == 2
           and all((ROOT / "previews" / "logos" / f).exists() for f in (
               "square.svg", "xero.svg", "zettle.png", "sumup.svg", "lightspeed.svg"))
-          and "filter:grayscale(1)" in land
-          and 'class="mono"' not in land,
           and "filter:grayscale(1)" not in land
-          and "opacity:.62" not in land,
+          and "opacity:.62" not in land
+          and 'class="mono"' not in land,
           "logo marquee + escape hatch, full-color marks vendored")
-    check("works-on-top", land.find('class="works"') < land.find('class="hero"')
-          and "opacity:.62" in land,
-          "slim translucent band above the hero")
+    check("works-on-top", land.find('class="works"') < land.find('class="hero"'),
+          "slim full-color band above the hero")
     check("one-voice", "Book a 30-min chat" not in land
           and land.count("Book the free 30-min chat") == 2,
           "every CTA reads exactly 'Book the free 30-min chat'")
