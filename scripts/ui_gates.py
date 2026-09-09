@@ -68,14 +68,20 @@ def main() -> int:
         "Monday", "Week 34", "Board-ready")),
           "landing speaks daily throughout")
     check("product-strip", all(k in land for k in (
-        'id="product"', "Yours, every morning.", "hottest-takes",
-        "caught before you ever see"))
-          and "sample-daily-pack.pdf" not in land
+        'id="product"', "Yours, every morning", "hottest-takes",
+        "caught before you ever see", "7am"))
           and 'id="monday"' not in land,
-          "save-once product, no PDF download, no link-word")
-    check("roi-illustrative", "Illustrative:" in land
-          and "afternoon a month" in land,
-          "labelled illustration, never a result")
+          "save-once product with delivery time, no link-word")
+    roi_line = [ln for ln in land.splitlines() if "Illustrative" in ln]
+    check("roi-illustrative", "Illustrative, on sample figures:" in land
+          and "afternoon a month" not in land
+          and all("oat" not in ln.lower() for ln in roi_line),
+          "concrete labelled illustration, oat-milk banned from ROI")
+    check("security-strip", all(k in land for k in (
+        "Your data", "Read-only", "Open Banking", "No passwords stored",
+        "UK GDPR", "UK/EEA"))
+          and "revoke access any time" in land.lower(),
+          "data-safety strip")
     check("tile-outcomes", all(k in land for k in (
         "Tuesday's order", "what food cost", "who's joining", "the bar take")),
           "one outcome line per demo tile")
@@ -117,8 +123,9 @@ def main() -> int:
     check("honest-proof", all(k in land for k in (
         'id="proof"', "Who's behind it", "Kraken", "Revolut",
         "first Belfast partners"))
+          and "First five founding partners" in land
           and "No client logos" not in land,
-          "LinkedIn-style bio, pilot honesty, sentence removed per owner")
+          "LinkedIn-style bio + First-5 scarcity, no apologising")
     check("no-fabrication", all(n not in land + "".join(text[d] for d in DEMOS)
                                 for n in ("Sarah", "Mick", "Aoife")),
           "no invented people anywhere")
@@ -150,14 +157,14 @@ def main() -> int:
           and all(s not in land for s in ("Sales by day, stock gaps", "Covers, promo profit",
                                           "Tickets, engagement", "Membership, courts")),
           "short outcome captions below shots, nothing overlaid")
-    check("no-sample-pdf", not (ROOT / "sample-daily-pack.pdf").exists()
-          and "sample-daily-pack.pdf" not in land
-          and "dl-row" not in land,
-          "PDF download row removed entirely per owner")
-    check("no-faq", "details.faq" not in land
-          and "Questions" not in land
-          and "No new software. Cancel anytime." not in land,
-          "FAQ section removed per owner")
+    check("no-sample-pdf", (ROOT / "sample-daily-pack.pdf").exists()
+          and 'href="sample-daily-pack.pdf" download' in land
+          and "dl-row" in land,
+          "sample PDF restored + downloadable")
+    check("faq-restored", "details.faq" in land
+          and "Good questions" in land
+          and "How do I cancel?" in land,
+          "trimmed FAQ restored")
     check("theme-stills", land.count('class="light"') == 8,
           "light layers: 4 slides + 4 mobile strips")
     check("markers-one-size", ".feat .n" not in land and ".step .n" in land,

@@ -106,6 +106,13 @@ p.standfirst{color:var(--muted);margin:0 0 2rem;max-width:38rem;font-size:1.0625
 .shot-cap b{font-size:1.0625rem;letter-spacing:-.01em}
 .shot-cap span{font-size:.875rem;color:var(--muted)}
 .do{margin:0 0 .9rem;max-width:38rem;font-size:1.0625rem}
+.sec{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:1.25rem}
+.sec-item{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:1.1rem 1.25rem;box-shadow:inset 0 1px 0 0 var(--highlight),var(--shadow)}
+.sec-item b{display:block;margin-bottom:.2rem;letter-spacing:-.01em}
+.sec-item p{margin:0;font-size:.9375rem;color:var(--muted)}
+details.faq{background:var(--surface);border:1px solid var(--line);border-radius:.75rem;padding:1rem 1.25rem;margin:0 auto .75rem;box-shadow:inset 0 1px 0 0 var(--highlight),var(--shadow);max-width:44rem}
+details.faq summary{font-weight:700;cursor:pointer;font-size:1rem}
+details.faq p{margin:.5rem 0 0;color:var(--muted);font-size:.9375rem}
 .do b{letter-spacing:-.01em}
 .do p{display:inline;color:var(--muted)}
 .founder{display:flex;gap:1.25rem;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:1.5rem;box-shadow:inset 0 1px 0 0 var(--highlight),var(--shadow);max-width:44rem}
@@ -129,6 +136,7 @@ p.standfirst{color:var(--muted);margin:0 0 2rem;max-width:38rem;font-size:1.0625
 .final:active{transform:translateY(1px)}
 .final .go{display:inline-block;background:var(--on-primary);color:var(--primary);font-weight:700;font-size:1rem;padding:.75rem 1.5rem;border-radius:.625rem;margin-top:1.25rem}
 .fin-mail{text-align:center}
+.dl-row{text-align:center;margin-top:1rem}
 .final h2{font-size:clamp(1.5rem,4vw,2.25rem);letter-spacing:-.02em;margin:0 0 .5rem;text-wrap:balance}
 .final p{margin:0;opacity:.85}
 footer.site{border-top:1px solid var(--line);margin-top:4rem}
@@ -214,6 +222,7 @@ footer.site .wrap{display:flex;gap:.5rem 1.5rem;flex-wrap:wrap;align-items:cente
 <a class="strip" href="demo-social-group.html"><span class="sthumb"><img src="previews/social.png" alt="" width="480" height="270" loading="lazy" decoding="async"><img src="previews/social-light.png" alt="" aria-hidden="true" width="480" height="270" loading="lazy" decoding="async" class="light"></span><span class="scap"><b>Social group</b><span>Ticket sales, guest pipeline</span></span></a>
 <a class="strip" href="demo-leisure-club.html"><span class="sthumb"><img src="previews/leisure.png" alt="" width="480" height="270" loading="lazy" decoding="async"><img src="previews/leisure-light.png" alt="" aria-hidden="true" width="480" height="270" loading="lazy" decoding="async" class="light"></span><span class="scap"><b>Leisure club</b><span>Members, courts, bar</span></span></a>
 </div>
+<p class="dl-row"><a class="link-more" href="sample-daily-pack.pdf" download>Download the sample daily pack (PDF)</a></p>
 </section>
 
 <section class="block">
@@ -245,14 +254,25 @@ footer.site .wrap{display:flex;gap:.5rem 1.5rem;flex-wrap:wrap;align-items:cente
 <p class="exp"><img class="wlogo" src="previews/logos/revolut.svg" alt="Revolut" width="20" height="20"> Data Analyst · Revolut</p>
 <p>Onboarding first Belfast partners now.</p></div>
 </div>
-<p class="micro">Real photo and first partner numbers land here when they exist — ask about founding-partner terms on the <a href="https://calendly.com/leargas/30min" target="_blank" rel="noopener">free 30-min chat</a>.</p>
+<p class="micro">First five founding partners lock founding terms for as long as they stay — ask on the <a href="https://calendly.com/leargas/30min" target="_blank" rel="noopener">free 30-min chat</a>.</p>
 </section>
 
 <section class="block" id="product">
 <p class="kicker">The product</p>
-<h2 class="title">Yours, every morning.</h2>
-<p class="standfirst">We send you your dashboard once — you save it and open it like an app. Every morning it's refreshed with your numbers, with the PDF hottest-takes alongside.</p>
+<h2 class="title">Yours, every morning by 7am.</h2>
+<p class="standfirst">We send you your dashboard once — you save it and open it like an app. Every morning by 7am it's refreshed with your numbers, with the PDF hottest-takes in your inbox alongside.</p>
 <p class="micro">Duplicates, gaps and odd lines are caught before you ever see the pack.</p>
+</section>
+
+<section class="block">
+<p class="kicker">Your data</p>
+<h2 class="title">Read-only. Revocable. Yours.</h2>
+<div class="grid sec">
+<div class="sec-item"><b>Read-only connections</b><p>Bank, till and bookings — pulled, never written to.</p></div>
+<div class="sec-item"><b>Open Banking</b><p>Official bank feeds where available; exports for the rest.</p></div>
+<div class="sec-item"><b>No passwords stored</b><p>Revoke access any time, one click.</p></div>
+<div class="sec-item"><b>UK GDPR</b><p>Data stays in the UK/EEA.</p></div>
+</div>
 </section>
 
 <section class="block" id="pricing">
@@ -267,8 +287,18 @@ footer.site .wrap{display:flex;gap:.5rem 1.5rem;flex-wrap:wrap;align-items:cente
 <li>Optional extras at £195 a month each — Promo, Rota and Pipeline checks, built around your data, only if you want them</li>
 </ul>
 <p class="micro">Setup only happens when the fit is obvious.</p>
-<p class="micro"><b>Illustrative:</b> pays for itself if it saves one person an afternoon a month.</p>
+<p class="micro"><b>Illustrative, on sample figures:</b> catch one wasteful order and one overstaffed close a week ≈ £400+/month — against £595. Two months for one makes the first month effectively £297.</p>
 </div>
+</section>
+
+<section class="block" id="faq">
+<p class="kicker">Good questions</p>
+<h2 class="title">Short answers.</h2>
+<details class="faq"><summary>How do you connect to my till and bank?</summary><p>Read-only connections where possible — Open Banking for bank feeds, official integrations or exports for till and bookings. Nothing is ever written to your systems.</p></details>
+<details class="faq"><summary>Is it safe?</summary><p>No passwords stored, revoke anytime. UK GDPR applies; data stays in the UK/EEA.</p></details>
+<details class="faq"><summary>What are the £195 extras?</summary><p>One extra, one money question — promo profit, rota cover, or who's close to buying. Built around your data, cancel anytime.</p></details>
+<details class="faq"><summary>When do I get my first pack?</summary><p>First morning within 10 days of setup, once everything's connected and checked.</p></details>
+<details class="faq"><summary>How do I cancel?</summary><p>30 days' notice. The dashboard stops with the subscription; any PDFs you've saved stay yours.</p></details>
 </section>
 
 <section class="block">
