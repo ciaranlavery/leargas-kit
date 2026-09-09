@@ -77,20 +77,12 @@ p.standfirst{color:var(--muted);margin:0 0 2rem;max-width:38rem;font-size:1.0625
 .shot:hover{transform:translateY(-2px);box-shadow:inset 0 1px 0 0 var(--highlight),var(--shadow-big)}
 .shot img{display:block;width:100%;height:auto}
 .shot img.light{position:absolute;inset:0;opacity:0;animation:thememorph 9s ease-in-out infinite}
-.track .slide:nth-child(2) img.light{animation-delay:2.2s}
-.track .slide:nth-child(3) img.light{animation-delay:4.5s}
-.track .slide:nth-child(4) img.light{animation-delay:6.7s}
-@keyframes thememorph{0%,42%{opacity:0}54%,88%{opacity:1}100%{opacity:0}}
-.shot-cap{position:absolute;left:0;right:0;bottom:0;display:flex;align-items:baseline;justify-content:space-between;gap:1rem;padding:2.5rem 1.25rem 1rem;background:linear-gradient(transparent,rgb(20 15 8/.82));color:#fff}
-.shot-cap b{font-size:1.25rem;letter-spacing:-.01em}
-.shot-cap span{font-size:.875rem;opacity:.85;white-space:nowrap}
-@media(max-width:40rem){.shot-cap{flex-wrap:wrap;gap:.25rem 1rem;padding-top:1.5rem}.shot-cap span{white-space:normal}}
+@keyframes thememorph{0%,40%{opacity:0}55%,100%{opacity:1}}
+.shot-cap{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;padding:.8rem 1.25rem;background:var(--surface);color:var(--ink)}
+.shot-cap b{font-size:1.0625rem;letter-spacing:-.01em}
 .feat{background:linear-gradient(var(--surface),var(--surface));border:1px solid var(--line);border-radius:var(--radius);padding:1.25rem;box-shadow:inset 0 1px 0 0 var(--highlight),var(--shadow)}
 .feat b{display:block;font-size:1.0625rem;margin-bottom:.25rem;letter-spacing:-.01em}
 .feat p{margin:0;font-size:.9375rem;color:var(--muted)}
-.grow{display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:.75rem 1.5rem}
-.grow div{font-size:.9375rem;color:var(--muted)}
-.grow b{color:var(--ink)}
 .quote{background:linear-gradient(var(--surface),var(--surface));border:1px solid var(--line);border-radius:var(--radius);padding:1.25rem;box-shadow:inset 0 1px 0 0 var(--highlight),var(--shadow);display:flex;flex-direction:column;gap:.5rem}
 .quote p{margin:0;font-size:1rem;letter-spacing:-.005em}
 .quote cite{font-style:normal;font-size:.875rem;color:var(--muted)}
@@ -165,10 +157,10 @@ body{padding-bottom:4.25rem}
 <p class="standfirst">Four sample packs, laid out like yours would be. It slides on its own — open the closest match.</p>
 <div class="carousel" id="demoCarousel" role="region" aria-roledescription="carousel" aria-label="Dashboard demos">
 <div class="viewport"><div class="track" id="demoTrack">
-<a class="shot slide" href="demo-juice-bar.html"><img src="previews/juice.png" alt="Juice bar dashboard preview: sales by day chart, top drinks and stock gaps" width="960" height="540" loading="lazy" decoding="async"><img src="previews/juice-light.png" alt="" aria-hidden="true" width="960" height="540" loading="lazy" decoding="async" class="light"><span class="shot-cap"><b>Juice bar dashboard</b><span>Sales by day, stock gaps, rota →</span></span></a>
-<a class="shot slide" href="demo-restaurant.html"><img src="previews/restaurant.png" alt="Restaurant dashboard preview: covers by day chart, promo performance and stock gaps" width="960" height="540" loading="lazy" decoding="async"><img src="previews/restaurant-light.png" alt="" aria-hidden="true" width="960" height="540" loading="lazy" decoding="async" class="light"><span class="shot-cap"><b>Restaurant dashboard</b><span>Covers, promo profit, food cost →</span></span></a>
-<a class="shot slide" href="demo-social-group.html"><img src="previews/social.png" alt="Social group dashboard preview: ticket sales, member activity and guest pipeline" width="960" height="540" loading="lazy" decoding="async"><img src="previews/social-light.png" alt="" aria-hidden="true" width="960" height="540" loading="lazy" decoding="async" class="light"><span class="shot-cap"><b>Social group dashboard</b><span>Tickets, engagement, pipeline →</span></span></a>
-<a class="shot slide" href="demo-leisure-club.html"><img src="previews/leisure.png" alt="Leisure club dashboard preview: revenue charts, membership mix and court usage" width="960" height="540" loading="lazy" decoding="async"><img src="previews/leisure-light.png" alt="" aria-hidden="true" width="960" height="540" loading="lazy" decoding="async" class="light"><span class="shot-cap"><b>Leisure club dashboard</b><span>Membership, courts, bar →</span></span></a>
+<a class="shot slide" href="demo-juice-bar.html"><img src="previews/juice.png" alt="Juice bar dashboard preview: sales by day chart, top drinks and stock gaps" width="960" height="540" loading="lazy" decoding="async"><img src="previews/juice-light.png" alt="" aria-hidden="true" width="960" height="540" loading="lazy" decoding="async" class="light"><span class="shot-cap"><b>Juice bar dashboard</b></span></a>
+<a class="shot slide" href="demo-restaurant.html"><img src="previews/restaurant.png" alt="Restaurant dashboard preview: covers by day chart, promo performance and stock gaps" width="960" height="540" loading="lazy" decoding="async"><img src="previews/restaurant-light.png" alt="" aria-hidden="true" width="960" height="540" loading="lazy" decoding="async" class="light"><span class="shot-cap"><b>Restaurant dashboard</b></span></a>
+<a class="shot slide" href="demo-social-group.html"><img src="previews/social.png" alt="Social group dashboard preview: ticket sales, member activity and guest pipeline" width="960" height="540" loading="lazy" decoding="async"><img src="previews/social-light.png" alt="" aria-hidden="true" width="960" height="540" loading="lazy" decoding="async" class="light"><span class="shot-cap"><b>Social group dashboard</b></span></a>
+<a class="shot slide" href="demo-leisure-club.html"><img src="previews/leisure.png" alt="Leisure club dashboard preview: revenue charts, membership mix and court usage" width="960" height="540" loading="lazy" decoding="async"><img src="previews/leisure-light.png" alt="" aria-hidden="true" width="960" height="540" loading="lazy" decoding="async" class="light"><span class="shot-cap"><b>Leisure club dashboard</b></span></a>
 </div></div>
 <div class="car-nav">
 <button type="button" class="car-btn" id="carPrev" aria-label="Previous demo">←</button>
@@ -208,10 +200,10 @@ body{padding-bottom:4.25rem}
 <p class="kicker">Grows with you</p>
 <h2 class="title">It gets smarter every Monday.</h2>
 <p class="standfirst">Every pack is kept, so every pack makes the next one sharper. The longer you stay, the more your own history can tell you.</p>
-<div class="grow">
-<div><b>Baselines harden.</b> By month three, promo verdicts cite your own history, not hunches.</div>
-<div><b>Seasons appear.</b> Christmas, summer, tournament cycles — rota and promos around your year.</div>
-<div><b>Big calls get evidence.</b> Year-on-year truth, lease packs, staffing rebuilt on your data.</div>
+<div class="grid">
+<div class="feat"><b>Baselines harden</b><p>By month three, promo verdicts cite your own history, not hunches.</p></div>
+<div class="feat"><b>Seasons appear</b><p>Christmas, summer, tournament cycles — rota and promos around your year.</p></div>
+<div class="feat"><b>Big calls get evidence</b><p>Year-on-year truth, lease packs, staffing rebuilt on your data.</p></div>
 </div>
 <p class="micro">Nothing extra to install — history accrues from your normal Monday packs.</p>
 </section>
@@ -311,13 +303,14 @@ var first=t.children[0].cloneNode(true),last=t.children[N-1].cloneNode(true);
 t.insertBefore(last,t.firstChild);t.appendChild(first);
 var p=1;
 function paint(){var li=((p-1)%N+N)%N;dots.forEach(function(d,j){if(j===li){d.setAttribute('aria-current','true');}else{d.removeAttribute('aria-current');}});}
-function show(){t.style.transform='translateX(-'+(p*100)+'%)';paint();}
+function show(){t.style.transform='translateX(-'+(p*100)+'%)';paint();syncMorph();}
+function syncMorph(){if(reduced)return;var imgs=t.querySelectorAll('img.light');for(var i=0;i<imgs.length;i++){imgs[i].style.animation='none';void imgs[i].offsetWidth;imgs[i].style.animation='';}}
 function snap(to){p=to;var tr=t.style.transition;t.style.transition='none';t.style.transform='translateX(-'+(p*100)+'%)';void t.offsetWidth;t.style.transition=tr;paint();busy=false;}
 t.addEventListener('transitionend',function(e){if(e.propertyName&&e.propertyName!=='transform')return;if(p===N+1){snap(1);}else if(p===0){snap(N);}});
 function next(){if(busy)return;if(reduced){p=(p>=N)?1:p+1;show();return;}p++;if(p===N+1)busy=true;show();}
 function prev(){if(busy)return;if(reduced){p=(p<=1)?N:p-1;show();return;}p--;if(p===0)busy=true;show();}
 function go(j){if(busy)return;p=j+1;show();}
-function play(){if(reduced||timer)return;timer=setInterval(next,4500);}
+function play(){if(reduced||timer)return;timer=setInterval(next,9000);}
 function stop(){if(timer){clearInterval(timer);timer=null;}}
 document.getElementById('carPrev').addEventListener('click',function(){stop();prev();play();});
 document.getElementById('carNext').addEventListener('click',function(){stop();next();play();});
