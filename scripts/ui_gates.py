@@ -66,17 +66,16 @@ def main() -> int:
         'id="demoCarousel"', 'id="demoTrack"', 'id="demoDots"',
         'id="carPrev"', 'id="carNext"')) and land.count('class="shot slide"') == 4,
           "autoplay carousel, 4 slides, dots + arrows")
-    check("carousel-motion-safe", "setInterval(next,6000)" in land
-          and "syncMorph" not in land
-          and ".track>.slide:nth-child(even) img.light{animation-direction:reverse}" in land
+    check("carousel-motion-safe", "armSlide" in land
+          and "HOLD_A=1800" in land
+          and "transition:opacity 1.5s" in land
+          and "img.light.lit{opacity:1}" in land
+          and "thememorph" not in land
+          and "setInterval(next" not in land
           and "snapGuard" in land
-          and "animation-play-state:paused" in land
-          and "animation-delay" not in land
           and "prefers-reduced-motion: reduce" in land
-          and "visibilitychange" in land
-          and "@keyframes thememorph{0%,33%{opacity:0}58%,100%{opacity:1}}" in land
-          and "animation:thememorph 6s" in land,
-          "one alternating 6s morph per slide, CSS-phased free-run (no JS restart flash), pausable, stuck-guard; static under reduced-motion")
+          and "visibilitychange" in land,
+          "one JS-timed morph per viewing, off-screen resets only, stuck-guard; static under reduced-motion")
     check("captions-below", ".shot-cap{display:flex" in land
           and "shot-cap b{font-size:1.0625rem" in land
           and all(s not in land for s in ("Sales by day, stock gaps", "Covers, promo profit",

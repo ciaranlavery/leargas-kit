@@ -21,14 +21,14 @@
 ## Landing (`index.html`) — carousel showcase, one intentional contrast
 
 - Demos showcase = autoplay carousel on cream (one slide visible, dots +
-  arrows, 6s advance === 6s morph clock). ONE morph per slide, alternating:
-  even track children run reversed (light→dark), odds forward (dark→light);
-  the clone order [clone-s4, s1..s4, clone-s1] makes each clone match its
-  source. Phased PURELY in CSS so all clocks free-run in sync — NEVER restart
-  morph animations from JS (`animation='none'` + reflow flashes every layer
-  to dark for a frame on advance; that was the pre-advance snap). ONE pausable
-  clock: `stop()` freezes BOTH the interval and the morph
-  (`animation-play-state:paused`); a 900ms `snapGuard` recovers if
+  arrows, ~5.1s per viewing: 1.8s hold, one 1.5s morph, 1.8s hold). ONE morph
+  per viewing, alternating: odd slides light→dark, even dark→light, so the
+  entering slide always starts on the theme the last one ended on. The morph
+  is a JS-timed `.lit` class flip (`armSlide`), NEVER a looping CSS animation
+  — loop wraps snap mid-view, and JS restarts flash. Resets touch ONLY the
+  entering slide while it is off-screen; frozen end-themes glide out cleanly.
+  No hover/focus pause (pausing one clock without the other is what desynced
+  them); hidden-tab return re-arms. A 900ms `snapGuard` recovers if
   `transitionend` is ever missed. Track glide (.8s) matches the morph pace.
   Captions sit BELOW shots as a static bar (title only), never overlaid on
   dashboard elements.
