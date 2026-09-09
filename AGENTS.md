@@ -23,6 +23,12 @@
   shows static slides). NEVER a static auto-fit screenshot grid — it orphans
   the 4th card (3+1) at common widths and lets captions run off-screen; the
   viewport clips overflow instead. Dark shots sit inside bordered cards.
+- Each slide crossfades dark→light stills (`previews/<name>.png` +
+  `<name>-light.png`, both 1920px, staggered `thememorph` cycle, frozen under
+  reduced-motion). Regenerate stills headless (viewport 1920×1080,
+  `color_scheme` dark/light) when dashboards change — never ship blurry 960px.
+- Numbers live ONLY on How-it-works steps. Why-cards carry no badges; Grows
+  is a plain text strip. FAQ cards centered (`margin-inline:auto`) like price.
 - Trust band = `Built for …` + sample line only. No big stat metrics.
 - Tinted bands: green final CTA only. No other `band` sections. Number
   markers (`feat .n`, `step .n`) one size. Sections share one rhythm

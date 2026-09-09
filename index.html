@@ -76,14 +76,21 @@ p.standfirst{color:var(--muted);margin:0 0 2rem;max-width:38rem;font-size:1.0625
 .shot{position:relative;display:block;overflow:hidden;border:1px solid var(--line);border-radius:var(--radius);box-shadow:inset 0 1px 0 0 var(--highlight),var(--shadow);background:var(--surface);text-decoration:none;transition:transform .15s ease-out,box-shadow .15s ease-out}
 .shot:hover{transform:translateY(-2px);box-shadow:inset 0 1px 0 0 var(--highlight),var(--shadow-big)}
 .shot img{display:block;width:100%;height:auto}
+.shot img.light{position:absolute;inset:0;opacity:0;animation:thememorph 9s ease-in-out infinite}
+.track .slide:nth-child(2) img.light{animation-delay:2.2s}
+.track .slide:nth-child(3) img.light{animation-delay:4.5s}
+.track .slide:nth-child(4) img.light{animation-delay:6.7s}
+@keyframes thememorph{0%,42%{opacity:0}54%,88%{opacity:1}100%{opacity:0}}
 .shot-cap{position:absolute;left:0;right:0;bottom:0;display:flex;align-items:baseline;justify-content:space-between;gap:1rem;padding:2.5rem 1.25rem 1rem;background:linear-gradient(transparent,rgb(20 15 8/.82));color:#fff}
 .shot-cap b{font-size:1.25rem;letter-spacing:-.01em}
 .shot-cap span{font-size:.875rem;opacity:.85;white-space:nowrap}
 @media(max-width:40rem){.shot-cap{flex-wrap:wrap;gap:.25rem 1rem;padding-top:1.5rem}.shot-cap span{white-space:normal}}
 .feat{background:linear-gradient(var(--surface),var(--surface));border:1px solid var(--line);border-radius:var(--radius);padding:1.25rem;box-shadow:inset 0 1px 0 0 var(--highlight),var(--shadow)}
-.feat .n{display:inline-flex;align-items:center;justify-content:center;width:1.625rem;height:1.625rem;border-radius:.625rem;background:var(--primary);color:var(--on-primary);font-weight:800;margin-bottom:.75rem}
 .feat b{display:block;font-size:1.0625rem;margin-bottom:.25rem;letter-spacing:-.01em}
 .feat p{margin:0;font-size:.9375rem;color:var(--muted)}
+.grow{display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:.75rem 1.5rem}
+.grow div{font-size:.9375rem;color:var(--muted)}
+.grow b{color:var(--ink)}
 .quote{background:linear-gradient(var(--surface),var(--surface));border:1px solid var(--line);border-radius:var(--radius);padding:1.25rem;box-shadow:inset 0 1px 0 0 var(--highlight),var(--shadow);display:flex;flex-direction:column;gap:.5rem}
 .quote p{margin:0;font-size:1rem;letter-spacing:-.005em}
 .quote cite{font-style:normal;font-size:.875rem;color:var(--muted)}
@@ -106,7 +113,7 @@ p.standfirst{color:var(--muted);margin:0 0 2rem;max-width:38rem;font-size:1.0625
 .book-fallback a{color:var(--primary);font-weight:700}
 .cal-fallback{padding:2rem 1.5rem;text-align:center;color:var(--muted);font-size:.9375rem}
 .cal-fallback a{color:var(--primary);font-weight:700}
-details.faq{background:var(--surface);border:1px solid var(--line);border-radius:.75rem;padding:1rem 1.25rem;margin-bottom:.75rem;box-shadow:inset 0 1px 0 0 var(--highlight),var(--shadow);max-width:44rem}
+details.faq{background:var(--surface);border:1px solid var(--line);border-radius:.75rem;padding:1rem 1.25rem;margin:0 auto .75rem;box-shadow:inset 0 1px 0 0 var(--highlight),var(--shadow);max-width:44rem}
 details.faq summary{font-weight:700;cursor:pointer;font-size:1rem}
 details.faq p{margin:.5rem 0 0;color:var(--muted);font-size:.9375rem}
 .final{background:var(--primary);color:var(--on-primary);border-radius:var(--radius);padding:2.5rem 2rem;text-align:center;margin-top:1rem;box-shadow:var(--shadow-big)}
@@ -158,10 +165,10 @@ body{padding-bottom:4.25rem}
 <p class="standfirst">Four sample packs, laid out like yours would be. It slides on its own — open the closest match.</p>
 <div class="carousel" id="demoCarousel" role="region" aria-roledescription="carousel" aria-label="Dashboard demos">
 <div class="viewport"><div class="track" id="demoTrack">
-<a class="shot slide" href="demo-juice-bar.html"><img src="previews/juice.png" alt="Juice bar dashboard preview: sales by day chart, top drinks and stock gaps" width="960" height="540" loading="lazy" decoding="async"><span class="shot-cap"><b>Juice bar dashboard</b><span>Sales by day, stock gaps, rota →</span></span></a>
-<a class="shot slide" href="demo-restaurant.html"><img src="previews/restaurant.png" alt="Restaurant dashboard preview: covers by day chart, promo performance and stock gaps" width="960" height="540" loading="lazy" decoding="async"><span class="shot-cap"><b>Restaurant dashboard</b><span>Covers, promo profit, food cost →</span></span></a>
-<a class="shot slide" href="demo-social-group.html"><img src="previews/social.png" alt="Social group dashboard preview: ticket sales, member activity and guest pipeline" width="960" height="540" loading="lazy" decoding="async"><span class="shot-cap"><b>Social group dashboard</b><span>Tickets, engagement, pipeline →</span></span></a>
-<a class="shot slide" href="demo-leisure-club.html"><img src="previews/leisure.png" alt="Leisure club dashboard preview: revenue charts, membership mix and court usage" width="960" height="540" loading="lazy" decoding="async"><span class="shot-cap"><b>Leisure club dashboard</b><span>Membership, courts, bar →</span></span></a>
+<a class="shot slide" href="demo-juice-bar.html"><img src="previews/juice.png" alt="Juice bar dashboard preview: sales by day chart, top drinks and stock gaps" width="960" height="540" loading="lazy" decoding="async"><img src="previews/juice-light.png" alt="" aria-hidden="true" width="960" height="540" loading="lazy" decoding="async" class="light"><span class="shot-cap"><b>Juice bar dashboard</b><span>Sales by day, stock gaps, rota →</span></span></a>
+<a class="shot slide" href="demo-restaurant.html"><img src="previews/restaurant.png" alt="Restaurant dashboard preview: covers by day chart, promo performance and stock gaps" width="960" height="540" loading="lazy" decoding="async"><img src="previews/restaurant-light.png" alt="" aria-hidden="true" width="960" height="540" loading="lazy" decoding="async" class="light"><span class="shot-cap"><b>Restaurant dashboard</b><span>Covers, promo profit, food cost →</span></span></a>
+<a class="shot slide" href="demo-social-group.html"><img src="previews/social.png" alt="Social group dashboard preview: ticket sales, member activity and guest pipeline" width="960" height="540" loading="lazy" decoding="async"><img src="previews/social-light.png" alt="" aria-hidden="true" width="960" height="540" loading="lazy" decoding="async" class="light"><span class="shot-cap"><b>Social group dashboard</b><span>Tickets, engagement, pipeline →</span></span></a>
+<a class="shot slide" href="demo-leisure-club.html"><img src="previews/leisure.png" alt="Leisure club dashboard preview: revenue charts, membership mix and court usage" width="960" height="540" loading="lazy" decoding="async"><img src="previews/leisure-light.png" alt="" aria-hidden="true" width="960" height="540" loading="lazy" decoding="async" class="light"><span class="shot-cap"><b>Leisure club dashboard</b><span>Membership, courts, bar →</span></span></a>
 </div></div>
 <div class="car-nav">
 <button type="button" class="car-btn" id="carPrev" aria-label="Previous demo">←</button>
@@ -181,9 +188,9 @@ body{padding-bottom:4.25rem}
 <h2 class="title">Monthly accounts tell you history. Monday tells you what to do.</h2>
 <p class="standfirst">Your accounts show what happened. Your Monday pack shows what's happening — down to daily detail.</p>
 <div class="grid">
-<div class="feat"><span class="n">1</span><b>One page, every Monday</b><p>Revenue, costs, cash position and anything that needs a look — compiled automatically, reviewed in a minute.</p></div>
-<div class="feat"><span class="n">2</span><b>Daily detail, not monthly fog</b><p>Promo profit, fastest movers, waste flags, quiet-hour gaps — recorded daily in your systems, displayed daily here.</p></div>
-<div class="feat"><span class="n">3</span><b>No work on your side</b><p>No new software or hardware. No manual entry. Duplicates, gaps and odd lines caught before you ever see them.</p></div>
+<div class="feat"><b>One page, every Monday</b><p>Revenue, costs, cash position and anything that needs a look — compiled automatically, reviewed in a minute.</p></div>
+<div class="feat"><b>Daily detail, not monthly fog</b><p>Promo profit, fastest movers, waste flags, quiet-hour gaps — recorded daily in your systems, displayed daily here.</p></div>
+<div class="feat"><b>No work on your side</b><p>No new software or hardware. No manual entry. Duplicates, gaps and odd lines caught before you ever see them.</p></div>
 </div>
 </section>
 
@@ -201,10 +208,10 @@ body{padding-bottom:4.25rem}
 <p class="kicker">Grows with you</p>
 <h2 class="title">It gets smarter every Monday.</h2>
 <p class="standfirst">Every pack is kept, so every pack makes the next one sharper. The longer you stay, the more your own history can tell you.</p>
-<div class="grid">
-<div class="feat"><span class="n">1</span><b>Baselines harden</b><p>By month three, normal Tuesdays have a measured range — promo verdicts stop being hunches and start citing your own history.</p></div>
-<div class="feat"><span class="n">2</span><b>Seasons appear</b><p>Christmas trading, summer footfall, tournament cycles. Rota and promos planned around your year, not anyone's template.</p></div>
-<div class="feat"><span class="n">3</span><b>Big calls get evidence</b><p>Year-on-year growth truth, lease-renewal packs, staffing models rebuilt on two years of your own data.</p></div>
+<div class="grow">
+<div><b>Baselines harden.</b> By month three, promo verdicts cite your own history, not hunches.</div>
+<div><b>Seasons appear.</b> Christmas, summer, tournament cycles — rota and promos around your year.</div>
+<div><b>Big calls get evidence.</b> Year-on-year truth, lease packs, staffing rebuilt on your data.</div>
 </div>
 <p class="micro">Nothing extra to install — history accrues from your normal Monday packs.</p>
 </section>

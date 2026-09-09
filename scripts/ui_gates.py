@@ -4,7 +4,6 @@
 Run before every merge to main:  python3 scripts/ui_gates.py
 Exit 0 = green. Exit 1 = violation listed. No dependencies.
 """
-import re
 import sys
 from pathlib import Path
 
@@ -69,12 +68,15 @@ def main() -> int:
           "autoplay carousel, 4 slides, dots + arrows")
     check("carousel-motion-safe", "setInterval(next,4500)" in land
           and "prefers-reduced-motion: reduce" in land
-          and "visibilitychange" in land,
-          "autoplay pauses on hover/focus/hidden-tab, static under reduced-motion")
-    feat = re.search(r"\.feat \.n\{[^}]*width:([\d.]+rem)", land)
-    step = re.search(r"\.step \.n\{[^}]*width:([\d.]+rem)", land)
-    check("markers-one-size", bool(feat and step and feat.group(1) == step.group(1)),
-          f"feat={feat.group(1) if feat else '?'} step={step.group(1) if step else '?'}")
+          and "visibilitychange" in land
+          and "@keyframes thememorph" in land,
+          "autoplay pauses on hover/focus/hidden-tab, static under reduced-motion; slides morph dark/light")
+    check("theme-stills", land.count('class="light"') == 4,
+          "one light layer per slide")
+    check("markers-one-size", ".feat .n" not in land and ".step .n" in land,
+          "numbers live only on How-it-works steps")
+    check("faq-centered", "details.faq" in land and "margin:0 auto .75rem" in land,
+          "FAQ cards centered like price card")
 
     # 5. CTA budget (catches redundancy creep).
     for p in pages:
@@ -88,6 +90,7 @@ def main() -> int:
         check(f"no-placeholder:{p}", not hits, f"{hits}" if hits else "clean")
     for name in ("juice", "restaurant", "social", "leisure"):
         check(f"preview:{name}", (ROOT / "previews" / f"{name}.png").exists(), f"previews/{name}.png")
+        check(f"preview-light:{name}", (ROOT / "previews" / f"{name}-light.png").exists(), f"previews/{name}-light.png")
 
     print(f"\n{len(FAILS)} failures" if FAILS else "\nALL GATES GREEN")
     return 1 if FAILS else 0
