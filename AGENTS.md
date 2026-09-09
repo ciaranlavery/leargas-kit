@@ -19,13 +19,18 @@
 
 ## Landing (`index.html`) — carousel showcase, one intentional contrast
 
-- Demos showcase = carousel on cream (arrows + dots + 8s auto-advance that
-  pauses on hover/focus/hidden tab): the viewed slide ping-pongs dark↔light
-  (1.8s holds, 1.5s morphs) via a JS-timed `.lit` flip (`armSlide`), NEVER a
-  looping CSS animation — loop wraps snap mid-view, and JS restarts flash.
-  Hover pauses ONLY the advance interval; the morph free-runs because no
-  phase alignment is required (pausing one clock without the other only
-  desyncs designs that depend on alignment). A 900ms
+- Demos showcase = carousel on cream (arrows + dots + phase-locked autoplay):
+  each viewing is self-contained — 1.8s hold, ONE 1.5s morph, 1.8s hold, THEN
+  the advance fires, so both themes always show before any slide moves.
+  Viewings alternate direction (odd slides light→dark, even dark→light) so
+  every handoff is theme-to-theme: dark glides to dark, light to light. The
+  advance is chained to the morph end (`nextT`), NEVER an independent
+  interval — a second clock is what desynced every previous design. The morph
+  is a JS-timed `.lit` class flip (`armSlide`), NEVER a looping CSS animation.
+  Resets touch ONLY the entering slide while off-screen (clone AND real on
+  wraps); timers resolve the LIVE index at fire time. Hover/focus/hidden-tab
+  pauses the chain and resumes from the actual current theme — pausing needs
+  no alignment because each viewing restarts its own phase. A 900ms
   `snapGuard` recovers if `transitionend` is ever missed. Track glide (.8s)
   matches the morph pace. Captions sit BELOW shots as a static bar (title
   only), never overlaid on dashboard elements. Standfirst is one line; no

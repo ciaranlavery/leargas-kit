@@ -102,16 +102,20 @@ def main() -> int:
         'id="carPrev"', 'id="carNext"')) and land.count('class="shot slide"') == 4,
           "carousel, 4 slides, dots + arrows, 8s auto-advance")
     check("carousel-motion-safe", "armSlide" in land
-          and "function tick" in land
-          and "setInterval(function(){next();armSlide(true);},8000)" in land
+          and "HOLD_A=1800" in land
+          and "nextT=setTimeout(function(){next();armSlide(true);},HOLD_A+1500+HOLD_B)" in land
+          and "setInterval" not in land
           and "transition:opacity 1.5s" in land
           and "img.light.lit{opacity:1}" in land
           and "thememorph" not in land
-          and "nextT" not in land
+          and "nextT" in land
+          and "t.children[p].querySelector('img.light');setLit(cur,target,false)" in land
+          and "var active=p" not in land
+          and "(m!==p)" in land
           and "snapGuard" in land
           and "prefers-reduced-motion: reduce" in land
           and "visibilitychange" in land,
-          "8s auto-advance + ping-pong morph, stuck-guard; static under reduced-motion")
+          "phase-locked viewings, theme-to-theme handoffs, stuck-guard; static under reduced-motion")
     check("captions-below", ".shot-cap{display:flex" in land
           and "shot-cap b{font-size:1.0625rem" in land
           and all(s not in land for s in ("Sales by day, stock gaps", "Covers, promo profit",
