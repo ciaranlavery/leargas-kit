@@ -71,7 +71,9 @@ def main() -> int:
               "square.svg", "xero.svg", "zettle.png", "sumup.svg", "lightspeed.svg"))
           and "filter:grayscale(1)" in land
           and 'class="mono"' not in land,
-          "logo marquee + escape hatch, all marks vendored, gray-rest/color-hover")
+          and "filter:grayscale(1)" not in land
+          and "opacity:.62" not in land,
+          "logo marquee + escape hatch, full-color marks vendored")
     check("works-on-top", land.find('class="works"') < land.find('class="hero"')
           and "opacity:.62" in land,
           "slim translucent band above the hero")
