@@ -57,8 +57,6 @@ button.ni{font-family:inherit}.ni:hover{background:rgba(255,255,255,.06);color:v
 .bookbar b{display:block;font-size:1rem;color:var(--ink-hi);letter-spacing:-.01em}
 .bookbar span{font-size:.875rem;color:var(--muted)}
 .bookbar a{flex-shrink:0;background:var(--accent);color:var(--accent-ink);font-weight:800;text-decoration:none;padding:.75rem 1.25rem;border-radius:.625rem;white-space:nowrap}
-.bookfoot{display:flex;gap:.25rem 1rem;flex-wrap:wrap;justify-content:space-between}
-.bookfoot a{color:inherit}
 @media(max-width:32.5rem){.bookbar a{width:100%;text-align:center;white-space:normal}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}html{scroll-behavior:auto}}
 [data-theme="light"]{--bg:#c3eef0;--surface:#d5f2f3;--surface-hi:#e5f8f9;--surface-2:#c3eef0;--ink:#00131a;--muted:#00555b;--faint:#447c7f;--line:rgba(20,25,45,.14);--accent:#00565d;--accent-ink:#fff;--success:#00131a;--danger:#00565d;--ink-hi:#00131a;--shadow:0 .125rem .625rem rgb(20 25 45/.12)}
@@ -68,27 +66,23 @@ button.ni{font-family:inherit}.ni:hover{background:rgba(255,255,255,.06);color:v
 .theme-toggle{position:fixed;right:.75rem;bottom:.75rem;z-index:99;background:var(--surface-2);border:1px solid var(--line);color:var(--ink);border-radius:999px;padding:.5rem .8rem;font-size:.9rem;line-height:1;cursor:pointer;box-shadow:var(--shadow)}
 .theme-toggle:hover{border-color:var(--accent);color:var(--accent)}
 .ni.on:hover{background:var(--accent);color:var(--accent-ink)}
-/* LK3 shared system (duplicated, static, no build). Canonical tokens from index.html landing: cream #faf7f0, green #1c7448. Demos keep dark product readability (charts stay dark); shared bits: topbar/CTA/footer labels, 3px focus, 360px guard. */
-:root{--lk-bg:#faf7f0;--lk-green:#1c7448;--lk-green-hi:#16603b;--lk-ink:#1e1b16;--lk-line:#e9e1d2}
+/* Theme-matched demo chrome (no landing green). Uses demo vars so each dashboard keeps its own scheme. */
 html,body{overflow-x:clip}
 img{max-width:100%;height:auto}
-.lk-topbar{display:flex;align-items:center;justify-content:space-between;gap:.75rem;padding:.6rem 1rem;background:var(--lk-bg);color:var(--lk-ink);border-bottom:1px solid var(--lk-line);font-size:.875rem}
-.lk-topbar a{color:var(--lk-green);font-weight:700;text-decoration:none;white-space:nowrap}
-.lk-topbar a:hover{text-decoration:underline}
-.lk-topbar .lk-note{color:#6f675c;font-size:.75rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.lk-cta{display:inline-block;background:var(--lk-green);color:#fff!important;font-weight:700;font-size:.875rem;padding:.6rem 1.1rem;border-radius:.625rem;text-decoration:none;border:none;cursor:pointer;white-space:nowrap}
-.lk-cta:hover{background:var(--lk-green-hi);color:#fff!important}
-.lk-foot{display:flex;gap:.5rem 1.5rem;flex-wrap:wrap;align-items:center;justify-content:space-between;padding:1.25rem 0 4rem;font-size:.75rem;color:var(--faint)}
-.lk-foot a{color:var(--lk-green);font-weight:700}
-@media(max-width:32rem){.lk-topbar .lk-note{display:none}}
+.demo-top{display:flex;align-items:center;justify-content:space-between;gap:.75rem;padding:.6rem 1rem;background:var(--surface-2);color:var(--muted);border-bottom:1px solid var(--line);font-size:.875rem}
+.demo-top a{color:var(--accent);font-weight:700;text-decoration:none;white-space:nowrap}
+.demo-top a:hover{text-decoration:underline}
+.demo-top .demo-note{color:var(--faint);font-size:.75rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.foot a{color:var(--accent);font-weight:700}
+@media(max-width:32rem){.demo-top .demo-note{display:none}}
 </style>
 </head>
-<body><div class="lk-topbar"><a href="index.html">← Léargas</a><span class="lk-note">Sample demo · mock numbers</span><a class="lk-cta" href="https://calendly.com/leargas/30min" target="_blank" rel="noopener">Book a 30-min chat</a></div>
+<body><div class="demo-top"><a href="index.html">← Léargas</a><span class="demo-note">Sample demo · mock numbers</span></div>
 <div class="layout">
 <aside class="side"><div class="brand"><div class="badge">C</div><div class="bname">Clearhead Social</div></div>
 <nav aria-label="Demo views"><div class="nav">Sample demo</div><button type="button" class="ni on" data-v="all">Overview</button><button type="button" class="ni" data-v="events">Events</button><button type="button" class="ni" data-v="members">Members</button><button type="button" class="ni" data-v="pipeline">Pipeline (extra)</button></nav></aside>
 <main class="main">
-<div class="top"><h1>Week 34 <span class="pill">SAMPLE · mock numbers</span></h1><div class="date">Board-ready Monday · ticketing + Circle + Instagram auto-feeds</div><p class="intro">Sample pack — run a social group or community? Start here. Your Monday numbers arrive on the same one-page layout. <a href="https://calendly.com/leargas/30min" target="_blank" rel="noopener">Book the free 30-min chat to see yours →</a></p></div>
+<div class="top"><h1>Week 34 <span class="pill">SAMPLE · mock numbers</span></h1><div class="date">Board-ready Monday · ticketing + Circle + Instagram auto-feeds</div><p class="intro">Sample pack — run a social group or community? Start here. Your Monday numbers arrive on the same one-page layout. <a href="https://calendly.com/leargas/30min" target="_blank" rel="noopener">Book the free 30-min chat to see yours</a></p></div>
 <div class="kpis">
 <div class="kpi"><div class="l">Ticket sales</div><div class="v">£3,150</div><div class="up">▲ 12% vs last week</div></div>
 <div class="kpi"><div class="l">Active members</div><div class="v">486</div><div class="up">+18 this week</div></div>
@@ -109,9 +103,8 @@ img{max-width:100%;height:auto}
 <div class="funnel"><div class="fstep"><b>47</b>trial guests</div><div class="arr">→</div><div class="fstep"><b>12</b>converted</div><div class="arr">→</div><div class="fstep"><b>35</b>to chase</div></div>
 <div class="act"><b>3 actions:</b> ① message the 35 warm trials this week ② repeat the quiz-night format (best £/head) ③ rest life-drawing for a month.</div></div></div></div>
 <div class="foot">DEMO - all figures invented for illustration. Your pack fills itself in from ticketing, Stripe, Circle and Instagram.</div>
-<div class="bookbar"><div><b>Like this Monday? Yours looks like this.</b><span>Sample numbers above — your pack fills in automatically. Free 30-min chat, first pack within 10 days.</span></div><a href="https://calendly.com/leargas/30min" target="_blank" rel="noopener">Book the free 30-min chat →</a></div>
-<div class="lk-foot"><span><b>Léargas</b> · Mock data throughout — your pack shows your numbers</span><span><a href="index.html">← Back to Léargas</a> · <a class="lk-cta" href="https://calendly.com/leargas/30min" target="_blank" rel="noopener">Book a 30-min chat</a></span></div>
-<div class="foot bookfoot"><span><a href="index.html">← Léargas home</a></span><span>Mock numbers throughout — your pack shows your numbers</span></div>
+<div class="bookbar"><div><b>Like this Monday? Yours looks like this.</b><span>Sample numbers above — your pack fills in automatically. Free 30-min chat, first pack within 10 days.</span></div><a href="https://calendly.com/leargas/30min" target="_blank" rel="noopener">Book the free 30-min chat</a></div>
+<div class="foot"><span><a href="index.html">← Léargas home</a></span><span>Mock numbers throughout — your pack shows your numbers</span></div>
 </main></div>
 <button type="button" class="theme-toggle" id="themeToggle" title="Toggle light/dark mode" aria-label="Switch to light mode">☀</button>
 <script>

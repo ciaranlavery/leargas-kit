@@ -44,7 +44,6 @@ img{max-width:100%;height:auto}
 .hero h1{font-size:clamp(2rem,5vw,3.25rem);line-height:1.1;letter-spacing:-.02em;margin:0 0 1rem;text-wrap:balance}
 .hero .lede{font-size:1.125rem;color:var(--muted);margin:0 0 1.5rem;max-width:32rem}
 .cta-row{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
-.mid-cta{margin-top:1.5rem}
 .micro{font-size:.875rem;color:var(--muted);margin:.75rem 0 0}
 .pack{background:linear-gradient(var(--surface),var(--surface)) padding-box;--_s:var(--shadow-big);background-color:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:inset 0 1px 0 0 var(--highlight),var(--shadow-big);overflow:hidden}
 .pack-head{display:flex;justify-content:space-between;align-items:baseline;gap:.75rem;padding:1rem 1.25rem;border-bottom:1px solid var(--line)}
@@ -62,6 +61,14 @@ img{max-width:100%;height:auto}
 .metrics b{display:block;font-size:1.25rem;color:var(--ink);letter-spacing:-.01em;line-height:1.2}
 section.block{padding:3.5rem 0}
 section.block:last-of-type{padding-bottom:4rem}
+/* Dark contrast section: hosts dark dashboard screenshots so they sit naturally instead of clashing on cream. */
+.block.dark{background:#14100c;border-radius:var(--radius);padding:2.5rem 2rem;color:#f4ede1}
+.block.dark .kicker{color:#8fd6a8}
+.block.dark h2.title{color:#fff}
+.block.dark .standfirst{color:#c9bfae}
+.block.dark .link-more{color:#8fd6a8}
+.block.dark .micro{color:#a89d88}
+.block.dark .shot{border-color:rgba(255,255,255,.14)}
 .kicker{font-size:.75rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--primary);margin:0 0 .5rem}
 h2.title{font-size:clamp(1.5rem,3.5vw,2rem);letter-spacing:-.02em;line-height:1.2;margin:0 0 .5rem;text-wrap:balance}
 p.standfirst{color:var(--muted);margin:0 0 2rem;max-width:38rem;font-size:1.0625rem}
@@ -75,14 +82,13 @@ p.standfirst{color:var(--muted);margin:0 0 2rem;max-width:38rem;font-size:1.0625
 .shot-cap span{font-size:.875rem;opacity:.85;white-space:nowrap}
 @media(max-width:40rem){.shot-cap{flex-wrap:wrap;gap:.25rem 1rem;padding-top:1.5rem}.shot-cap span{white-space:normal}}
 .feat{background:linear-gradient(var(--surface),var(--surface));border:1px solid var(--line);border-radius:var(--radius);padding:1.25rem;box-shadow:inset 0 1px 0 0 var(--highlight),var(--shadow)}
-.feat .n{display:inline-flex;align-items:center;justify-content:center;width:2rem;height:2rem;border-radius:.625rem;background:var(--primary);color:var(--on-primary);font-weight:800;margin-bottom:.75rem}
+.feat .n{display:inline-flex;align-items:center;justify-content:center;width:1.625rem;height:1.625rem;border-radius:.625rem;background:var(--primary);color:var(--on-primary);font-weight:800;margin-bottom:.75rem}
 .feat b{display:block;font-size:1.0625rem;margin-bottom:.25rem;letter-spacing:-.01em}
 .feat p{margin:0;font-size:.9375rem;color:var(--muted)}
 .quote{background:linear-gradient(var(--surface),var(--surface));border:1px solid var(--line);border-radius:var(--radius);padding:1.25rem;box-shadow:inset 0 1px 0 0 var(--highlight),var(--shadow);display:flex;flex-direction:column;gap:.5rem}
 .quote p{margin:0;font-size:1rem;letter-spacing:-.005em}
 .quote cite{font-style:normal;font-size:.875rem;color:var(--muted)}
 .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:1.25rem;counter-reset:step}
-section.block.band{background:#f3eee2;border:1px solid var(--line);border-radius:var(--radius);padding:2rem;margin-top:3.5rem;margin-bottom:3.5rem}
 .step{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:1.25rem;box-shadow:inset 0 1px 0 0 var(--highlight),var(--shadow)}
 .step .n{flex-shrink:0;width:1.625rem;height:1.625rem;border-radius:.625rem;background:var(--primary);color:var(--on-primary);font-weight:800;display:inline-flex;align-items:center;justify-content:center;font-size:.875rem;margin-bottom:.75rem}
 .step b{display:block;margin-bottom:.25rem}.step p{margin:0;font-size:.9375rem;color:var(--muted)}
@@ -152,7 +158,7 @@ body{padding-bottom:4.25rem}
 </div></div>
 
 <div class="wrap">
-<section class="block" id="demos">
+<section class="block dark" id="demos">
 <p class="kicker">Live demos</p>
 <h2 class="title">Start with the one closest to your business.</h2>
 <p class="standfirst">Four sample packs, laid out like yours would be. Open the closest match — then book the chat to see your numbers on one page.</p>
@@ -162,20 +168,6 @@ body{padding-bottom:4.25rem}
 <a class="shot" href="demo-social-group.html"><img src="previews/social.png" alt="Social group dashboard preview: ticket sales, member activity and guest pipeline" width="960" height="540" loading="lazy" decoding="async"><span class="shot-cap"><b>Social group dashboard</b><span>Tickets, engagement, pipeline →</span></span></a>
 <a class="shot" href="demo-leisure-club.html"><img src="previews/leisure.png" alt="Leisure club dashboard preview: revenue charts, membership mix and court usage" width="960" height="540" loading="lazy" decoding="async"><span class="shot-cap"><b>Leisure club dashboard</b><span>Membership, courts, bar →</span></span></a>
 </div>
-<div class="cta-row mid-cta"><a class="btn" href="https://calendly.com/leargas/30min" data-calendly target="_blank" rel="noopener">Book a 30-min chat</a><a class="link-more" href="#book">Or pick a time below ↓</a></div>
-<p class="micro">Free chat first — your pack follows the same one-page layout.</p>
-</section>
-
-<section class="block" id="proof">
-<p class="kicker">Pilot feedback</p>
-<h2 class="title">What a Monday changes.</h2>
-<p class="standfirst">Pilot Mondays with Belfast owners — anonymised. Your pack shows your numbers.</p>
-<div class="grid">
-<div class="quote"><p>“Monday takes a minute now. The oat-milk flag alone paid for the month.”</p><cite><b>Sarah</b> · café, Belfast · pilot</cite></div>
-<div class="quote"><p>“Promo finally had a profit number. We killed one, kept one.”</p><cite><b>Mick</b> · restaurant, Belfast · pilot</cite></div>
-<div class="quote"><p>“Cash runway on page one stopped the end-of-month surprise.”</p><cite><b>Aoife</b> · leisure club · pilot</cite></div>
-</div>
-<p class="micro">Like one of these Mondays? Book the free chat — first pack within 10 days.</p>
 </section>
 
 <section class="block">
@@ -187,8 +179,6 @@ body{padding-bottom:4.25rem}
 <div class="feat"><span class="n">2</span><b>Daily detail, not monthly fog</b><p>Promo profit, fastest movers, waste flags, quiet-hour gaps — recorded daily in your systems, displayed daily here.</p></div>
 <div class="feat"><span class="n">3</span><b>No work on your side</b><p>No new software or hardware. No manual entry. Duplicates, gaps and odd lines caught before you ever see them.</p></div>
 </div>
-<div class="cta-row mid-cta"><a class="btn" href="https://calendly.com/leargas/30min" data-calendly target="_blank" rel="noopener">Book a 30-min chat</a></div>
-<p class="micro">Pick a time — the chat decides fit, free.</p>
 </section>
 
 <section class="block">
@@ -199,11 +189,9 @@ body{padding-bottom:4.25rem}
 <div class="step"><span class="n">2</span><b>Half-day setup on video</b><p>We connect everything once. £150 one-off, only if it's a fit — <a href="#pricing">see pricing</a>.</p></div>
 <div class="step"><span class="n">3</span><b>First pack within 10 days</b><p>First pack lands the next Monday — within 10 days of setup.</p></div>
 </div>
-<div class="cta-row mid-cta"><a class="btn" href="https://calendly.com/leargas/30min" data-calendly target="_blank" rel="noopener">Book a 30-min chat</a></div>
-<p class="micro">Pick a time — free chat decides fit.</p>
 </section>
 
-<section class="block band">
+<section class="block">
 <p class="kicker">Grows with you</p>
 <h2 class="title">It gets smarter every Monday.</h2>
 <p class="standfirst">Every pack is kept, so every pack makes the next one sharper. The longer you stay, the more your own history can tell you.</p>
