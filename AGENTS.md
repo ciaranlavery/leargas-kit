@@ -27,6 +27,12 @@
   is a JS-timed `.lit` class flip (`armSlide`), NEVER a looping CSS animation
   — loop wraps snap mid-view, and JS restarts flash. Resets touch ONLY the
   entering slide while it is off-screen; frozen end-themes glide out cleanly.
+  On wrap advances the clone AND its real counterpart are both reset (the
+  snap swaps identity mid-glide; resetting only the clone leaves the real
+  slide stale and the handoff snaps).
+  Timers resolve the LIVE slide index at fire time (`t.children[p]`), never a
+  captured one — the wrap-snap swaps clone→real underneath pending timers,
+  and a stale index fades a hidden clone while the visible slide sits frozen.
   No hover/focus pause (pausing one clock without the other is what desynced
   them); hidden-tab return re-arms. A 900ms `snapGuard` recovers if
   `transitionend` is ever missed. Track glide (.8s) matches the morph pace.

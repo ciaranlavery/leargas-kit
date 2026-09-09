@@ -72,6 +72,9 @@ def main() -> int:
           and "img.light.lit{opacity:1}" in land
           and "thememorph" not in land
           and "setInterval(next" not in land
+          and "t.children[p].querySelector('img.light');setLit(cur,target,false)" in land
+          and "var active=p" not in land
+          and "(m!==p)" in land
           and "snapGuard" in land
           and "prefers-reduced-motion: reduce" in land
           and "visibilitychange" in land,
