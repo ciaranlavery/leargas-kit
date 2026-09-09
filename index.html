@@ -17,16 +17,12 @@
 <meta name="twitter:description" content="Revenue, costs, cash and what needs attention — one page, every Monday. Live demos.">
 <meta name="twitter:image" content="https://ciaranlavery.github.io/leargas-kit/previews/juice.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231c7448'/%3E%3Crect x='14' y='34' width='8' height='16' rx='2' fill='%23fff'/%3E%3Crect x='28' y='24' width='8' height='26' rx='2' fill='%23fff'/%3E%3Crect x='42' y='14' width='8' height='36' rx='2' fill='%23fff'/%3E%3C/svg+xml">
-<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"ProfessionalService","name":"Léargas","description":"Every Monday, your numbers on one page. Revenue, costs, cash and actions for independent hospitality.","areaServed":"Belfast, UK","priceRange":"£595/mo +VAT","url":"https://ciaranlavery.github.io/leargas-kit/"}
 </script>
 <style>
-/* LK3 shared system canonical: cream #faf7f0, green #1c7448. Demos duplicate --lk-* + topbar/CTA/footer (static, no build). */:root{--lk-bg:#faf7f0;--lk-green:#1c7448;--lk-green-hi:#16603b;--lk-ink:#1e1b16;--lk-line:#e9e1d2}
-/* LK3 360px guard (matches demos): page never h-scrolls; wide tables scroll inside their own container. */html,body{overflow-x:clip}
+html,body{overflow-x:clip}
 img{max-width:100%;height:auto}
-
-/* CONFIG: brand + booking live here. Calendly URL is set once in the script at the bottom (CALENDLY_URL). */
 :root{--bg:#faf7f0;--surface:#fff;--ink:#1e1b16;--muted:#6f675c;--line:#e9e1d2;--primary:#1c7448;--primary-hi:#16603b;--on-primary:#fff;--radius:1rem;--highlight:#ffffff;--shadow:0 .125rem .625rem rgb(30 27 22/.08);--shadow-big:0 1.5rem 3rem -1rem rgb(30 27 22/.22)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;margin:0;background:var(--bg);color:var(--ink);font-size:1rem;line-height:1.6;-webkit-font-smoothing:antialiased}
 ::selection{background:var(--primary);color:var(--on-primary)}
@@ -35,9 +31,6 @@ img{max-width:100%;height:auto}
 .topbar{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
 .topbar .wrap{display:flex;align-items:center;justify-content:space-between;padding-top:.75rem;padding-bottom:.75rem}
 .brand{font-weight:800;letter-spacing:.14em;font-size:.875rem;text-decoration:none;color:var(--ink)}
-.btn{display:inline-block;background:var(--primary);color:var(--on-primary);font-weight:700;font-size:1rem;padding:.75rem 1.5rem;border-radius:.625rem;text-decoration:none;border:none;cursor:pointer;transition:background .15s ease-out,transform .15s ease-out,box-shadow .15s ease-out}
-.btn:hover{background:var(--primary-hi)}.btn:active{transform:translateY(1px)}
-.btn.small{font-size:.875rem;padding:.5rem 1rem}
 .link-more{font-weight:600;font-size:1rem;color:var(--primary)}
 .hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:2rem;align-items:center;padding-top:3.5rem;padding-bottom:3rem}
 .eyebrow{display:inline-block;font-size:.75rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--primary);margin-bottom:1rem}
@@ -96,46 +89,29 @@ p.standfirst{color:var(--muted);margin:0 0 2rem;max-width:38rem;font-size:1.0625
 .price-card ul{margin:1rem 0;padding:0;list-style:none;font-size:.9375rem}
 .price-card li{padding:.4rem 0 .4rem 1.5rem;position:relative}
 .price-card li::before{content:'✓';position:absolute;left:0;color:var(--primary);font-weight:800}
-.book-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:inset 0 1px 0 0 var(--highlight),var(--shadow-big);overflow:hidden}
-.book-head{padding:1.5rem 1.5rem 0}
-.book-head h2{margin:0 0 .25rem;font-size:clamp(1.5rem,3.5vw,2rem);letter-spacing:-.02em;line-height:1.2;text-wrap:balance}
-.book-head p{margin:0 0 1rem;color:var(--muted)}
-.calendly-inline-widget{min-width:18rem;height:42rem;border-top:1px solid var(--line)}
-.book-fallback{padding:0 1.5rem 1.5rem;font-size:.9375rem;color:var(--muted)}
-.book-fallback a{color:var(--primary);font-weight:700}
-.cal-fallback{padding:2rem 1.5rem;text-align:center;color:var(--muted);font-size:.9375rem}
-.cal-fallback a{color:var(--primary);font-weight:700}
 details.faq{background:var(--surface);border:1px solid var(--line);border-radius:.75rem;padding:1rem 1.25rem;margin:0 auto .75rem;box-shadow:inset 0 1px 0 0 var(--highlight),var(--shadow);max-width:44rem}
 details.faq summary{font-weight:700;cursor:pointer;font-size:1rem}
 details.faq p{margin:.5rem 0 0;color:var(--muted);font-size:.9375rem}
 .final{background:var(--primary);color:var(--on-primary);border-radius:var(--radius);padding:2.5rem 2rem;text-align:center;margin-top:1rem;box-shadow:var(--shadow-big)}
 .final h2{font-size:clamp(1.5rem,4vw,2.25rem);letter-spacing:-.02em;margin:0 0 .5rem;text-wrap:balance}
-.final p{margin:0 0 1.5rem;opacity:.85}
-.final .btn{background:var(--on-primary);color:var(--primary)}
-.final .btn:hover{background:#e9f2ec}
+.final p{margin:0;opacity:.85}
 footer.site{border-top:1px solid var(--line);margin-top:4rem}
 footer.site .wrap{display:flex;gap:.5rem 1.5rem;flex-wrap:wrap;align-items:center;justify-content:space-between;padding-top:1.5rem;padding-bottom:2rem;font-size:.875rem;color:var(--muted)}
-.sticky-cta{display:none;position:fixed;left:0;right:0;bottom:0;z-index:20;background:color-mix(in srgb,var(--surface) 94%,transparent);backdrop-filter:blur(8px);border-top:1px solid var(--line);padding:.625rem 1rem calc(.625rem + env(safe-area-inset-bottom))}
-.sticky-cta .btn{display:block;text-align:center;width:100%}
 @media(max-width:56rem){
 .hero .wrap{grid-template-columns:1fr;padding-top:2.5rem}.pack{max-width:28rem}
-body{padding-bottom:4.25rem}
-.sticky-cta{display:block}
-.sticky-cta[hidden]{display:none}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
-<header class="topbar"><div class="wrap"><a class="brand" href="index.html">LÉARGAS</a><a class="btn small" href="https://calendly.com/leargas/30min" data-calendly target="_blank" rel="noopener">Book a 30-min chat</a></div></header>
+<header class="topbar"><div class="wrap"><a class="brand" href="index.html">LÉARGAS</a></div></header>
 
 <div class="hero"><div class="wrap">
 <div>
 <div class="eyebrow">Made in Belfast · For independent hospitality</div>
 <h1>Every Monday, your numbers on one page.</h1>
 <p class="lede">Revenue, costs, cash and what needs attention — pulled automatically from the systems you already use. No new software. No manual entry. No Monday spreadsheet.</p>
-<div class="cta-row"><a class="btn" href="https://calendly.com/leargas/30min" data-calendly target="_blank" rel="noopener">Book a 30-min chat</a><a class="link-more" href="#demos">See a live demo ↓</a></div>
-<p class="micro">Free 30-min video chat — pick a time. If it's not a fit, we'll say so.</p>
+<div class="cta-row"><a class="link-more" href="#demos">See a live demo ↓</a></div>
 </div>
 <div class="pack" aria-label="Sample Monday pack preview">
 <div class="pack-head"><b>Monday pack · Week 34</b><span>SAMPLE</span></div>
@@ -154,7 +130,7 @@ body{padding-bottom:4.25rem}
 <section class="block" id="demos">
 <p class="kicker">Live demos</p>
 <h2 class="title">Start with the one closest to your business.</h2>
-<p class="standfirst">Four sample packs, laid out like yours would be. It slides on its own — open the closest match.</p>
+<p class="standfirst">Four sample packs, laid out like yours would be.</p>
 <div class="carousel" id="demoCarousel" role="region" aria-roledescription="carousel" aria-label="Dashboard demos">
 <div class="viewport"><div class="track" id="demoTrack">
 <a class="shot slide" href="demo-juice-bar.html"><img src="previews/juice.png" alt="Juice bar dashboard preview: sales by day chart, top drinks and stock gaps" width="960" height="540" loading="lazy" decoding="async"><img src="previews/juice-light.png" alt="" aria-hidden="true" width="960" height="540" loading="lazy" decoding="async" class="light"><span class="shot-cap"><b>Juice bar dashboard</b></span></a>
@@ -190,7 +166,7 @@ body{padding-bottom:4.25rem}
 <p class="kicker">How it works</p>
 <h2 class="title">Three steps to your first pack.</h2>
 <div class="steps">
-<div class="step"><span class="n">1</span><b>30-minute chat, free</b><p>We look at where your numbers live. If it's not a fit, we'll say so.</p></div>
+<div class="step"><span class="n">1</span><b>30-minute chat, free</b><p>We look at where your numbers live.</p></div>
 <div class="step"><span class="n">2</span><b>Half-day setup on video</b><p>We connect everything once. £150 one-off, only if it's a fit — <a href="#pricing">see pricing</a>.</p></div>
 <div class="step"><span class="n">3</span><b>First pack within 10 days</b><p>First pack lands the next Monday — within 10 days of setup.</p></div>
 </div>
@@ -208,20 +184,7 @@ body{padding-bottom:4.25rem}
 <li>Then £595 a month, rolling monthly, cancel with 30 days</li>
 <li>Optional extras at £195 a month each — Promo, Rota and Pipeline checks, built around your data, only if you want them</li>
 </ul>
-<div class="cta-row"><a class="btn" href="https://calendly.com/leargas/30min" data-calendly target="_blank" rel="noopener">Book a 30-min chat</a></div>
-<p class="micro">Free chat first — pick a time. Setup only happens when the fit is obvious.</p>
-</div>
-</section>
-
-<section class="block" id="book">
-<div class="book-card">
-<div class="book-head">
-<p class="kicker">Book</p>
-<h2>Pick a time that suits the rota.</h2>
-<p>Free 30-minute video chat. We look at where your numbers live — if it's not a fit, we'll say so. This books a real slot with confirmation email; the dashboards above use sample data. Prefer not to book inline? <a href="https://calendly.com/leargas/30min" data-calendly target="_blank" rel="noopener">Open Calendly in a new tab →</a></p>
-</div>
-<div class="calendly-inline-widget" data-url="https://calendly.com/leargas/30min?hide_gdpr_banner=1&amp;primary_color=1c7448"><p class="cal-fallback">Loading the booking calendar… if nothing appears here, <a href="https://calendly.com/leargas/30min" data-calendly target="_blank" rel="noopener">book the 30-min chat here →</a></p></div>
-<p class="book-fallback">Calendly not loading? <a href="https://calendly.com/leargas/30min" data-calendly target="_blank" rel="noopener">Book the 30-min chat here →</a></p>
+<p class="micro">Setup only happens when the fit is obvious.</p>
 </div>
 </section>
 
@@ -230,59 +193,23 @@ body{padding-bottom:4.25rem}
 <h2 class="title">No new software. Cancel anytime.</h2>
 <details class="faq" open><summary>Do I need new software or hardware?</summary><p>No. The pack is built from the systems you already hold — till, bookings, bank, sheets. Nothing to install, nothing to learn.</p></details>
 <details class="faq"><summary>How do you connect to my till and bank? Is it safe?</summary><p>Read-only connections where possible — Open Banking for bank feeds, official integrations or exports for till and bookings. No passwords stored, you can revoke access anytime, and we only pull what the Monday pack needs. UK GDPR applies; data stays in the UK/EEA.</p></details>
-<details class="faq"><summary>What if it's not a fit?</summary><p>Then we tell you on the free 30-minute chat, before any money changes hands. The £150 setup only happens when the fit is obvious.</p></details>
 <details class="faq"><summary>How do the £195 extras work?</summary><p>Each extra answers one money question your accounts can't — did the promo profit, are busy hours covered without idle ones, who's close to buying. Built around your data, one at a time, cancel anytime.</p></details>
-<details class="faq"><summary>When do I get my first pack?</summary><p>On the first Monday within 10 days of setup, once everything's connected and checked. You review a single page to start the week. Book the chat to start the 10-day clock.</p></details>
+<details class="faq"><summary>When do I get my first pack?</summary><p>On the first Monday within 10 days of setup, once everything's connected and checked. You review a single page to start the week.</p></details>
 <details class="faq"><summary>What does the timeline and billing look like?</summary><p>Free 30-min chat → £150 one-off setup on video → first pack on the next Monday within 10 days → £595 covers months one and two → then £595 +VAT a month, rolling, cancel with 30 days. Cancel anytime and the dashboard stops with your subscription; any PDFs you've saved stay yours.</p></details>
 </section>
 
 <section class="block">
 <div class="final">
 <h2>Start next Monday knowing your numbers.</h2>
-<p>One free chat. One page. First pack within 10 days.</p>
-<a class="btn" href="https://calendly.com/leargas/30min" data-calendly target="_blank" rel="noopener">Book the free 30-min chat</a>
+<p>One page. First pack within 10 days.</p>
 </div>
 </section>
 </div>
 
 <footer class="site"><div class="wrap"><span><b>Léargas</b> · Made in Belfast</span><span>Mock data throughout — your pack shows your numbers</span></div></footer>
 
-<div class="sticky-cta" id="stickyCta"><a class="btn" href="https://calendly.com/leargas/30min" data-calendly target="_blank" rel="noopener">Book a 30-min chat — free</a></div>
-
-<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 <script>
-// CALENDLY SETUP — change in one place. Replace with your real link, e.g. https://calendly.com/your-name/30min
-var CALENDLY_URL = 'https://calendly.com/leargas/30min';
-(function(){
-  var inlineUrl = CALENDLY_URL + '?hide_gdpr_banner=1&primary_color=1c7448';
-  document.querySelectorAll('[data-calendly]').forEach(function(a){ a.href = CALENDLY_URL; });
-  var inline = document.querySelector('.calendly-inline-widget');
-  if (inline) inline.setAttribute('data-url', inlineUrl);
-  // Inline fallback: visible until the Calendly iframe renders (blocked widget.js / ad-blocker / offline).
-  // Calendly replaces widget content on success; hide the fallback once the iframe appears.
-  var calFallback = inline ? inline.querySelector('.cal-fallback') : null;
-  if (inline) {
-    var calPoll = setInterval(function(){
-      if (inline.querySelector('iframe')) { if (calFallback) calFallback.hidden = true; clearInterval(calPoll); }
-    }, 500);
-    setTimeout(function(){ clearInterval(calPoll); }, 8000);
-  }
-  // Popup widget: open Calendly overlay when available, else fall back to new-tab link (href above).
-  document.addEventListener('click', function(e){
-    var t = e.target.closest && e.target.closest('[data-calendly]');
-    if (!t) return;
-    if (t.getAttribute('href') === '#book') return;
-    if (window.Calendly && Calendly.initPopupWidget) { e.preventDefault(); Calendly.initPopupWidget({url: CALENDLY_URL}); }
-  });
-  // Hide sticky CTA while the booking section is in view (avoid covering it).
-  var sticky = document.getElementById('stickyCta'), book = document.getElementById('book');
-  if (sticky && book && 'IntersectionObserver' in window) {
-    new IntersectionObserver(function(entries){
-      entries.forEach(function(en){ sticky.hidden = en.isIntersecting; });
-    }, {threshold: 0.15}).observe(book);
-  }
-})();
-  // Demos carousel: one morph per viewing (JS-timed), dots + arrows, reduced-motion static.
+  // Demos carousel: manual advance (arrows/dots), ping-pong dark/light morph while viewed, reduced-motion static.
 (function(){var t=document.getElementById('demoTrack');if(!t)return;var N=t.children.length,busy=false,snapGuard=null;
 var dots=Array.prototype.slice.call(document.querySelectorAll('#demoDots .dot'));
 var reduced=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -301,15 +228,14 @@ function go(j){if(busy)return;p=j+1;show();}
 function liOf(i){return i===0?N-1:(i===N+1?0:i-1);}
 function startLit(li){return li%2===0;}
 function setLit(im,lit,instant){if(!im)return;if(instant){im.style.transition='none';}if(lit){im.classList.add('lit');}else{im.classList.remove('lit');}if(instant){void im.offsetWidth;im.style.transition='';}}
-var HOLD_A=1800,HOLD_B=1800,morphT=null,nextT=null;
-function clearPhase(){clearTimeout(morphT);clearTimeout(nextT);}
-function armSlide(){clearPhase();var kids=t.children;var m=(p===N+1)?1:(p===0?N:p);var start=startLit(liOf(p));setLit(kids[p].querySelector('img.light'),start,true);if(m!==p){setLit(kids[m].querySelector('img.light'),start,true);}if(reduced)return;var target=!start;morphT=setTimeout(function(){var cur=t.children[p].querySelector('img.light');setLit(cur,target,false);},HOLD_A);nextT=setTimeout(function(){next();armSlide();},HOLD_A+1500+HOLD_B);}
-function play(){if(reduced)return;armSlide();}
-document.getElementById('carPrev').addEventListener('click',function(){prev();armSlide();});
-document.getElementById('carNext').addEventListener('click',function(){next();armSlide();});
-dots.forEach(function(d,j){d.addEventListener('click',function(){go(j);armSlide();});});
-document.addEventListener('visibilitychange',function(){if(!document.hidden){armSlide();}});
-show();play();})();
+var HOLD=1800,morphT=null;
+function clearPhase(){clearTimeout(morphT);}
+function armSlide(fresh){clearPhase();var kids=t.children;var im=kids[p].querySelector('img.light');if(fresh!==false){var m=(p===N+1)?1:(p===0?N:p);var start=startLit(liOf(p));setLit(im,start,true);if(m!==p){setLit(kids[m].querySelector('img.light'),start,true);}}if(reduced)return;var on=im.classList.contains('lit');morphT=setTimeout(function tick(){on=!on;var cur=t.children[p].querySelector('img.light');setLit(cur,on,false);morphT=setTimeout(tick,1500+HOLD);},HOLD);}
+document.getElementById('carPrev').addEventListener('click',function(){prev();armSlide(true);});
+document.getElementById('carNext').addEventListener('click',function(){next();armSlide(true);});
+dots.forEach(function(d,j){d.addEventListener('click',function(){go(j);armSlide(true);});});
+document.addEventListener('visibilitychange',function(){if(!document.hidden){armSlide(false);}});
+show();armSlide(true);})();
 </script>
 </body>
 </html>

@@ -12,35 +12,26 @@
   classes `lk-topbar`/`lk-cta`/`lk-foot`/`lk-note`) inside demos.
 - NO top banner on demos. Wayfinding is the footer home link only — a banner
   photographs into every screenshot and unbalances the dashboard top.
-- One booking band per demo (`.bookbar`, theme `--accent` button, NO `→` on
-  the button) + ONE quiet footer (home link in accent + mock line, flex
-  `space-between`, baseline-aligned). No stacked triple footers, no green CTA
-  button inside a themed dashboard.
-- No `→` on booking-button/intro links (timeline `→` inside FAQ prose is fine).
+- Demos end at ONE quiet footer (home link in accent + mock line, flex
+  `space-between`, baseline-aligned). No booking bands, no green CTA button
+  inside a themed dashboard — there is no scheduling integration; demos are
+  pure product showcase.
+- No `→` on intro links (timeline `→` inside FAQ prose is fine).
 
 ## Landing (`index.html`) — carousel showcase, one intentional contrast
 
-- Demos showcase = autoplay carousel on cream (one slide visible, dots +
-  arrows, ~5.1s per viewing: 1.8s hold, one 1.5s morph, 1.8s hold). ONE morph
-  per viewing, alternating: odd slides light→dark, even dark→light, so the
-  entering slide always starts on the theme the last one ended on. The morph
-  is a JS-timed `.lit` class flip (`armSlide`), NEVER a looping CSS animation
-  — loop wraps snap mid-view, and JS restarts flash. Resets touch ONLY the
-  entering slide while it is off-screen; frozen end-themes glide out cleanly.
-  On wrap advances the clone AND its real counterpart are both reset (the
-  snap swaps identity mid-glide; resetting only the clone leaves the real
-  slide stale and the handoff snaps).
-  Timers resolve the LIVE slide index at fire time (`t.children[p]`), never a
-  captured one — the wrap-snap swaps clone→real underneath pending timers,
-  and a stale index fades a hidden clone while the visible slide sits frozen.
-  No hover/focus pause (pausing one clock without the other is what desynced
-  them); hidden-tab return re-arms. A 900ms `snapGuard` recovers if
-  `transitionend` is ever missed. Track glide (.8s) matches the morph pace.
-  Captions sit BELOW shots as a static bar (title only), never overlaid on
-  dashboard elements.
-- Each slide morphs exactly once per 6s viewing (then the advance carries the
-  ending theme into the next slide, which starts on it). Stills
-  (`previews/<name>.png` + `<name>-light.png`, both 1920px, banner-free).
+- Demos showcase = MANUAL carousel on cream (arrows + dots, no autoplay):
+  the viewed slide ping-pongs dark↔light (1.8s holds, 1.5s morphs) via a
+  JS-timed `.lit` flip (`armSlide`), NEVER a looping CSS animation — loop
+  wraps snap mid-view, and JS restarts flash. Resets touch ONLY the current
+  slide; frozen end-themes glide out cleanly on manual nav. A 900ms
+  `snapGuard` recovers if `transitionend` is ever missed. Track glide (.8s)
+  matches the morph pace. Captions sit BELOW shots as a static bar (title
+  only), never overlaid on dashboard elements. Standfirst is one line; no
+  autoplay claims, no "closest match" steering.
+- Each slide ping-pongs dark↔light while viewed (morphs alternate direction
+  via flip-flop target). Stills (`previews/<name>.png` + `<name>-light.png`,
+  both 1920px, banner-free, band-free).
   Regenerate headless (viewport 1920×1080, `color_scheme` dark/light) when
   dashboards change — never ship blurry 960px.
 - Numbers live ONLY on How-it-works steps. Why-cards carry no badges; Grows
