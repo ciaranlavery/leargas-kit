@@ -1,4 +1,4 @@
-# AGENTS.md — learned operating rules (2026-09-09, enforced by `scripts/ui_gates.py`)
+# AGENTS.md — learned operating rules (daily-pack era; enforced by `scripts/ui_gates.py`)
 
 ## Parallel work (learned from LK3/LK4 shared-checkout collision)
 
@@ -84,9 +84,15 @@
   popup code.
 - Contact paths: booking CTAs as above, plus ONE mailto alternative
   (`ciaranolavery@gmail.com`) with a call-agenda line under the final band.
-- Monday strip (`#monday`): one link refreshed weekly + PDF hottest-takes
-  printout + messy-data line. ROI anchor under pricing stays clearly labelled
-  `Illustrative` — never a client result.
+- Product cadence is DAILY, everywhere: the pack is the "Daily pack ·
+  Yesterday", KPIs compare vs yesterday, charts lead with intraday grain
+  (hours/dayparts), never Mon–Sun weeks. Leisure keeps longer explorer
+  periods but defaults to its Yesterday view. The words Monday, Week 34, and
+  Board-ready   appear nowhere on any page — the gate fails them on sight.
+- Daily strip (`#daily`): one link refreshed every morning + PDF hottest-takes
+  printout (`sample-daily-pack.pdf`, regenerated with the pack) + messy-data
+  line. ROI anchor under pricing stays clearly labelled `Illustrative` —
+  never a client result.
 - Wordmark images (non-square logos) MUST keep `width:auto` (`.chip img.word`)
   — a blanket square size squishes them, which is exactly the distortion
   shipped once when the rule was dropped; the gate pins it.
