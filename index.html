@@ -36,12 +36,12 @@
 .trust{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--surface)}
 .trust .wrap{display:flex;gap:.5rem 2rem;flex-wrap:wrap;align-items:center;justify-content:center;padding-top:1rem;padding-bottom:1rem;font-size:.875rem;color:var(--muted)}
 .trust b{color:var(--ink)}
-section.block{padding:3rem 0 0}
-section.block:last-of-type{padding-bottom:4rem}
+section.block{padding:4rem 0 0}
+section.block:last-of-type{padding-bottom:5rem}
 .kicker{font-size:.75rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--primary);margin:0 0 .5rem}
 h2.title{font-size:clamp(1.5rem,3.5vw,2rem);letter-spacing:-.02em;line-height:1.2;margin:0 0 .5rem;text-wrap:balance}
-p.standfirst{color:var(--muted);margin:0 0 1.5rem;max-width:38rem;font-size:1.0625rem}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:1rem}
+p.standfirst{color:var(--muted);margin:0 0 2rem;max-width:38rem;font-size:1.0625rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:1.25rem}
 .grid.cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
 @media(max-width:40rem){.grid.cols-2{grid-template-columns:1fr}}
 a.card{display:block;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:1.25rem;text-decoration:none;color:var(--ink);box-shadow:var(--shadow);transition:transform .15s ease-out,box-shadow .15s ease-out}
@@ -54,16 +54,17 @@ a.card span.d{display:block;font-size:.875rem;color:var(--muted);margin-top:.25r
 .feat .n{display:inline-flex;align-items:center;justify-content:center;width:2rem;height:2rem;border-radius:.625rem;background:var(--primary);color:var(--on-primary);font-weight:800;margin-bottom:.75rem}
 .feat b{display:block;font-size:1.0625rem;margin-bottom:.25rem;letter-spacing:-.01em}
 .feat p{margin:0;font-size:.9375rem;color:var(--muted)}
-.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:1rem;counter-reset:step}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:1.25rem;counter-reset:step}
+section.block.band{background:#f3eee2;border:1px solid var(--line);border-radius:var(--radius);padding:2rem;margin-top:4rem}
 .step{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:1.25rem}
 .step .n{flex-shrink:0;width:1.625rem;height:1.625rem;border-radius:.625rem;background:var(--primary);color:var(--on-primary);font-weight:800;display:inline-flex;align-items:center;justify-content:center;font-size:.875rem;margin-bottom:.75rem}
 .step b{display:block;margin-bottom:.25rem}.step p{margin:0;font-size:.9375rem;color:var(--muted)}
-.price-card{background:var(--surface);border:1px solid var(--line);border-top:.3125rem solid var(--primary);border-radius:var(--radius);padding:1.5rem;box-shadow:var(--shadow-big);max-width:38rem}
+.price-card{background:var(--surface);border:1px solid var(--line);border-top:.3125rem solid var(--primary);border-radius:var(--radius);padding:1.5rem;box-shadow:var(--shadow-big);max-width:38rem;margin-inline:auto}
 .p-big{font-size:2.5rem;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums}.p-big span{font-size:1rem;font-weight:400;color:var(--muted)}
 .price-card ul{margin:1rem 0;padding:0;list-style:none;font-size:.9375rem}
 .price-card li{padding:.4rem 0 .4rem 1.5rem;position:relative}
 .price-card li::before{content:'✓';position:absolute;left:0;color:var(--primary);font-weight:800}
-details.faq{background:var(--surface);border:1px solid var(--line);border-radius:.75rem;padding:1rem 1.25rem;margin-bottom:.75rem;box-shadow:var(--shadow)}
+details.faq{background:var(--surface);border:1px solid var(--line);border-radius:.75rem;padding:1rem 1.25rem;margin-bottom:.75rem;box-shadow:var(--shadow);max-width:44rem}
 details.faq summary{font-weight:700;cursor:pointer;font-size:1rem}
 details.faq p{margin:.5rem 0 0;color:var(--muted);font-size:.9375rem}
 .final{background:var(--primary);color:var(--on-primary);border-radius:var(--radius);padding:2.5rem 2rem;text-align:center;margin-top:3rem;box-shadow:var(--shadow-big)}
@@ -133,7 +134,7 @@ footer.site .wrap{display:flex;gap:.5rem 1.5rem;flex-wrap:wrap;align-items:cente
 </div>
 </section>
 
-<section class="block">
+<section class="block band">
 <p class="kicker">Grows with you</p>
 <h2 class="title">It gets smarter every Monday.</h2>
 <p class="standfirst">Every pack is kept, so every pack makes the next one sharper. The longer you stay, the more your own history can tell you.</p>
