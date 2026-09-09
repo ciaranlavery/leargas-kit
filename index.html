@@ -44,6 +44,16 @@ p.standfirst{color:var(--muted);margin:0 0 2rem;max-width:38rem;font-size:1.0625
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:1.25rem}
 .grid.cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
 @media(max-width:40rem){.grid.cols-2{grid-template-columns:1fr}}
+.carousel{position:relative}
+.viewport{overflow:hidden;border-radius:var(--radius)}
+.track{display:flex;transition:transform .35s ease-out}
+.slide{flex:0 0 100%;min-width:0}
+.car-nav{display:flex;align-items:center;justify-content:center;gap:1rem;margin-top:1rem}
+.car-btn{width:2.5rem;height:2.5rem;border-radius:50%;background:var(--surface);border:1px solid var(--line);color:var(--ink);font-size:1.1rem;line-height:1;cursor:pointer;transition:border-color .15s ease-out,color .15s ease-out}
+.car-btn:hover{border-color:var(--primary);color:var(--primary)}
+.dots{display:flex;gap:.5rem}
+.dot{width:.625rem;height:.625rem;border-radius:50%;border:none;background:var(--line);padding:0;cursor:pointer}
+.dot[aria-current="true"]{background:var(--primary)}
 a.card{display:block;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:1.25rem;text-decoration:none;color:var(--ink);box-shadow:var(--shadow);transition:transform .15s ease-out,box-shadow .15s ease-out}
 a.card:hover{transform:translateY(-2px);box-shadow:var(--shadow-big)}
 a.card:focus-visible{transform:translateY(-2px)}
@@ -104,12 +114,24 @@ footer.site .wrap{display:flex;gap:.5rem 1.5rem;flex-wrap:wrap;align-items:cente
 <section class="block" id="demos">
 <p class="kicker">Live demos</p>
 <h2 class="title">Click through a dashboard.</h2>
-<p class="standfirst">Each demo shows the tabs, charts and extras exactly as your pack would work.</p>
-<div class="grid cols-2">
-<a class="card" href="demo-juice-bar.html"><span class="k">Demo</span><b>Juice bar dashboard</b><span class="d">Sales by day, stock gaps, rota</span></a>
-<a class="card" href="demo-restaurant.html"><span class="k">Demo</span><b>Restaurant dashboard</b><span class="d">Covers, promo profit, food cost</span></a>
-<a class="card" href="demo-social-group.html"><span class="k">Demo</span><b>Social group dashboard</b><span class="d">Tickets, engagement, pipeline</span></a>
-<a class="card" href="demo-leisure-club.html"><span class="k">Demo</span><b>Leisure club dashboard</b><span class="d">Membership, courts, bar</span></a>
+<p class="standfirst">Each demo shows the tabs, charts and extras exactly as your pack would work. It slides on its own — click any card to visit that dashboard.</p>
+<div class="carousel" id="demoCarousel" role="region" aria-roledescription="carousel" aria-label="Dashboard demos">
+<div class="viewport"><div class="track" id="demoTrack">
+<a class="card slide" href="demo-juice-bar.html"><span class="k">Demo</span><b>Juice bar dashboard</b><span class="d">Sales by day, stock gaps, rota</span></a>
+<a class="card slide" href="demo-restaurant.html"><span class="k">Demo</span><b>Restaurant dashboard</b><span class="d">Covers, promo profit, food cost</span></a>
+<a class="card slide" href="demo-social-group.html"><span class="k">Demo</span><b>Social group dashboard</b><span class="d">Tickets, engagement, pipeline</span></a>
+<a class="card slide" href="demo-leisure-club.html"><span class="k">Demo</span><b>Leisure club dashboard</b><span class="d">Membership, courts, bar</span></a>
+</div></div>
+<div class="car-nav">
+<button type="button" class="car-btn" id="carPrev" aria-label="Previous demo">←</button>
+<div class="dots" id="demoDots">
+<button type="button" class="dot" aria-label="Go to Juice bar dashboard" aria-current="true"></button>
+<button type="button" class="dot" aria-label="Go to Restaurant dashboard"></button>
+<button type="button" class="dot" aria-label="Go to Social group dashboard"></button>
+<button type="button" class="dot" aria-label="Go to Leisure club dashboard"></button>
+</div>
+<button type="button" class="car-btn" id="carNext" aria-label="Next demo">→</button>
+</div>
 </div>
 </section>
 
@@ -180,5 +202,22 @@ footer.site .wrap{display:flex;gap:.5rem 1.5rem;flex-wrap:wrap;align-items:cente
 </div>
 
 <footer class="site"><div class="wrap"><span><b>Léargas</b> · Made in Belfast</span><span>Mock data throughout — your pack shows your numbers</span></div></footer>
+<script>
+(function(){var t=document.getElementById('demoTrack');if(!t)return;var n=t.children.length,i=0,timer=null;
+var dots=Array.prototype.slice.call(document.querySelectorAll('#demoDots .dot'));
+var reduced=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(reduced){t.style.transition='none';}
+function go(k){i=((k%n)+n)%n;t.style.transform='translateX(-'+(i*100)+'%)';dots.forEach(function(d,j){if(j===i){d.setAttribute('aria-current','true');}else{d.removeAttribute('aria-current');}});}
+function play(){if(reduced||timer)return;timer=setInterval(function(){go(i+1);},4500);}
+function stop(){if(timer){clearInterval(timer);timer=null;}}
+document.getElementById('carPrev').addEventListener('click',function(){stop();go(i-1);play();});
+document.getElementById('carNext').addEventListener('click',function(){stop();go(i+1);play();});
+dots.forEach(function(d,j){d.addEventListener('click',function(){stop();go(j);play();});});
+var c=document.getElementById('demoCarousel');
+c.addEventListener('mouseenter',stop);c.addEventListener('mouseleave',play);
+c.addEventListener('focusin',stop);c.addEventListener('focusout',play);
+document.addEventListener('visibilitychange',function(){if(document.hidden){stop();}else{play();}});
+go(0);play();})();
+</script>
 </body>
 </html>
