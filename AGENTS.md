@@ -38,11 +38,13 @@
   FAQ cards centered (`margin-inline:auto`) like price. Price card stands off
   its title, like standfirst rhythm.
 - Trust band = `Built for …` + sample line only. No big stat metrics.
-- Works-with strip = infinite logo marquee (CSS `mq` keyframes, two identical
-  `.mq-half` groups for a seamless -50% loop, edge fade mask, pause on hover,
-  wraps statically under reduced-motion). Real marks vendored locally in
-  `previews/logos/` (never hotlink); brands without a Simple Icons slug get a
-  same-green monogram tile, never a fake logo. Escape hatch below the marquee:
+- Works-with strip lives at the TOP of the page (directly under the topbar),
+  slim and translucent: chips at 62% opacity, full on hover. Infinite logo
+  marquee (CSS `mq` keyframes, two identical `.mq-half` groups for a seamless
+  -50% loop, edge fade mask, pause on hover, wraps statically under
+  reduced-motion). Real marks vendored locally in `previews/logos/` (never
+  hotlink); brands without a Simple Icons slug get a same-green monogram
+  tile, never a fake logo. Escape hatch below the marquee:
   "Don't see yours? Ask — if it exports, we can use it."
 - Proof block (`#proof`, above pricing) = founder monogram + pilot-stage
   honesty, never testimonials. Mock stays mock.
