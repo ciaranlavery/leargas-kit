@@ -70,6 +70,9 @@ def main() -> int:
           and (ROOT / "previews" / "logos" / "square.svg").exists()
           and (ROOT / "previews" / "logos" / "xero.svg").exists(),
           "logo marquee + escape hatch, marks vendored")
+    check("works-on-top", land.find('class="works"') < land.find('class="hero"')
+          and "opacity:.62" in land,
+          "slim translucent band above the hero")
     check("one-voice", "Book a 30-min chat" not in land
           and land.count("Book the free 30-min chat") == 2,
           "every CTA reads exactly 'Book the free 30-min chat'")

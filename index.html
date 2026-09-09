@@ -52,15 +52,16 @@ img{max-width:100%;height:auto}
 .trust .wrap{display:flex;gap:.5rem 2rem;flex-wrap:wrap;align-items:center;justify-content:center;padding-top:1rem;padding-bottom:1rem;font-size:.875rem;color:var(--muted)}
 .trust b{color:var(--ink)}
 .works{border-bottom:1px solid var(--line);background:var(--surface)}
-.works .wrap{display:flex;gap:.5rem 2rem;flex-wrap:wrap;align-items:center;justify-content:center;padding-top:1rem;padding-bottom:1rem;font-size:.875rem;color:var(--muted)}
+.works .wrap{display:flex;gap:.35rem 2rem;flex-wrap:wrap;align-items:center;justify-content:center;padding-top:.7rem;padding-bottom:.7rem;font-size:.8125rem;color:var(--muted)}
 .works b{color:var(--ink)}
 .works-line{width:100%;text-align:center;margin:0}
-.works .micro{width:100%;text-align:center}
+.works .micro{width:100%;text-align:center;font-size:.75rem;margin:.2rem 0 0}
 .mq{overflow:hidden;width:100%;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
 .mq-track{display:flex;width:max-content;animation:mq 32s linear infinite}
 .mq-half{display:flex;gap:.75rem;padding-right:.75rem}
 .marquee:hover .mq-track{animation-play-state:paused}
-.chip{display:inline-flex;align-items:center;gap:.5rem;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:.5rem 1rem;font-size:.875rem;font-weight:600;color:var(--ink);white-space:nowrap}
+.chip{display:inline-flex;align-items:center;gap:.5rem;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:.4rem .85rem;font-size:.8125rem;font-weight:600;color:var(--ink);white-space:nowrap;opacity:.62;transition:opacity .15s ease-out}
+.chip:hover{opacity:1}
 .chip img{width:1.25rem;height:1.25rem;display:block}
 .chip svg{width:1.25rem;height:1.25rem}
 .chip .mono{width:1.25rem;height:1.25rem;border-radius:.375rem;background:var(--primary);color:var(--on-primary);font-size:.75rem;font-weight:800;display:inline-flex;align-items:center;justify-content:center}
@@ -130,26 +131,6 @@ footer.site .wrap{display:flex;gap:.5rem 1.5rem;flex-wrap:wrap;align-items:cente
 </head>
 <body>
 <header class="topbar"><div class="wrap"><a class="brand" href="index.html">LÉARGAS</a></div></header>
-
-<div class="hero"><div class="wrap">
-<div>
-<div class="eyebrow">Made in Belfast · For independent hospitality</div>
-<h1>Every Monday, your numbers on one page.</h1>
-<p class="lede">Revenue, costs, cash and what needs attention — pulled automatically from the systems you already use. No new software. No manual entry. No Monday spreadsheet.</p>
-<div class="cta-row"><a class="btn" href="https://calendly.com/leargas/30min" target="_blank" rel="noopener">Book the free 30-min chat</a><a class="link-more" href="#demos">See a live demo ↓</a></div>
-</div>
-<div class="pack" aria-label="Sample Monday pack preview">
-<div class="pack-head"><b>Monday pack · Week 34</b><span>SAMPLE</span></div>
-<div class="pack-row"><span class="k">Total revenue</span><span class="n">£8,420 <span class="good">▲ 4%</span></span></div>
-<div class="pack-row"><span class="k">Gross profit · 71% margin</span><span class="n">£5,980</span></div>
-<div class="pack-row"><span class="k">Cash at bank</span><span class="n">£31,000 <span class="flag">≈ 5 wks</span></span></div>
-<div class="pack-act"><b>3 actions:</b> reorder oat milk Tue · trim Friday close by one · push Green Machine promo.</div>
-</div>
-</div></div>
-
-<div class="trust"><div class="wrap">
-<span><b>Built for</b> cafés · restaurants · social groups · leisure clubs</span><span>Sample data throughout</span>
-</div></div>
 <div class="works"><div class="wrap">
 <p class="works-line"><b>Works with</b> what you already have</p>
 <div class="marquee mq" role="region" aria-label="Systems Léargas works with"><div class="mq-track">
@@ -175,6 +156,25 @@ footer.site .wrap{display:flex;gap:.5rem 1.5rem;flex-wrap:wrap;align-items:cente
 <p class="micro">Don't see yours? Ask — if it exports, we can use it.</p>
 </div></div>
 
+<div class="hero"><div class="wrap">
+<div>
+<div class="eyebrow">Made in Belfast · For independent hospitality</div>
+<h1>Every Monday, your numbers on one page.</h1>
+<p class="lede">Revenue, costs, cash and what needs attention — pulled automatically from the systems you already use. No new software. No manual entry. No Monday spreadsheet.</p>
+<div class="cta-row"><a class="btn" href="https://calendly.com/leargas/30min" target="_blank" rel="noopener">Book the free 30-min chat</a><a class="link-more" href="#demos">See a live demo ↓</a></div>
+</div>
+<div class="pack" aria-label="Sample Monday pack preview">
+<div class="pack-head"><b>Monday pack · Week 34</b><span>SAMPLE</span></div>
+<div class="pack-row"><span class="k">Total revenue</span><span class="n">£8,420 <span class="good">▲ 4%</span></span></div>
+<div class="pack-row"><span class="k">Gross profit · 71% margin</span><span class="n">£5,980</span></div>
+<div class="pack-row"><span class="k">Cash at bank</span><span class="n">£31,000 <span class="flag">≈ 5 wks</span></span></div>
+<div class="pack-act"><b>3 actions:</b> reorder oat milk Tue · trim Friday close by one · push Green Machine promo.</div>
+</div>
+</div></div>
+
+<div class="trust"><div class="wrap">
+<span><b>Built for</b> cafés · restaurants · social groups · leisure clubs</span><span>Sample data throughout</span>
+</div></div>
 <div class="wrap">
 <section class="block" id="demos">
 <p class="kicker">Live demos</p>
