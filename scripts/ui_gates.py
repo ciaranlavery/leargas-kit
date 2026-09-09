@@ -37,25 +37,32 @@ def main() -> int:
         check(f"no-top-banner:{d}", 'demo-top' not in text[d] and 'demo-note' not in text[d],
               "banner-free top, footer carries wayfinding")
 
-    # 2. Demo structure: one slim top bar, one booking band, one quiet footer.
+    # 2. Demo structure: quiet footer only, no booking furniture.
     for d in DEMOS:
         t = text[d]
-        check(f"bookbar-once:{d}", t.count('class="bookbar"') == 1,
-              f"count={t.count('class=\"bookbar\"')}")
+        check(f"no-bookbar:{d}", 'bookbar' not in t,
+              "no booking band")
         check(f"home-link:{d}", "← Léargas home" in t, "accent home link present")
         check(f"mock-label:{d}", ("mock" in t.lower() or "sample" in t.lower()),
               "mock/sample labelled")
 
-    # 3. No arrows on booking buttons/links (FAQ timeline prose in index exempt).
+    # 3. Purged copy (FAQ timeline prose exempt).
     for d in DEMOS:
         check(f"no-booking-arrow:{d}", "30-min chat →" not in t,
               "arrow-free" if "30-min chat →" not in t else "found → on booking copy")
-    btn_arrows = [ln.strip()[:100] for ln in text[LANDING].splitlines()
-                  if 'class="btn' in ln and "→" in ln]
-    check("landing-btn-no-arrow", not btn_arrows, f"{len(btn_arrows)} btn lines with →" if btn_arrows else "buttons arrow-free")
 
     # 4. Landing structure.
     land = text[LANDING]
+    check("zero-calendly", "calendly" not in land.lower()
+          and "data-calendly" not in land
+          and 'id="book"' not in land
+          and "sticky-cta" not in land and "stickyCta" not in land,
+          "no scheduling integration anywhere")
+    check("no-fit-phrase", "not a fit" not in land,
+          "phrase purged")
+    check("no-autoplay-copy", "slides on its own" not in land
+          and "closest match" not in land,
+          "manual carousel, no steering copy")
     check("no-proof-section", 'id="proof"' not in land and "Pilot feedback" not in land,
           "proof removed")
     check("no-mid-cta", "mid-cta" not in land, "no mid-section CTA rows")
@@ -65,20 +72,18 @@ def main() -> int:
     check("demos-carousel", all(k in land for k in (
         'id="demoCarousel"', 'id="demoTrack"', 'id="demoDots"',
         'id="carPrev"', 'id="carNext"')) and land.count('class="shot slide"') == 4,
-          "autoplay carousel, 4 slides, dots + arrows")
+          "manual carousel, 4 slides, dots + arrows")
     check("carousel-motion-safe", "armSlide" in land
-          and "HOLD_A=1800" in land
+          and "function tick" in land
           and "transition:opacity 1.5s" in land
           and "img.light.lit{opacity:1}" in land
           and "thememorph" not in land
-          and "setInterval(next" not in land
-          and "t.children[p].querySelector('img.light');setLit(cur,target,false)" in land
-          and "var active=p" not in land
-          and "(m!==p)" in land
+          and "setInterval" not in land
+          and "nextT" not in land
           and "snapGuard" in land
           and "prefers-reduced-motion: reduce" in land
           and "visibilitychange" in land,
-          "one JS-timed morph per viewing, off-screen resets only, stuck-guard; static under reduced-motion")
+          "manual advance, ping-pong morph, stuck-guard; static under reduced-motion")
     check("captions-below", ".shot-cap{display:flex" in land
           and "shot-cap b{font-size:1.0625rem" in land
           and all(s not in land for s in ("Sales by day, stock gaps", "Covers, promo profit",
@@ -96,11 +101,12 @@ def main() -> int:
     check("faq-centered", "details.faq" in land and "margin:0 auto .75rem" in land,
           "FAQ cards centered like price card")
 
-    # 5. CTA budget (catches redundancy creep).
+    # 5. Zero scheduling integration, everywhere (pages, not historical docs).
     for p in pages:
-        n = text[p].count("calendly.com/leargas/30min")
-        limit = 11 if p == LANDING else 4
-        check(f"cta-budget:{p}", n <= limit, f"{n}/{limit} refs")
+        check(f"zero-calendly:{p}", "calendly" not in text[p].lower(),
+              "clean")
+        check(f"no-fit-phrase:{p}", "not a fit" not in text[p],
+              "phrase purged")
 
     # 6. Placeholders, previews.
     for p in pages:
