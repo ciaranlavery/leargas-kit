@@ -55,8 +55,10 @@
   hotlink); brands without a Simple Icons slug get a same-green monogram
   tile, never a fake logo. Escape hatch below the marquee:
   "Don't see yours? Ask — if it exports, we can use it."
-- Proof block (`#proof`, above pricing) = founder monogram + pilot-stage
-  honesty, never testimonials. Mock stays mock.
+- Proof block (`#proof`, above pricing) = founder monogram + ex-Kraken /
+  ex-Revolut bio (marks vendored in `previews/logos/`) + pilot-stage honesty.
+  The "no client logos" sentence is OUT per owner — the block says what it is
+  without apologizing. Mock stays mock.
 - Tinted bands: green final CTA only. No other `band` sections. Sections
   share one rhythm (`section.block` padding, no per-section snowflakes).
 ## Trust & honesty (non-negotiable — user-verified 2026-09-09)
@@ -69,12 +71,22 @@
   (Sarah/Mick/Aoife and kin are permanently banned strings).
 - Compatibility claims stay input-level ("built from … e.g. …; if it exports,
   it probably packs") — never claim certified integrations.
+- Mobile (≤40rem) shows FOUR horizontal demo strips instead of the
+  carousel (which hides there): thumb ping-pongs dark↔light on a seamless
+  symmetric `stripmorph` loop (end-state equals start-state, staggered
+  1.5s delays share one clock so nothing drifts), static under
+  reduced-motion. Same still files, desktop untouched.
 - Booking CTAs live in exactly three places, all reading word-for-word
   `Book the free 30-min chat` → `https://calendly.com/leargas/30min`: the hero
   button, one `.bookbar` band per demo (theme `--accent` button, NO `→`), and
   the green final band (whole band clickable), plus ONE low-key text link in
   the proof block. Nowhere else — no topbar, pricing, sticky, widget, or
   popup code.
+- Contact paths: booking CTAs as above, plus ONE mailto alternative
+  (`ciaranolavery@gmail.com`) with a call-agenda line under the final band.
+- Monday strip (`#monday`): one link refreshed weekly + PDF hottest-takes
+  printout + messy-data line. ROI anchor under pricing stays clearly labelled
+  `Illustrative` — never a client result.
 - Wordmark images (non-square logos) MUST keep `width:auto` (`.chip img.word`)
   — a blanket square size squishes them, which is exactly the distortion
   shipped once when the rule was dropped; the gate pins it.
