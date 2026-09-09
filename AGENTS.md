@@ -21,14 +21,16 @@
 ## Landing (`index.html`) — carousel showcase, one intentional contrast
 
 - Demos showcase = autoplay carousel on cream (one slide visible, dots +
-  arrows, 9s advance === 9s morph clock). ONE pausable clock: `stop()` freezes
-  BOTH the interval and the morph (`animation-play-state:paused`) — pausing one
-  without the other is what desynced them. `show()` restarts every morph so all
-  slides stay in phase; a 900ms `snapGuard` recovers if `transitionend` is ever
-  missed (a stuck `busy` flag freezes the carousel). Morph is symmetric
-  (dark hold → light hold → dark hold) so the advance always lands on dark —
-  never a snap. Track glide (.8s) matches the morph pace. Captions sit BELOW
-  shots as a static bar (title only), never overlaid on dashboard elements.
+  arrows, 6s advance === 6s morph clock). ONE morph per slide, alternating
+  direction: odd slides run reversed (light→dark), even slides forward
+  (dark→light) — set per logical slide in `show()`, clones inherit their
+  source's direction. ONE pausable clock: `stop()` freezes BOTH the interval
+  and the morph (`animation-play-state:paused`) — pausing one without the
+  other is what desynced them. `show()` restarts every morph so all slides
+  stay in phase; a 900ms `snapGuard` recovers if `transitionend` is ever
+  missed (a stuck `busy` flag freezes the carousel). Track glide (.8s) matches
+  the morph pace. Captions sit BELOW shots as a static bar (title only), never
+  overlaid on dashboard elements.
 - Each slide holds dark, morphs to light, morphs back, and the 9s advance
   lands on dark; `show()` restarts every `img.light` animation so all slides
   stay in phase (no per-slide delays — stagger is what desynced them). Stills
