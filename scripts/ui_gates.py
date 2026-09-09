@@ -67,9 +67,11 @@ def main() -> int:
           and "probably packs" not in land
           and "@keyframes mq" in land
           and land.count('class="mq-half"') == 2
-          and (ROOT / "previews" / "logos" / "square.svg").exists()
-          and (ROOT / "previews" / "logos" / "xero.svg").exists(),
-          "logo marquee + escape hatch, marks vendored")
+          and all((ROOT / "previews" / "logos" / f).exists() for f in (
+              "square.svg", "xero.svg", "zettle.png", "sumup.svg", "lightspeed.svg"))
+          and "filter:grayscale(1)" in land
+          and 'class="mono"' not in land,
+          "logo marquee + escape hatch, all marks vendored, gray-rest/color-hover")
     check("works-on-top", land.find('class="works"') < land.find('class="hero"')
           and "opacity:.62" in land,
           "slim translucent band above the hero")

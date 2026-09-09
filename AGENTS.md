@@ -66,6 +66,12 @@
   the green final band (whole band clickable), plus ONE low-key text link in
   the proof block. Nowhere else — no topbar, pricing, sticky, widget, or
   popup code.
+- Works-with marks: real artwork vendored in `previews/logos/` (Simple Icons
+  where a slug exists; Wikimedia Commons press SVGs otherwise, e.g. SumUp,
+  Lightspeed; transparent PNG downscaled for Zettle). Resting state is
+  grayscale + translucent (`filter:grayscale(1)`, chip at 62%); full color on
+  hover. Brands with no obtainable mark get a same-green monogram tile, never
+  a fake logo.
 
 ## Gate
 
