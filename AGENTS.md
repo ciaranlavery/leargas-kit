@@ -21,19 +21,19 @@
 ## Landing (`index.html`) — carousel showcase, one intentional contrast
 
 - Demos showcase = autoplay carousel on cream (one slide visible, dots +
-  arrows, 6s advance === 6s morph clock). ONE morph per slide, alternating
-  direction: odd slides run reversed (light→dark), even slides forward
-  (dark→light) — set per logical slide in `show()`, clones inherit their
-  source's direction. ONE pausable clock: `stop()` freezes BOTH the interval
-  and the morph (`animation-play-state:paused`) — pausing one without the
-  other is what desynced them. `show()` restarts every morph so all slides
-  stay in phase; a 900ms `snapGuard` recovers if `transitionend` is ever
-  missed (a stuck `busy` flag freezes the carousel). Track glide (.8s) matches
-  the morph pace. Captions sit BELOW shots as a static bar (title only), never
-  overlaid on dashboard elements.
-- Each slide holds dark, morphs to light, morphs back, and the 9s advance
-  lands on dark; `show()` restarts every `img.light` animation so all slides
-  stay in phase (no per-slide delays — stagger is what desynced them). Stills
+  arrows, 6s advance === 6s morph clock). ONE morph per slide, alternating:
+  even track children run reversed (light→dark), odds forward (dark→light);
+  the clone order [clone-s4, s1..s4, clone-s1] makes each clone match its
+  source. Phased PURELY in CSS so all clocks free-run in sync — NEVER restart
+  morph animations from JS (`animation='none'` + reflow flashes every layer
+  to dark for a frame on advance; that was the pre-advance snap). ONE pausable
+  clock: `stop()` freezes BOTH the interval and the morph
+  (`animation-play-state:paused`); a 900ms `snapGuard` recovers if
+  `transitionend` is ever missed. Track glide (.8s) matches the morph pace.
+  Captions sit BELOW shots as a static bar (title only), never overlaid on
+  dashboard elements.
+- Each slide morphs exactly once per 6s viewing (then the advance carries the
+  ending theme into the next slide, which starts on it). Stills
   (`previews/<name>.png` + `<name>-light.png`, both 1920px, banner-free).
   Regenerate headless (viewport 1920×1080, `color_scheme` dark/light) when
   dashboards change — never ship blurry 960px.
