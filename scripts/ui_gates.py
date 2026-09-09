@@ -53,14 +53,18 @@ def main() -> int:
 
     # 4. Landing structure.
     land = text[LANDING]
-    check("booking-ctas", land.lower().count("calendly") == 2
+    check("booking-ctas", land.count("https://calendly.com/leargas/30min") == 3
           and '<a class="btn" href="https://calendly.com/leargas/30min"' in land
           and '<a class="final" href="https://calendly.com/leargas/30min"' in land
           and "data-calendly" not in land
           and 'id="book"' not in land
           and "sticky-cta" not in land and "stickyCta" not in land
           and "widget.js" not in land,
-          "hero button + final band only, no widget/sticky/book section")
+          "hero button + proof text link + final band, nothing else")
+    check("works-strip", all(k in land for k in (
+        "Square", "Zettle", "SumUp", "Lightspeed", "Xero", "Open Banking",
+        "Don't see yours?")),
+          "compatibility self-qualification")
     check("one-voice", "Book a 30-min chat" not in land
           and land.count("Book the free 30-min chat") == 2,
           "every CTA reads exactly 'Book the free 30-min chat'")
@@ -69,8 +73,16 @@ def main() -> int:
     check("no-autoplay-copy", "slides on its own" not in land
           and "closest match" not in land,
           "manual carousel, no steering copy")
-    check("no-proof-section", 'id="proof"' not in land and "Pilot feedback" not in land,
-          "proof removed")
+    check("no-proof-section", "Pilot feedback" not in land
+          and "What a Monday changes" not in land,
+          "no invented-testimonials section")
+    check("honest-proof", all(k in land for k in (
+        'id="proof"', "Who's behind it", "No client logos",
+        "Founding partners", "labelled sample")),
+          "founder + pilot-stage honesty, no fake clients")
+    check("no-fabrication", all(n not in land + "".join(text[d] for d in DEMOS)
+                                for n in ("Sarah", "Mick", "Aoife")),
+          "no invented people anywhere")
     check("no-mid-cta", "mid-cta" not in land, "no mid-section CTA rows")
     check("no-band", "block band" not in land, "no arbitrary tinted band")
     check("no-trust-metrics", "class=\"metrics\"" not in land, "trust band is one line")
@@ -95,6 +107,9 @@ def main() -> int:
           and all(s not in land for s in ("Sales by day, stock gaps", "Covers, promo profit",
                                           "Tickets, engagement", "Membership, courts")),
           "title-only static caption bar, nothing overlaid on shots")
+    check("sample-pdf", (ROOT / "sample-monday-pack.pdf").exists()
+          and 'href="sample-monday-pack.pdf" download' in land,
+          "downloadable sample pack")
     check("theme-stills", land.count('class="light"') == 4,
           "one light layer per slide")
     check("markers-one-size", ".feat .n" not in land and ".step .n" in land,

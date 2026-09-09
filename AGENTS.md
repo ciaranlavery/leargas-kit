@@ -38,14 +38,28 @@
   FAQ cards centered (`margin-inline:auto`) like price. Price card stands off
   its title, like standfirst rhythm.
 - Trust band = `Built for …` + sample line only. No big stat metrics.
+- Works-with strip = input names only (Square, Zettle, SumUp, Lightspeed,
+  Xero, Open Banking, spreadsheets) + "Don't see yours? Ask" escape hatch.
+- Proof block (`#proof`, above pricing) = founder monogram + pilot-stage
+  honesty, never testimonials. Mock stays mock.
 - Tinted bands: green final CTA only. No other `band` sections. Sections
   share one rhythm (`section.block` padding, no per-section snowflakes).
+## Trust & honesty (non-negotiable — user-verified 2026-09-09)
+
+- NEVER fabricate testimonials, client names, £/hrs-saved figures, founder
+  photos, or logos. Pilot-stage MUST read as pilot-stage: the proof block
+  says plainly there are no client logos yet and every number is labelled
+  sample. When real photo/numbers land, they replace the monogram + pilot
+  copy — until then the gate below fails any invented proof on sight
+  (Sarah/Mick/Aoife and kin are permanently banned strings).
+- Compatibility claims stay input-level ("built from … e.g. …; if it exports,
+  it probably packs") — never claim certified integrations.
 - Booking CTAs live in exactly three places, all reading word-for-word
   `Book the free 30-min chat` → `https://calendly.com/leargas/30min`: the hero
   button, one `.bookbar` band per demo (theme `--accent` button, NO `→`), and
-  the green final band (whole band clickable). Nowhere else — no topbar,
-  pricing, sticky, widget, popup code, or booking bands anywhere else.
-- No pilot-feedback/proof section without real named data. Mock stays mock.
+  the green final band (whole band clickable), plus ONE low-key text link in
+  the proof block. Nowhere else — no topbar, pricing, sticky, widget, or
+  popup code.
 
 ## Gate
 
