@@ -269,7 +269,7 @@ footer.site .wrap{display:flex;gap:.5rem 1.5rem;flex-wrap:wrap;align-items:cente
 <footer class="site"><div class="wrap"><span><b>Léargas</b> · Made in Belfast</span><span>Mock data throughout — your pack shows your numbers</span></div></footer>
 
 <script>
-  // Demos carousel: 8s auto-advance (pauses on hover/focus/hidden tab) + ping-pong dark/light morph while viewed, reduced-motion static.
+  // Demos carousel: phase-locked viewings (hold, one morph, hold, advance), dots + arrows, reduced-motion static.
 (function(){var t=document.getElementById('demoTrack');if(!t)return;var N=t.children.length,busy=false,snapGuard=null;
 var dots=Array.prototype.slice.call(document.querySelectorAll('#demoDots .dot'));
 var reduced=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -288,19 +288,19 @@ function go(j){if(busy)return;p=j+1;show();}
 function liOf(i){return i===0?N-1:(i===N+1?0:i-1);}
 function startLit(li){return li%2===0;}
 function setLit(im,lit,instant){if(!im)return;if(instant){im.style.transition='none';}if(lit){im.classList.add('lit');}else{im.classList.remove('lit');}if(instant){void im.offsetWidth;im.style.transition='';}}
-var HOLD=1800,morphT=null,autoT=null;
-function clearPhase(){clearTimeout(morphT);}
-function armSlide(fresh){clearPhase();var kids=t.children;var im=kids[p].querySelector('img.light');if(fresh!==false){var m=(p===N+1)?1:(p===0?N:p);var start=startLit(liOf(p));setLit(im,start,true);if(m!==p){setLit(kids[m].querySelector('img.light'),start,true);}}if(reduced)return;var on=im.classList.contains('lit');morphT=setTimeout(function tick(){on=!on;var cur=t.children[p].querySelector('img.light');setLit(cur,on,false);morphT=setTimeout(tick,1500+HOLD);},HOLD);}
-function play(){if(reduced)return;clearInterval(autoT);autoT=setInterval(function(){next();armSlide(true);},8000);}
-function stop(){clearInterval(autoT);}
-document.getElementById('carPrev').addEventListener('click',function(){prev();armSlide(true);play();});
-document.getElementById('carNext').addEventListener('click',function(){next();armSlide(true);play();});
-dots.forEach(function(d,j){d.addEventListener('click',function(){go(j);armSlide(true);play();});});
+var HOLD_A=1800,HOLD_B=1800,morphT=null,nextT=null;
+function clearPhase(){clearTimeout(morphT);clearTimeout(nextT);}
+function armSlide(fresh){clearPhase();var kids=t.children;var start;if(fresh!==false){var m=(p===N+1)?1:(p===0?N:p);start=startLit(liOf(p));setLit(kids[p].querySelector('img.light'),start,true);if(m!==p){setLit(kids[m].querySelector('img.light'),start,true);}}else{start=kids[p].querySelector('img.light').classList.contains('lit');}if(reduced)return;var target=!start;morphT=setTimeout(function(){var cur=t.children[p].querySelector('img.light');setLit(cur,target,false);},HOLD_A);nextT=setTimeout(function(){next();armSlide(true);},HOLD_A+1500+HOLD_B);}
+function play(){if(reduced)return;armSlide(false);}
+function stop(){clearTimeout(morphT);clearTimeout(nextT);}
+document.getElementById('carPrev').addEventListener('click',function(){prev();armSlide(true);});
+document.getElementById('carNext').addEventListener('click',function(){next();armSlide(true);});
+dots.forEach(function(d,j){d.addEventListener('click',function(){go(j);armSlide(true);});});
 var c=document.getElementById('demoCarousel');
 c.addEventListener('mouseenter',stop);c.addEventListener('mouseleave',play);
 c.addEventListener('focusin',stop);c.addEventListener('focusout',play);
-document.addEventListener('visibilitychange',function(){if(document.hidden){stop();}else{armSlide(false);play();}});
-show();armSlide(true);play();})();
+document.addEventListener('visibilitychange',function(){if(document.hidden){stop();}else{play();}});
+show();armSlide(true);})();
 </script>
 </body>
 </html>
