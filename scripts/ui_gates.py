@@ -61,6 +61,24 @@ def main() -> int:
           and "sticky-cta" not in land and "stickyCta" not in land
           and "widget.js" not in land,
           "hero button + proof text link + final band, nothing else")
+    check("contact-paths", "mailto:ciaranolavery@gmail.com" in land
+          and "first-pack date" in land,
+          "email alternative + call agenda")
+    check("monday-strip", all(k in land for k in (
+        'id="monday"', "One link. Every Monday.", "hottest takes",
+        "caught before you ever see")),
+          "delivery facts: link, PDF, messy-data")
+    check("roi-illustrative", "Illustrative:" in land
+          and "afternoon a month" in land,
+          "labelled illustration, never a result")
+    check("tile-outcomes", all(k in land for k in (
+        "Tuesday's order", "what food cost", "who's joining", "the bar take")),
+          "one outcome line per demo tile")
+    check("mobile-strips", land.count('class="strip"') == 4
+          and land.count('class="sthumb"') == 4
+          and "@keyframes stripmorph" in land
+          and ".carousel{display:none}" in land,
+          "four mobile strips, carousel hidden on small screens")
     check("works-strip", all(k in land for k in (
         "Square", "Zettle", "SumUp", "Lightspeed", "Xero", "Open Banking",
         "Don't see yours?", "if it exports, we can use it"))
@@ -87,9 +105,10 @@ def main() -> int:
           and "What a Monday changes" not in land,
           "no invented-testimonials section")
     check("honest-proof", all(k in land for k in (
-        'id="proof"', "Who's behind it", "No client logos",
-        "Founding partners", "labelled sample")),
-          "founder + pilot-stage honesty, no fake clients")
+        'id="proof"', "Who's behind it", "Kraken", "Revolut",
+        "founding partners"))
+          and "No client logos" not in land,
+          "founder bio + pilot honesty, sentence removed per owner")
     check("no-fabrication", all(n not in land + "".join(text[d] for d in DEMOS)
                                 for n in ("Sarah", "Mick", "Aoife")),
           "no invented people anywhere")
@@ -120,12 +139,12 @@ def main() -> int:
           and "shot-cap b{font-size:1.0625rem" in land
           and all(s not in land for s in ("Sales by day, stock gaps", "Covers, promo profit",
                                           "Tickets, engagement", "Membership, courts")),
-          "title-only static caption bar, nothing overlaid on shots")
+          "short outcome captions below shots, nothing overlaid")
     check("sample-pdf", (ROOT / "sample-monday-pack.pdf").exists()
           and 'href="sample-monday-pack.pdf" download' in land,
           "downloadable sample pack")
-    check("theme-stills", land.count('class="light"') == 4,
-          "one light layer per slide")
+    check("theme-stills", land.count('class="light"') == 8,
+          "light layers: 4 slides + 4 mobile strips")
     check("markers-one-size", ".feat .n" not in land and ".step .n" in land,
           "numbers live only on How-it-works steps")
     check("sections-consolidated", "Grows with you" not in land
