@@ -68,10 +68,10 @@
   popup code.
 - Works-with marks: real artwork vendored in `previews/logos/` (Simple Icons
   where a slug exists; Wikimedia Commons press SVGs otherwise, e.g. SumUp,
-  Lightspeed; transparent PNG downscaled for Zettle). Resting state is
-  grayscale + translucent (`filter:grayscale(1)`, chip at 62%); full color on
-  hover. Brands with no obtainable mark get a same-green monogram tile, never
-  a fake logo.
+  Lightspeed; transparent PNG downscaled for Zettle). ALWAYS full brand
+  colors at full opacity — instant recognition beats decoration; no
+  grayscale, no translucency. Brands with no obtainable mark get a same-green
+  monogram tile, never a fake logo.
 
 ## Gate
 

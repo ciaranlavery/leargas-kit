@@ -60,11 +60,8 @@ img{max-width:100%;height:auto}
 .mq-track{display:flex;width:max-content;animation:mq 32s linear infinite}
 .mq-half{display:flex;gap:.75rem;padding-right:.75rem}
 .marquee:hover .mq-track{animation-play-state:paused}
-.chip{display:inline-flex;align-items:center;gap:.5rem;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:.4rem .85rem;font-size:.8125rem;font-weight:600;color:var(--ink);white-space:nowrap;opacity:.62;transition:opacity .15s ease-out}
-.chip:hover{opacity:1}
-.chip img{width:1.25rem;height:1.25rem;display:block;filter:grayscale(1)}
-.chip img.word{width:auto}
-.chip:hover img{filter:none}
+.chip{display:inline-flex;align-items:center;gap:.5rem;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:.4rem .85rem;font-size:.8125rem;font-weight:600;color:var(--ink);white-space:nowrap}
+.chip img{width:1.25rem;height:1.25rem;display:block}
 .chip svg{width:1.25rem;height:1.25rem}
 @keyframes mq{to{transform:translateX(-50%)}}
 @media(prefers-reduced-motion:reduce){.mq-track{flex-wrap:wrap;width:auto}}
