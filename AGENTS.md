@@ -12,6 +12,8 @@
   classes `lk-topbar`/`lk-cta`/`lk-foot`/`lk-note`) inside demos.
 - NO top banner on demos. Wayfinding is the footer home link only — a banner
   photographs into every screenshot and unbalances the dashboard top.
+- All four demos share one content canvas (`.main` max-width 94rem). A
+  narrower cap strands empty space on the right at desktop widths.
 - Demos end at one `.bookbar` band + ONE quiet footer (home link in accent +
   mock line, flex `space-between`, baseline-aligned). No stacked triple
   footers, no green CTA button inside a themed dashboard.

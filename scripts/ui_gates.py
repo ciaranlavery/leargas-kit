@@ -147,7 +147,10 @@ def main() -> int:
         check(f"no-fit-phrase:{p}", "not a fit" not in text[p],
               "phrase purged")
 
-    # 6. Placeholders, previews.
+    # 6. Placeholders, previews, demo canvas width.
+    for d in DEMOS:
+        check(f"demo-width:{d}", "max-width:94rem" in text[d],
+              "same content canvas as leisure club")
     for p in pages:
         hits = [w for w in ("TODO", "FIXME", "lorem", "Lorem") if w in text[p]]
         check(f"no-placeholder:{p}", not hits, f"{hits}" if hits else "clean")
