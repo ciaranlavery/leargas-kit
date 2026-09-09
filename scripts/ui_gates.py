@@ -37,11 +37,11 @@ def main() -> int:
         check(f"no-top-banner:{d}", 'demo-top' not in text[d] and 'demo-note' not in text[d],
               "banner-free top, footer carries wayfinding")
 
-    # 2. Demo structure: quiet footer only, no booking furniture.
+    # 2. Demo structure: one booking band + quiet footer, no other furniture.
     for d in DEMOS:
         t = text[d]
-        check(f"no-bookbar:{d}", 'bookbar' not in t,
-              "no booking band")
+        check(f"bookbar-once:{d}", t.count('class="bookbar"') == 1,
+              f"count={t.count('class=\"bookbar\"')}")
         check(f"home-link:{d}", "← Léargas home" in t, "accent home link present")
         check(f"mock-label:{d}", ("mock" in t.lower() or "sample" in t.lower()),
               "mock/sample labelled")
@@ -53,13 +53,17 @@ def main() -> int:
 
     # 4. Landing structure.
     land = text[LANDING]
-    check("single-cta", land.lower().count("calendly") == 1
-          and 'class="final" href="https://calendly.com/leargas/30min"' in land
+    check("booking-ctas", land.lower().count("calendly") == 2
+          and '<a class="btn" href="https://calendly.com/leargas/30min"' in land
+          and '<a class="final" href="https://calendly.com/leargas/30min"' in land
           and "data-calendly" not in land
           and 'id="book"' not in land
           and "sticky-cta" not in land and "stickyCta" not in land
           and "widget.js" not in land,
-          "the green final band is the one and only booking link")
+          "hero button + final band only, no widget/sticky/book section")
+    check("one-voice", "Book a 30-min chat" not in land
+          and land.count("Book the free 30-min chat") == 2,
+          "every CTA reads exactly 'Book the free 30-min chat'")
     check("no-fit-phrase", "not a fit" not in land,
           "phrase purged")
     check("no-autoplay-copy", "slides on its own" not in land
@@ -103,12 +107,14 @@ def main() -> int:
     check("faq-centered", "details.faq" in land and "margin:0 auto .75rem" in land,
           "FAQ cards centered like price card")
 
-    # 5. Booking linkage: exactly one, on the landing's final band; demos pure showcase.
+    # 5. Booking linkage: hero button + final band on landing, one band per demo.
     for p in pages:
         if p == LANDING:
             continue
-        check(f"zero-calendly:{p}", "calendly" not in text[p].lower(),
-              "clean")
+        check(f"demo-cta:{p}", text[p].count("calendly.com/leargas/30min") == 1
+              and "Book a 30-min chat" not in text[p]
+              and text[p].count("Book the free 30-min chat") == 1,
+              "one band, one voice")
         check(f"no-fit-phrase:{p}", "not a fit" not in text[p],
               "phrase purged")
 

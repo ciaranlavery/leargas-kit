@@ -63,6 +63,11 @@ button.ni{font-family:inherit}.ni:hover{background:rgba(255,255,255,.06);color:v
 html,body{overflow-x:clip}
 img{max-width:100%;height:auto}
 .foot a{color:var(--accent);font-weight:700}
+.bookbar{margin-top:1.25rem;border:1px solid var(--line);border-radius:1rem;padding:1.25rem;background:linear-gradient(180deg,var(--surface-hi),var(--surface));box-shadow:var(--shadow);display:flex;gap:1rem;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.bookbar b{display:block;font-size:1rem;color:var(--ink-hi);letter-spacing:-.01em}
+.bookbar span{font-size:.875rem;color:var(--muted)}
+.bookbar a{flex-shrink:0;background:var(--accent);color:var(--accent-ink);font-weight:800;text-decoration:none;padding:.75rem 1.25rem;border-radius:.625rem;white-space:nowrap}
+@media(max-width:32.5rem){.bookbar a{width:100%;text-align:center;white-space:normal}}
 </style>
 </head>
 <body>
@@ -96,6 +101,7 @@ img{max-width:100%;height:auto}
 <div class="row"><span>Saturday peak understaffed</span><b>queue 11 min</b></div>
 <div class="act"><b>3 actions:</b> ① reorder oat milk Tue ② trim Friday close by one ③ push Green Machine promo (margin 71%).</div></div></div></div>
 <div class="foot">DEMO - all figures invented for illustration. Your pack fills itself in from till, Stripe, bank and sheets.</div>
+<div class="bookbar"><div><b>Like this Monday? Yours looks like this.</b><span>Sample numbers above — your pack fills in automatically. Free 30-min chat, first pack within 10 days.</span></div><a href="https://calendly.com/leargas/30min" target="_blank" rel="noopener">Book the free 30-min chat</a></div>
 <div class="foot"><span><a href="index.html">← Léargas home</a></span><span>Mock numbers throughout — your pack shows your numbers</span></div>
 </main></div>
 <button type="button" class="theme-toggle" id="themeToggle" title="Toggle light/dark mode" aria-label="Switch to light mode">☀</button>

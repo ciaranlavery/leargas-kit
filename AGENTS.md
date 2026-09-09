@@ -12,10 +12,9 @@
   classes `lk-topbar`/`lk-cta`/`lk-foot`/`lk-note`) inside demos.
 - NO top banner on demos. Wayfinding is the footer home link only — a banner
   photographs into every screenshot and unbalances the dashboard top.
-- Demos end at ONE quiet footer (home link in accent + mock line, flex
-  `space-between`, baseline-aligned). No booking bands, no green CTA button
-  inside a themed dashboard — there is no scheduling integration; demos are
-  pure product showcase.
+- Demos end at one `.bookbar` band + ONE quiet footer (home link in accent +
+  mock line, flex `space-between`, baseline-aligned). No stacked triple
+  footers, no green CTA button inside a themed dashboard.
 - No `→` on intro links (timeline `→` inside FAQ prose is fine).
 
 ## Landing (`index.html`) — carousel showcase, one intentional contrast
@@ -41,10 +40,11 @@
 - Trust band = `Built for …` + sample line only. No big stat metrics.
 - Tinted bands: green final CTA only. No other `band` sections. Sections
   share one rhythm (`section.block` padding, no per-section snowflakes).
-- Booking has exactly ONE surface: the green final band, which links to the
-  30-min chat (`https://calendly.com/leargas/30min`, whole band clickable).
-  No topbar/hero/pricing/sticky buttons, no widget, no popup code, no booking
-  bands on demos. Demos are pure showcase ending at the quiet footer.
+- Booking CTAs live in exactly three places, all reading word-for-word
+  `Book the free 30-min chat` → `https://calendly.com/leargas/30min`: the hero
+  button, one `.bookbar` band per demo (theme `--accent` button, NO `→`), and
+  the green final band (whole band clickable). Nowhere else — no topbar,
+  pricing, sticky, widget, popup code, or booking bands anywhere else.
 - No pilot-feedback/proof section without real named data. Mock stays mock.
 
 ## Gate
