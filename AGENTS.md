@@ -41,8 +41,10 @@
 - Trust band = `Built for …` + sample line only. No big stat metrics.
 - Tinted bands: green final CTA only. No other `band` sections. Sections
   share one rhythm (`section.block` padding, no per-section snowflakes).
-- CTA budget: topbar, hero, pricing, final, sticky + `#book` widget/fallbacks
-  only. No mid-section `Book a 30-min chat` button rows.
+- Booking has exactly ONE surface: the green final band, which links to the
+  30-min chat (`https://calendly.com/leargas/30min`, whole band clickable).
+  No topbar/hero/pricing/sticky buttons, no widget, no popup code, no booking
+  bands on demos. Demos are pure showcase ending at the quiet footer.
 - No pilot-feedback/proof section without real named data. Mock stays mock.
 
 ## Gate

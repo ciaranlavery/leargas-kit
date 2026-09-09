@@ -53,11 +53,13 @@ def main() -> int:
 
     # 4. Landing structure.
     land = text[LANDING]
-    check("zero-calendly", "calendly" not in land.lower()
+    check("single-cta", land.lower().count("calendly") == 1
+          and 'class="final" href="https://calendly.com/leargas/30min"' in land
           and "data-calendly" not in land
           and 'id="book"' not in land
-          and "sticky-cta" not in land and "stickyCta" not in land,
-          "no scheduling integration anywhere")
+          and "sticky-cta" not in land and "stickyCta" not in land
+          and "widget.js" not in land,
+          "the green final band is the one and only booking link")
     check("no-fit-phrase", "not a fit" not in land,
           "phrase purged")
     check("no-autoplay-copy", "slides on its own" not in land
@@ -101,8 +103,10 @@ def main() -> int:
     check("faq-centered", "details.faq" in land and "margin:0 auto .75rem" in land,
           "FAQ cards centered like price card")
 
-    # 5. Zero scheduling integration, everywhere (pages, not historical docs).
+    # 5. Booking linkage: exactly one, on the landing's final band; demos pure showcase.
     for p in pages:
+        if p == LANDING:
+            continue
         check(f"zero-calendly:{p}", "calendly" not in text[p].lower(),
               "clean")
         check(f"no-fit-phrase:{p}", "not a fit" not in text[p],

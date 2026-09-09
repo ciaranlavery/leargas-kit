@@ -92,7 +92,10 @@ p.standfirst{color:var(--muted);margin:0 0 2rem;max-width:38rem;font-size:1.0625
 details.faq{background:var(--surface);border:1px solid var(--line);border-radius:.75rem;padding:1rem 1.25rem;margin:0 auto .75rem;box-shadow:inset 0 1px 0 0 var(--highlight),var(--shadow);max-width:44rem}
 details.faq summary{font-weight:700;cursor:pointer;font-size:1rem}
 details.faq p{margin:.5rem 0 0;color:var(--muted);font-size:.9375rem}
-.final{background:var(--primary);color:var(--on-primary);border-radius:var(--radius);padding:2.5rem 2rem;text-align:center;margin-top:1rem;box-shadow:var(--shadow-big)}
+.final{display:block;background:var(--primary);color:var(--on-primary);border-radius:var(--radius);padding:2.5rem 2rem;text-align:center;margin-top:1rem;box-shadow:var(--shadow-big);text-decoration:none;transition:background .15s ease-out,transform .15s ease-out}
+.final:hover{background:var(--primary-hi)}
+.final:active{transform:translateY(1px)}
+.final .go{display:inline-block;background:var(--on-primary);color:var(--primary);font-weight:700;font-size:1rem;padding:.75rem 1.5rem;border-radius:.625rem;margin-top:1.25rem}
 .final h2{font-size:clamp(1.5rem,4vw,2.25rem);letter-spacing:-.02em;margin:0 0 .5rem;text-wrap:balance}
 .final p{margin:0;opacity:.85}
 footer.site{border-top:1px solid var(--line);margin-top:4rem}
@@ -199,10 +202,11 @@ footer.site .wrap{display:flex;gap:.5rem 1.5rem;flex-wrap:wrap;align-items:cente
 </section>
 
 <section class="block">
-<div class="final">
+<a class="final" href="https://calendly.com/leargas/30min" target="_blank" rel="noopener">
 <h2>Start next Monday knowing your numbers.</h2>
 <p>One page. First pack within 10 days.</p>
-</div>
+<span class="go">Book the free 30-min chat</span>
+</a>
 </section>
 </div>
 
