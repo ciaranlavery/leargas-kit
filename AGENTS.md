@@ -16,12 +16,17 @@
   triple footers, no green CTA button inside a themed dashboard.
 - No `→` on booking-button/intro links (timeline `→` inside FAQ prose is fine).
 
-## Landing (`index.html`) — one intentional contrast only
+## Landing (`index.html`) — carousel showcase, one intentional contrast
 
-- Dark dashboard screenshots live on the dark `#demos` section
-  (`.block.dark`). Never put dark shots on cream.
-- Tinted bands: the dark demos section + green final CTA only. No other
-  `band` sections. Number markers (`feat .n`, `step .n`) one size.
+- Demos showcase = autoplay carousel on cream (one slide visible, dots +
+  arrows, 4.5s advance, pauses on hover/focus/hidden tab, reduced-motion
+  shows static slides). NEVER a static auto-fit screenshot grid — it orphans
+  the 4th card (3+1) at common widths and lets captions run off-screen; the
+  viewport clips overflow instead. Dark shots sit inside bordered cards.
+- Trust band = `Built for …` + sample line only. No big stat metrics.
+- Tinted bands: green final CTA only. No other `band` sections. Number
+  markers (`feat .n`, `step .n`) one size. Sections share one rhythm
+  (`section.block` padding, no per-section snowflakes).
 - CTA budget: topbar, hero, pricing, final, sticky + `#book` widget/fallbacks
   only. No mid-section `Book a 30-min chat` button rows.
 - No pilot-feedback/proof section without real named data. Mock stays mock.
