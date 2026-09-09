@@ -68,11 +68,13 @@ def main() -> int:
           "autoplay carousel, 4 slides, dots + arrows")
     check("carousel-motion-safe", "setInterval(next,9000)" in land
           and "syncMorph" in land
+          and "snapGuard" in land
+          and "animation-play-state:paused" in land
           and "animation-delay" not in land
           and "prefers-reduced-motion: reduce" in land
           and "visibilitychange" in land
-          and "@keyframes thememorph{0%,40%{opacity:0}55%,100%{opacity:1}}" in land,
-          "9s morph synced to 9s advance, restarted per slide, no stagger; static under reduced-motion")
+          and "@keyframes thememorph{0%,32%{opacity:0}47%,78%{opacity:1}93%,100%{opacity:0}}" in land,
+          "one pausable 9s clock, symmetric morph landing on dark, stuck-guard; static under reduced-motion")
     check("captions-below", ".shot-cap{display:flex" in land
           and "shot-cap b{font-size:1.0625rem" in land
           and all(s not in land for s in ("Sales by day, stock gaps", "Covers, promo profit",
@@ -82,6 +84,11 @@ def main() -> int:
           "one light layer per slide")
     check("markers-one-size", ".feat .n" not in land and ".step .n" in land,
           "numbers live only on How-it-works steps")
+    check("sections-consolidated", "Grows with you" not in land
+          and "compounds" in land,
+          "Grows folded to one line, no third card grid")
+    check("price-stands-off", "margin:2rem auto 0" in land,
+          "price card spaced off its title")
     check("faq-centered", "details.faq" in land and "margin:0 auto .75rem" in land,
           "FAQ cards centered like price card")
 
