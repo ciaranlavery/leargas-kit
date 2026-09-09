@@ -64,8 +64,11 @@ def main() -> int:
     check("contact-paths", "mailto:ciaranolavery@gmail.com" in land
           and "first-pack date" in land,
           "email alternative + call agenda")
+    check("daily-landing", all(s not in land for s in (
+        "Monday", "Week 34", "Board-ready")),
+          "landing speaks daily throughout")
     check("monday-strip", all(k in land for k in (
-        'id="monday"', "One link. Every Monday.", "hottest takes",
+        'id="daily"', "One link. Every morning.", "hottest takes",
         "caught before you ever see")),
           "delivery facts: link, PDF, messy-data")
     check("roi-illustrative", "Illustrative:" in land
@@ -140,9 +143,10 @@ def main() -> int:
           and all(s not in land for s in ("Sales by day, stock gaps", "Covers, promo profit",
                                           "Tickets, engagement", "Membership, courts")),
           "short outcome captions below shots, nothing overlaid")
-    check("sample-pdf", (ROOT / "sample-monday-pack.pdf").exists()
-          and 'href="sample-monday-pack.pdf" download' in land,
-          "downloadable sample pack")
+    check("sample-pdf", (ROOT / "sample-daily-pack.pdf").exists()
+          and 'href="sample-daily-pack.pdf" download' in land
+          and not (ROOT / "sample-monday-pack.pdf").exists(),
+          "downloadable sample pack, old file gone")
     check("theme-stills", land.count('class="light"') == 8,
           "light layers: 4 slides + 4 mobile strips")
     check("markers-one-size", ".feat .n" not in land and ".step .n" in land,
@@ -166,10 +170,13 @@ def main() -> int:
         check(f"no-fit-phrase:{p}", "not a fit" not in text[p],
               "phrase purged")
 
-    # 6. Placeholders, previews, demo canvas width.
+    # 6. Placeholders, previews, demo canvas width, daily pivot.
     for d in DEMOS:
         check(f"demo-width:{d}", "max-width:94rem" in text[d],
               "same content canvas as leisure club")
+        check(f"daily-default:{d}", all(s not in text[d] for s in (
+            "Monday", "Week 34", "Board-ready")),
+              "no weekly framing left")
     for p in pages:
         hits = [w for w in ("TODO", "FIXME", "lorem", "Lorem") if w in text[p]]
         check(f"no-placeholder:{p}", not hits, f"{hits}" if hits else "clean")
