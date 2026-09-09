@@ -149,19 +149,15 @@ button.pill{font-family:inherit}
 .theme-toggle{position:fixed;right:.75rem;bottom:.75rem;z-index:99;background:var(--surface-2);border:1px solid var(--line);color:var(--ink);border-radius:999px;padding:.5rem .8rem;font-size:.9rem;line-height:1;cursor:pointer;box-shadow:var(--shadow)}
 .theme-toggle:hover{border-color:var(--accent);color:var(--accent)}
 .nav-item.active:hover{background:var(--accent);color:var(--accent-ink)}
-/* LK3 shared system (duplicated, static, no build). Canonical tokens from index.html landing: cream #faf7f0, green #1c7448. Demos keep dark product readability (charts stay dark); shared bits: topbar/CTA/footer labels, 3px focus, 360px guard. */
-:root{--lk-bg:#faf7f0;--lk-green:#1c7448;--lk-green-hi:#16603b;--lk-ink:#1e1b16;--lk-line:#e9e1d2}
+/* Theme-matched demo chrome (no landing green). Uses demo vars so each dashboard keeps its own scheme. */
 html,body{overflow-x:clip}
 img{max-width:100%;height:auto}
-.lk-topbar{display:flex;align-items:center;justify-content:space-between;gap:.75rem;padding:.6rem 1rem;background:var(--lk-bg);color:var(--lk-ink);border-bottom:1px solid var(--lk-line);font-size:.875rem}
-.lk-topbar a{color:var(--lk-green);font-weight:700;text-decoration:none;white-space:nowrap}
-.lk-topbar a:hover{text-decoration:underline}
-.lk-topbar .lk-note{color:#6f675c;font-size:.75rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.lk-cta{display:inline-block;background:var(--lk-green);color:#fff!important;font-weight:700;font-size:.875rem;padding:.6rem 1.1rem;border-radius:.625rem;text-decoration:none;border:none;cursor:pointer;white-space:nowrap}
-.lk-cta:hover{background:var(--lk-green-hi);color:#fff!important}
-.lk-foot{display:flex;gap:.5rem 1.5rem;flex-wrap:wrap;align-items:center;justify-content:space-between;padding:1.25rem 0 4rem;font-size:.75rem;color:var(--faint)}
-.lk-foot a{color:var(--lk-green);font-weight:700}
-@media(max-width:32rem){.lk-topbar .lk-note{display:none}}
+.demo-top{display:flex;align-items:center;justify-content:space-between;gap:.75rem;padding:.6rem 1rem;background:var(--surface-2);color:var(--muted);border-bottom:1px solid var(--line);font-size:.875rem}
+.demo-top a{color:var(--accent);font-weight:700;text-decoration:none;white-space:nowrap}
+.demo-top a:hover{text-decoration:underline}
+.demo-top .demo-note{color:var(--faint);font-size:.75rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.leisure-foot a,.foot a{color:var(--accent);font-weight:700}
+@media(max-width:32rem){.demo-top .demo-note{display:none}}
 .intro{font-size:.875rem;color:var(--muted);margin-top:.5rem;max-width:44rem;line-height:1.55}
 .intro a{color:var(--accent);font-weight:700}
 .bookbar{margin-top:1.5rem;border-radius:var(--radius);padding:1.25rem;background:linear-gradient(180deg,var(--surface-hi),var(--surface));box-shadow:var(--shadow);display:flex;gap:1rem;align-items:center;justify-content:space-between;flex-wrap:wrap}
@@ -173,7 +169,7 @@ img{max-width:100%;height:auto}
 @media(max-width:32.5rem){.bookbar a{width:100%;text-align:center;white-space:normal}}
 </style>
 </head>
-<body><div class="lk-topbar"><a href="index.html">← Léargas</a><span class="lk-note">Sample demo · mock numbers</span><a class="lk-cta" href="https://calendly.com/leargas/30min" target="_blank" rel="noopener">Book a 30-min chat</a></div><div style="position:fixed;left:.75rem;bottom:.75rem;z-index:99;background:var(--accent);color:var(--accent-ink);font:700 .75rem system-ui,sans-serif;padding:.5rem 1rem;border-radius:999px;box-shadow:0 2px 8px rgba(0,0,0,.4)">DEMO · sample leisure-club figures</div>
+<body><div class="demo-top"><a href="index.html">← Léargas</a><span class="demo-note">Sample demo · mock numbers</span></div><div style="position:fixed;left:.75rem;bottom:.75rem;z-index:99;background:var(--accent);color:var(--accent-ink);font:700 .75rem system-ui,sans-serif;padding:.5rem 1rem;border-radius:999px;box-shadow:0 2px 8px rgba(0,0,0,.4)">DEMO · sample leisure-club figures</div>
 <div class="layout">
 
   <!-- ======= SIDEBAR ======= -->
@@ -192,7 +188,7 @@ img{max-width:100%;height:auto}
     <button type="button" class="nav-item" data-view="barevents"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h3l2-7 4 14 2-7h5"/></svg>Bar &amp; Events</button>
     <div class="nav-label">Partners</div>
     <button type="button" class="nav-item" data-view="sponsors"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3 6 6 .5-4.5 4 1.5 6-6-3.5L6 18.5l1.5-6L3 8.5 9 8z"/></svg>Sponsors</button></nav>
-    <div class="side-foot"><b>Board-ready</b> · refreshed every Monday<br>Data to Sun 30 Aug<br><a href="https://calendly.com/leargas/30min" target="_blank" rel="noopener" style="color:var(--accent);font-weight:700">Book the free 30-min chat →</a></div>
+    <div class="side-foot"><b>Board-ready</b> · refreshed every Monday<br>Data to Sun 30 Aug<br><a href="https://calendly.com/leargas/30min" target="_blank" rel="noopener" style="color:var(--accent);font-weight:700">Book the free 30-min chat</a></div>
   </aside>
 
   <!-- ======= MAIN ======= -->
@@ -201,7 +197,7 @@ img{max-width:100%;height:auto}
       <div>
         <h1 id="viewTitle">Club health</h1>
         <div class="date" id="viewSub">Mon 24 – Sun 30 Aug · last complete week</div>
-        <div class="intro">Sample pack — run a leisure club? Start here. Your Monday numbers arrive on the same layout. <a href="https://calendly.com/leargas/30min" target="_blank" rel="noopener">Book the free 30-min chat to see yours →</a></div>
+        <div class="intro">Sample pack — run a leisure club? Start here. Your Monday numbers arrive on the same layout. <a href="https://calendly.com/leargas/30min" target="_blank" rel="noopener">Book the free 30-min chat to see yours</a></div>
       </div>
       <div class="controls" id="pills">
         <button type="button" class="pill on" data-p="week">This week</button>
@@ -490,8 +486,7 @@ img{max-width:100%;height:auto}
         </div>
       </div>
     </section>
-    <div class="bookbar"><div><b>Like this Monday? Yours looks like this.</b><span>Sample numbers above — your pack fills in automatically. Free 30-min chat, first pack within 10 days.</span></div><a href="https://calendly.com/leargas/30min" target="_blank" rel="noopener">Book the free 30-min chat →</a></div>
-  <div class="lk-foot"><span><b>Léargas</b> · Mock data throughout — your pack shows your numbers</span><span><a href="index.html">← Back to Léargas</a> · <a class="lk-cta" href="https://calendly.com/leargas/30min" target="_blank" rel="noopener">Book a 30-min chat</a></span></div>
+    <div class="bookbar"><div><b>Like this Monday? Yours looks like this.</b><span>Sample numbers above — your pack fills in automatically. Free 30-min chat, first pack within 10 days.</span></div><a href="https://calendly.com/leargas/30min" target="_blank" rel="noopener">Book the free 30-min chat</a></div>
     <div class="leisure-foot"><span><a href="index.html">← Léargas home</a></span><span>Mock numbers throughout — your pack shows your numbers</span></div></main>
 </div>
 <button type="button" class="theme-toggle" id="themeToggle" title="Toggle light/dark mode" aria-label="Switch to light mode">☀</button>
