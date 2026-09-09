@@ -56,24 +56,23 @@ img{max-width:100%;height:auto}
 .trust{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--surface)}
 .trust .wrap{display:flex;gap:.5rem 2rem;flex-wrap:wrap;align-items:center;justify-content:center;padding-top:1rem;padding-bottom:1rem;font-size:.875rem;color:var(--muted)}
 .trust b{color:var(--ink)}
-.metrics{display:flex;gap:.5rem 2rem;flex-wrap:wrap;align-items:center;justify-content:center;width:100%;padding-bottom:.25rem}
-.metrics span{font-size:.875rem;color:var(--muted)}
-.metrics b{display:block;font-size:1.25rem;color:var(--ink);letter-spacing:-.01em;line-height:1.2}
-section.block{padding:3.5rem 0}
-section.block:last-of-type{padding-bottom:4rem}
+section.block{padding:2.75rem 0}
+section.block:last-of-type{padding-bottom:3rem}
 /* Dark contrast section: hosts dark dashboard screenshots so they sit naturally instead of clashing on cream. */
-.block.dark{background:#14100c;border-radius:var(--radius);padding:2.5rem 2rem;color:#f4ede1}
-.block.dark .kicker{color:#8fd6a8}
-.block.dark h2.title{color:#fff}
-.block.dark .standfirst{color:#c9bfae}
-.block.dark .link-more{color:#8fd6a8}
-.block.dark .micro{color:#a89d88}
-.block.dark .shot{border-color:rgba(255,255,255,.14)}
+.carousel{position:relative}
+.viewport{overflow:hidden;border-radius:var(--radius)}
+.track{display:flex;transition:transform .35s ease-out}
+.slide{flex:0 0 100%;min-width:0}
+.car-nav{display:flex;align-items:center;justify-content:center;gap:1rem;margin-top:1rem}
+.car-btn{width:2.5rem;height:2.5rem;border-radius:50%;background:var(--surface);border:1px solid var(--line);color:var(--ink);font-size:1.1rem;line-height:1;cursor:pointer;transition:border-color .15s ease-out,color .15s ease-out}
+.car-btn:hover{border-color:var(--primary);color:var(--primary)}
+.dots{display:flex;gap:.5rem}
+.dot{width:.625rem;height:.625rem;border-radius:50%;border:none;background:var(--line);padding:0;cursor:pointer}
+.dot[aria-current="true"]{background:var(--primary)}
 .kicker{font-size:.75rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--primary);margin:0 0 .5rem}
 h2.title{font-size:clamp(1.5rem,3.5vw,2rem);letter-spacing:-.02em;line-height:1.2;margin:0 0 .5rem;text-wrap:balance}
 p.standfirst{color:var(--muted);margin:0 0 2rem;max-width:38rem;font-size:1.0625rem}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:1.25rem}
-.demo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:1.25rem}
 .shot{position:relative;display:block;overflow:hidden;border:1px solid var(--line);border-radius:var(--radius);box-shadow:inset 0 1px 0 0 var(--highlight),var(--shadow);background:var(--surface);text-decoration:none;transition:transform .15s ease-out,box-shadow .15s ease-out}
 .shot:hover{transform:translateY(-2px);box-shadow:inset 0 1px 0 0 var(--highlight),var(--shadow-big)}
 .shot img{display:block;width:100%;height:auto}
@@ -149,24 +148,31 @@ body{padding-bottom:4.25rem}
 </div></div>
 
 <div class="trust"><div class="wrap">
-<div class="metrics" aria-label="Key facts">
-<span><b>10 days</b>to first pack</span>
-<span><b>1 page</b>to review Monday</span>
-<span><b>0</b>new apps to install</span>
-</div>
 <span><b>Built for</b> cafés · restaurants · social groups · leisure clubs</span><span>Sample data throughout</span>
 </div></div>
 
 <div class="wrap">
-<section class="block dark" id="demos">
+<section class="block" id="demos">
 <p class="kicker">Live demos</p>
 <h2 class="title">Start with the one closest to your business.</h2>
-<p class="standfirst">Four sample packs, laid out like yours would be. Open the closest match — then book the chat to see your numbers on one page.</p>
-<div class="demo-grid">
-<a class="shot" href="demo-juice-bar.html"><img src="previews/juice.png" alt="Juice bar dashboard preview: sales by day chart, top drinks and stock gaps" width="960" height="540" loading="lazy" decoding="async"><span class="shot-cap"><b>Juice bar dashboard</b><span>Sales by day, stock gaps, rota →</span></span></a>
-<a class="shot" href="demo-restaurant.html"><img src="previews/restaurant.png" alt="Restaurant dashboard preview: covers by day chart, promo performance and stock gaps" width="960" height="540" loading="lazy" decoding="async"><span class="shot-cap"><b>Restaurant dashboard</b><span>Covers, promo profit, food cost →</span></span></a>
-<a class="shot" href="demo-social-group.html"><img src="previews/social.png" alt="Social group dashboard preview: ticket sales, member activity and guest pipeline" width="960" height="540" loading="lazy" decoding="async"><span class="shot-cap"><b>Social group dashboard</b><span>Tickets, engagement, pipeline →</span></span></a>
-<a class="shot" href="demo-leisure-club.html"><img src="previews/leisure.png" alt="Leisure club dashboard preview: revenue charts, membership mix and court usage" width="960" height="540" loading="lazy" decoding="async"><span class="shot-cap"><b>Leisure club dashboard</b><span>Membership, courts, bar →</span></span></a>
+<p class="standfirst">Four sample packs, laid out like yours would be. It slides on its own — open the closest match.</p>
+<div class="carousel" id="demoCarousel" role="region" aria-roledescription="carousel" aria-label="Dashboard demos">
+<div class="viewport"><div class="track" id="demoTrack">
+<a class="shot slide" href="demo-juice-bar.html"><img src="previews/juice.png" alt="Juice bar dashboard preview: sales by day chart, top drinks and stock gaps" width="960" height="540" loading="lazy" decoding="async"><span class="shot-cap"><b>Juice bar dashboard</b><span>Sales by day, stock gaps, rota →</span></span></a>
+<a class="shot slide" href="demo-restaurant.html"><img src="previews/restaurant.png" alt="Restaurant dashboard preview: covers by day chart, promo performance and stock gaps" width="960" height="540" loading="lazy" decoding="async"><span class="shot-cap"><b>Restaurant dashboard</b><span>Covers, promo profit, food cost →</span></span></a>
+<a class="shot slide" href="demo-social-group.html"><img src="previews/social.png" alt="Social group dashboard preview: ticket sales, member activity and guest pipeline" width="960" height="540" loading="lazy" decoding="async"><span class="shot-cap"><b>Social group dashboard</b><span>Tickets, engagement, pipeline →</span></span></a>
+<a class="shot slide" href="demo-leisure-club.html"><img src="previews/leisure.png" alt="Leisure club dashboard preview: revenue charts, membership mix and court usage" width="960" height="540" loading="lazy" decoding="async"><span class="shot-cap"><b>Leisure club dashboard</b><span>Membership, courts, bar →</span></span></a>
+</div></div>
+<div class="car-nav">
+<button type="button" class="car-btn" id="carPrev" aria-label="Previous demo">←</button>
+<div class="dots" id="demoDots">
+<button type="button" class="dot" aria-label="Go to Juice bar dashboard" aria-current="true"></button>
+<button type="button" class="dot" aria-label="Go to Restaurant dashboard"></button>
+<button type="button" class="dot" aria-label="Go to Social group dashboard"></button>
+<button type="button" class="dot" aria-label="Go to Leisure club dashboard"></button>
+</div>
+<button type="button" class="car-btn" id="carNext" aria-label="Next demo">→</button>
+</div>
 </div>
 </section>
 
@@ -288,6 +294,32 @@ var CALENDLY_URL = 'https://calendly.com/leargas/30min';
     }, {threshold: 0.15}).observe(book);
   }
 })();
+  // Demos carousel: autoplay showcase, dots + arrows, reduced-motion + hidden-tab safe.
+(function(){var t=document.getElementById('demoTrack');if(!t)return;var N=t.children.length,timer=null,busy=false;
+var dots=Array.prototype.slice.call(document.querySelectorAll('#demoDots .dot'));
+var reduced=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(reduced){t.style.transition='none';}
+var first=t.children[0].cloneNode(true),last=t.children[N-1].cloneNode(true);
+[first,last].forEach(function(c){c.removeAttribute('href');c.setAttribute('aria-hidden','true');c.tabIndex=-1;});
+t.insertBefore(last,t.firstChild);t.appendChild(first);
+var p=1;
+function paint(){var li=((p-1)%N+N)%N;dots.forEach(function(d,j){if(j===li){d.setAttribute('aria-current','true');}else{d.removeAttribute('aria-current');}});}
+function show(){t.style.transform='translateX(-'+(p*100)+'%)';paint();}
+function snap(to){p=to;var tr=t.style.transition;t.style.transition='none';t.style.transform='translateX(-'+(p*100)+'%)';void t.offsetWidth;t.style.transition=tr;paint();busy=false;}
+t.addEventListener('transitionend',function(e){if(e.propertyName&&e.propertyName!=='transform')return;if(p===N+1){snap(1);}else if(p===0){snap(N);}});
+function next(){if(busy)return;if(reduced){p=(p>=N)?1:p+1;show();return;}p++;if(p===N+1)busy=true;show();}
+function prev(){if(busy)return;if(reduced){p=(p<=1)?N:p-1;show();return;}p--;if(p===0)busy=true;show();}
+function go(j){if(busy)return;p=j+1;show();}
+function play(){if(reduced||timer)return;timer=setInterval(next,4500);}
+function stop(){if(timer){clearInterval(timer);timer=null;}}
+document.getElementById('carPrev').addEventListener('click',function(){stop();prev();play();});
+document.getElementById('carNext').addEventListener('click',function(){stop();next();play();});
+dots.forEach(function(d,j){d.addEventListener('click',function(){stop();go(j);play();});});
+var c=document.getElementById('demoCarousel');
+c.addEventListener('mouseenter',stop);c.addEventListener('mouseleave',play);
+c.addEventListener('focusin',stop);c.addEventListener('focusout',play);
+document.addEventListener('visibilitychange',function(){if(document.hidden){stop();}else{play();}});
+show();play();})();
 </script>
 </body>
 </html>

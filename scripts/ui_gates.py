@@ -61,8 +61,16 @@ def main() -> int:
           "proof removed")
     check("no-mid-cta", "mid-cta" not in land, "no mid-section CTA rows")
     check("no-band", "block band" not in land, "no arbitrary tinted band")
-    check("demos-dark", 'class="block dark" id="demos"' in land,
-          "dark shots hosted on dark section")
+    check("no-trust-metrics", "class=\"metrics\"" not in land, "trust band is one line")
+    check("no-static-grid", "demo-grid" not in land, "no orphan-prone screenshot grid")
+    check("demos-carousel", all(k in land for k in (
+        'id="demoCarousel"', 'id="demoTrack"', 'id="demoDots"',
+        'id="carPrev"', 'id="carNext"')) and land.count('class="shot slide"') == 4,
+          "autoplay carousel, 4 slides, dots + arrows")
+    check("carousel-motion-safe", "setInterval(next,4500)" in land
+          and "prefers-reduced-motion: reduce" in land
+          and "visibilitychange" in land,
+          "autoplay pauses on hover/focus/hidden-tab, static under reduced-motion")
     feat = re.search(r"\.feat \.n\{[^}]*width:([\d.]+rem)", land)
     step = re.search(r"\.step \.n\{[^}]*width:([\d.]+rem)", land)
     check("markers-one-size", bool(feat and step and feat.group(1) == step.group(1)),
