@@ -19,11 +19,13 @@
 
 ## Landing (`index.html`) — carousel showcase, one intentional contrast
 
-- Demos showcase = MANUAL carousel on cream (arrows + dots, no autoplay):
-  the viewed slide ping-pongs dark↔light (1.8s holds, 1.5s morphs) via a
-  JS-timed `.lit` flip (`armSlide`), NEVER a looping CSS animation — loop
-  wraps snap mid-view, and JS restarts flash. Resets touch ONLY the current
-  slide; frozen end-themes glide out cleanly on manual nav. A 900ms
+- Demos showcase = carousel on cream (arrows + dots + 8s auto-advance that
+  pauses on hover/focus/hidden tab): the viewed slide ping-pongs dark↔light
+  (1.8s holds, 1.5s morphs) via a JS-timed `.lit` flip (`armSlide`), NEVER a
+  looping CSS animation — loop wraps snap mid-view, and JS restarts flash.
+  Hover pauses ONLY the advance interval; the morph free-runs because no
+  phase alignment is required (pausing one clock without the other only
+  desyncs designs that depend on alignment). A 900ms
   `snapGuard` recovers if `transitionend` is ever missed. Track glide (.8s)
   matches the morph pace. Captions sit BELOW shots as a static bar (title
   only), never overlaid on dashboard elements. Standfirst is one line; no

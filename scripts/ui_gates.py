@@ -100,18 +100,18 @@ def main() -> int:
     check("demos-carousel", all(k in land for k in (
         'id="demoCarousel"', 'id="demoTrack"', 'id="demoDots"',
         'id="carPrev"', 'id="carNext"')) and land.count('class="shot slide"') == 4,
-          "manual carousel, 4 slides, dots + arrows")
+          "carousel, 4 slides, dots + arrows, 8s auto-advance")
     check("carousel-motion-safe", "armSlide" in land
           and "function tick" in land
+          and "setInterval(function(){next();armSlide(true);},8000)" in land
           and "transition:opacity 1.5s" in land
           and "img.light.lit{opacity:1}" in land
           and "thememorph" not in land
-          and "setInterval" not in land
           and "nextT" not in land
           and "snapGuard" in land
           and "prefers-reduced-motion: reduce" in land
           and "visibilitychange" in land,
-          "manual advance, ping-pong morph, stuck-guard; static under reduced-motion")
+          "8s auto-advance + ping-pong morph, stuck-guard; static under reduced-motion")
     check("captions-below", ".shot-cap{display:flex" in land
           and "shot-cap b{font-size:1.0625rem" in land
           and all(s not in land for s in ("Sales by day, stock gaps", "Covers, promo profit",
