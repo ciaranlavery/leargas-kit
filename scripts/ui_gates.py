@@ -34,12 +34,12 @@ def main() -> int:
     for d in DEMOS:
         hits = sorted({b for b in banned if b in text[d]})
         check(f"demo-chrome:{d}", not hits, f"banned remnants: {hits}" if hits else "no landing green")
+        check(f"no-top-banner:{d}", 'demo-top' not in text[d] and 'demo-note' not in text[d],
+              "banner-free top, footer carries wayfinding")
 
     # 2. Demo structure: one slim top bar, one booking band, one quiet footer.
     for d in DEMOS:
         t = text[d]
-        check(f"demo-top:{d}", t.count('class="demo-top"') == 1,
-              f"count={t.count('class=\"demo-top\"')}")
         check(f"bookbar-once:{d}", t.count('class="bookbar"') == 1,
               f"count={t.count('class=\"bookbar\"')}")
         check(f"home-link:{d}", "← Léargas home" in t, "accent home link present")
@@ -66,11 +66,18 @@ def main() -> int:
         'id="demoCarousel"', 'id="demoTrack"', 'id="demoDots"',
         'id="carPrev"', 'id="carNext"')) and land.count('class="shot slide"') == 4,
           "autoplay carousel, 4 slides, dots + arrows")
-    check("carousel-motion-safe", "setInterval(next,4500)" in land
+    check("carousel-motion-safe", "setInterval(next,9000)" in land
+          and "syncMorph" in land
+          and "animation-delay" not in land
           and "prefers-reduced-motion: reduce" in land
           and "visibilitychange" in land
-          and "@keyframes thememorph" in land,
-          "autoplay pauses on hover/focus/hidden-tab, static under reduced-motion; slides morph dark/light")
+          and "@keyframes thememorph{0%,40%{opacity:0}55%,100%{opacity:1}}" in land,
+          "9s morph synced to 9s advance, restarted per slide, no stagger; static under reduced-motion")
+    check("captions-below", ".shot-cap{display:flex" in land
+          and "shot-cap b{font-size:1.0625rem" in land
+          and all(s not in land for s in ("Sales by day, stock gaps", "Covers, promo profit",
+                                          "Tickets, engagement", "Membership, courts")),
+          "title-only static caption bar, nothing overlaid on shots")
     check("theme-stills", land.count('class="light"') == 4,
           "one light layer per slide")
     check("markers-one-size", ".feat .n" not in land and ".step .n" in land,
