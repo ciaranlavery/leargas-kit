@@ -22,6 +22,10 @@
 {"@context":"https://schema.org","@type":"ProfessionalService","name":"Léargas","description":"Every Monday, your numbers on one page. Revenue, costs, cash and actions for independent hospitality.","areaServed":"Belfast, UK","priceRange":"£595/mo +VAT","url":"https://ciaranlavery.github.io/leargas-kit/"}
 </script>
 <style>
+/* LK3 shared system canonical: cream #faf7f0, green #1c7448. Demos duplicate --lk-* + topbar/CTA/footer (static, no build). */:root{--lk-bg:#faf7f0;--lk-green:#1c7448;--lk-green-hi:#16603b;--lk-ink:#1e1b16;--lk-line:#e9e1d2}
+/* LK3 360px guard (matches demos): page never h-scrolls; wide tables scroll inside their own container. */html,body{overflow-x:clip}
+img{max-width:100%;height:auto}
+
 /* CONFIG: brand + booking live here. Calendly URL is set once in the script at the bottom (CALENDLY_URL). */
 :root{--bg:#faf7f0;--surface:#fff;--ink:#1e1b16;--muted:#6f675c;--line:#e9e1d2;--primary:#1c7448;--primary-hi:#16603b;--on-primary:#fff;--radius:1rem;--highlight:#ffffff;--shadow:0 .125rem .625rem rgb(30 27 22/.08);--shadow-big:0 1.5rem 3rem -1rem rgb(30 27 22/.22)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;margin:0;background:var(--bg);color:var(--ink);font-size:1rem;line-height:1.6;-webkit-font-smoothing:antialiased}
