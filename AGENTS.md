@@ -97,7 +97,12 @@
   pre-baked datasets, Yesterday default, no custom builder). Leisure keeps
   the full engine + custom ranges.
 - Narrative order: What-we-do trio (Collect daily. Show plainly. You act.)
-  then How-it-works. No FAQ section. No sample-PDF download row.
+  then How-it-works, then Your-data security strip (read-only / Open Banking /
+  no passwords / UK GDPR), then trimmed FAQ (Good questions, 5 entries max),
+  then sample-PDF download row (regenerated with the pack).
+- First-5 founding-partner scarcity lives in the proof block (zero price
+  change). ROI under pricing = concrete illustrative figures on sample
+  numbers, labelled, oat-milk banned.
 - Wordmark images (non-square logos) MUST keep `width:auto` (`.chip img.word`)
   — a blanket square size squishes them, which is exactly the distortion
   shipped once when the rule was dropped; the gate pins it.
