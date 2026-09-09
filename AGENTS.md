@@ -66,6 +66,9 @@
   the green final band (whole band clickable), plus ONE low-key text link in
   the proof block. Nowhere else — no topbar, pricing, sticky, widget, or
   popup code.
+- Wordmark images (non-square logos) MUST keep `width:auto` (`.chip img.word`)
+  — a blanket square size squishes them, which is exactly the distortion
+  shipped once when the rule was dropped; the gate pins it.
 - Works-with marks: real artwork vendored in `previews/logos/` (Simple Icons
   where a slug exists; Wikimedia Commons press SVGs otherwise, e.g. SumUp,
   Lightspeed; transparent PNG downscaled for Zettle). ALWAYS full brand

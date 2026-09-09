@@ -71,8 +71,8 @@ def main() -> int:
               "square.svg", "xero.svg", "zettle.png", "sumup.svg", "lightspeed.svg"))
           and "filter:grayscale(1)" not in land
           and "opacity:.62" not in land
-          and 'class="mono"' not in land,
-          "logo marquee + escape hatch, full-color marks vendored")
+          and ".chip img.word{width:auto}" in land,
+          "logo marquee + escape hatch, full-color marks vendored, wordmarks keep aspect")
     check("works-on-top", land.find('class="works"') < land.find('class="hero"'),
           "slim full-color band above the hero")
     check("one-voice", "Book a 30-min chat" not in land
