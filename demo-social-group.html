@@ -64,6 +64,10 @@ button.ni{font-family:inherit}.ni:hover{background:rgba(255,255,255,.06);color:v
 html,body{overflow-x:clip}
 img{max-width:100%;height:auto}
 .foot a{color:var(--accent);font-weight:700}
+.ppills{display:flex;gap:.5rem;margin:1rem 0 0;flex-wrap:wrap}
+.ppill{font:inherit;font-size:.75rem;font-weight:700;padding:.45rem 1rem;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer}
+.ppill:hover{border-color:var(--accent);color:var(--ink)}
+.ppill.on{background:var(--accent);border-color:transparent;color:var(--accent-ink)}
 .bookbar{margin-top:1.25rem;border:1px solid var(--line);border-radius:1rem;padding:1.25rem;background:linear-gradient(180deg,var(--surface-hi),var(--surface));box-shadow:var(--shadow);display:flex;gap:1rem;align-items:center;justify-content:space-between;flex-wrap:wrap}
 .bookbar b{display:block;font-size:1rem;color:var(--ink-hi);letter-spacing:-.01em}
 .bookbar span{font-size:.875rem;color:var(--muted)}
@@ -76,7 +80,7 @@ img{max-width:100%;height:auto}
 <aside class="side"><div class="brand"><div class="badge">C</div><div class="bname">Clearhead Social</div></div>
 <nav aria-label="Demo views"><div class="nav">Sample demo</div><button type="button" class="ni on" data-v="all">Overview</button><button type="button" class="ni" data-v="events">Events</button><button type="button" class="ni" data-v="members">Members</button><button type="button" class="ni" data-v="pipeline">Pipeline (extra)</button></nav></aside>
 <main class="main">
-<div class="top"><h1>Yesterday <span class="pill">SAMPLE · mock numbers</span></h1><div class="date">Tue 12 Aug · ticketing + Circle + Instagram auto-feeds</div><p class="intro">Sample pack — run a social group or community? Start here. Your morning numbers arrive on the same one-page layout.</p></div>
+<div class="top"><h1>Yesterday <span class="pill">SAMPLE · mock numbers</span></h1><div class="date">Tue 12 Aug · ticketing + Circle + Instagram auto-feeds</div><p class="intro">Sample pack — run a social group or community? Start here. Your morning numbers arrive on the same one-page layout.</p><div class="ppills" id="ppills"></div></div>
 <div class="kpis">
 <div class="kpi"><div class="l">Ticket sales</div><div class="v">£420</div><div class="up">▲ 12% vs yesterday</div></div>
 <div class="kpi"><div class="l">Active members</div><div class="v">486</div><div class="up">+3 yesterday</div></div>
@@ -105,6 +109,15 @@ img{max-width:100%;height:auto}
 function rebalance(){document.querySelectorAll('.grid').forEach(function(g){var vis=Array.prototype.filter.call(g.children,function(c){return c.style.display!=='none'});vis.forEach(function(c){c.style.gridColumn=(vis.length===1)?'1 / -1':'';});});}
 document.querySelectorAll('.ni').forEach(function(n){n.addEventListener('click',function(){document.querySelectorAll('.ni').forEach(function(x){x.classList.remove('on')});n.classList.add('on');var v=n.getAttribute('data-v');document.querySelectorAll('[data-view]').forEach(function(p){p.style.display=(v==='all'||p.getAttribute('data-view')===v)?'':'none';});rebalance();});});
 rebalance();
+(function(){var P={
+yesterday:{kpi:[['£420','▲ 12% vs yesterday','up'],['486','+3 yesterday','up'],['3.1k','▲ 8%','up'],['9%','▼ 2pts - good','up']],rows:['9 / 58','6','2 of 6 - chase 4','170'],funnel:['6','2','4']},
+week:{kpi:[['£3,150','▲ 12% vs last week','up'],['486','+18 this week','up'],['21.4k','▲ 8%','up'],['9%','▼ 2pts - good','up']],rows:['64 / 412','47','12 of 47 - chase 35','1,180'],funnel:['47','12','35']},
+month:{kpi:[['£12,900','▲ 9% vs last month','up'],['486','+71 this month','up'],['84k','▲ 6%','up'],['9.5%','▼ 1pt - good','up']],rows:['260 / 1.6k','190','48 of 190 - chase 142','4,700'],funnel:['190','48','142']}};
+var order=['yesterday','week','month'],txt={yesterday:'Yesterday',week:'This week',month:'This month'},cur='yesterday';
+function render(){var d=P[cur];var ks=document.querySelectorAll('.kpis .kpi');ks.forEach(function(k,i){if(!d.kpi[i])return;k.querySelector('.v').textContent=d.kpi[i][0];var dl=k.querySelector('.up,.down,.flat');if(dl){dl.className=d.kpi[i][2];dl.textContent=d.kpi[i][1];}});
+document.querySelectorAll('[data-view="members"] .row b').forEach(function(b,i){b.textContent=d.rows[i];});
+var f=document.querySelector('.funnel');if(f){f.innerHTML='<div class="fstep"><b>'+d.funnel[0]+'</b>trial guests</div><div class="arr">→</div><div class="fstep"><b>'+d.funnel[1]+'</b>converted</div><div class="arr">→</div><div class="fstep"><b>'+d.funnel[2]+'</b>to chase</div>';}}
+var wrap=document.getElementById('ppills');order.forEach(function(o){var b=document.createElement('button');b.type='button';b.className='ppill'+(o===cur?' on':'');b.textContent=txt[o];b.addEventListener('click',function(){cur=o;wrap.querySelectorAll('.ppill').forEach(function(x){x.classList.toggle('on',x===b)});render();});wrap.appendChild(b);});})();
 (function(){var b=document.getElementById('themeToggle');function paint(m){b.textContent=(m==='light')?'☾':'☀';b.setAttribute('aria-label',(m==='light')?'Switch to dark mode':'Switch to light mode');}function set(m){document.documentElement.dataset.theme=m;try{localStorage.setItem('leargas-theme',m)}catch(e){}paint(m);}paint(document.documentElement.dataset.theme==='light'?'light':'dark');b.addEventListener('click',function(){var m=document.documentElement.dataset.theme==='light'?'dark':'light';set(m);if(window.applyChartTheme)applyChartTheme(m==='light');});})();
 </script>
 </body>

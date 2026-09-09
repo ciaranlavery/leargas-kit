@@ -67,16 +67,23 @@ def main() -> int:
     check("daily-landing", all(s not in land for s in (
         "Monday", "Week 34", "Board-ready")),
           "landing speaks daily throughout")
-    check("monday-strip", all(k in land for k in (
-        'id="daily"', "One link. Every morning.", "hottest takes",
-        "caught before you ever see")),
-          "delivery facts: link, PDF, messy-data")
+    check("product-strip", all(k in land for k in (
+        'id="product"', "Yours, every morning.", "hottest-takes",
+        "caught before you ever see"))
+          and "sample-daily-pack.pdf" not in land
+          and 'id="monday"' not in land,
+          "save-once product, no PDF download, no link-word")
     check("roi-illustrative", "Illustrative:" in land
           and "afternoon a month" in land,
           "labelled illustration, never a result")
     check("tile-outcomes", all(k in land for k in (
         "Tuesday's order", "what food cost", "who's joining", "the bar take")),
           "one outcome line per demo tile")
+    check("what-we-do", all(k in land for k in (
+        "What we do", "Collect daily.", "Show plainly.", "You act."))
+          and "Why Léargas" not in land
+          and "Monthly accounts tell you history" not in land,
+          "plain trio replaces Why, no assumed knowledge")
     check("mobile-strips", land.count('class="strip"') == 4
           and land.count('class="sthumb"') == 4
           and "@keyframes stripmorph" in land
@@ -109,9 +116,9 @@ def main() -> int:
           "no invented-testimonials section")
     check("honest-proof", all(k in land for k in (
         'id="proof"', "Who's behind it", "Kraken", "Revolut",
-        "founding partners"))
+        "first Belfast partners"))
           and "No client logos" not in land,
-          "founder bio + pilot honesty, sentence removed per owner")
+          "LinkedIn-style bio, pilot honesty, sentence removed per owner")
     check("no-fabrication", all(n not in land + "".join(text[d] for d in DEMOS)
                                 for n in ("Sarah", "Mick", "Aoife")),
           "no invented people anywhere")
@@ -143,10 +150,14 @@ def main() -> int:
           and all(s not in land for s in ("Sales by day, stock gaps", "Covers, promo profit",
                                           "Tickets, engagement", "Membership, courts")),
           "short outcome captions below shots, nothing overlaid")
-    check("sample-pdf", (ROOT / "sample-daily-pack.pdf").exists()
-          and 'href="sample-daily-pack.pdf" download' in land
-          and not (ROOT / "sample-monday-pack.pdf").exists(),
-          "downloadable sample pack, old file gone")
+    check("no-sample-pdf", not (ROOT / "sample-daily-pack.pdf").exists()
+          and "sample-daily-pack.pdf" not in land
+          and "dl-row" not in land,
+          "PDF download row removed entirely per owner")
+    check("no-faq", "details.faq" not in land
+          and "Questions" not in land
+          and "No new software. Cancel anytime." not in land,
+          "FAQ section removed per owner")
     check("theme-stills", land.count('class="light"') == 8,
           "light layers: 4 slides + 4 mobile strips")
     check("markers-one-size", ".feat .n" not in land and ".step .n" in land,
@@ -156,8 +167,6 @@ def main() -> int:
           "Grows folded to one line, no third card grid")
     check("price-stands-off", "margin:2rem auto 0" in land,
           "price card spaced off its title")
-    check("faq-centered", "details.faq" in land and "margin:0 auto .75rem" in land,
-          "FAQ cards centered like price card")
 
     # 5. Booking linkage: hero button + final band on landing, one band per demo.
     for p in pages:
@@ -170,13 +179,19 @@ def main() -> int:
         check(f"no-fit-phrase:{p}", "not a fit" not in text[p],
               "phrase purged")
 
-    # 6. Placeholders, previews, demo canvas width, daily pivot.
+    # 6. Placeholders, previews, demo canvas width, daily pivot, trio pills.
     for d in DEMOS:
         check(f"demo-width:{d}", "max-width:94rem" in text[d],
               "same content canvas as leisure club")
         check(f"daily-default:{d}", all(s not in text[d] for s in (
             "Monday", "Week 34", "Board-ready")),
               "no weekly framing left")
+    for d in ["demo-juice-bar.html", "demo-restaurant.html", "demo-social-group.html"]:
+        check(f"trio-pills:{d}", 'id="ppills"' in text[d]
+              and "This month" in text[d]
+              and "week:{" in text[d] and "month:{" in text[d] and "yesterday:{" in text[d]
+              and "toggle('on'" in text[d],
+              "Yesterday/week/month pre-baked, Yesterday default")
     for p in pages:
         hits = [w for w in ("TODO", "FIXME", "lorem", "Lorem") if w in text[p]]
         check(f"no-placeholder:{p}", not hits, f"{hits}" if hits else "clean")

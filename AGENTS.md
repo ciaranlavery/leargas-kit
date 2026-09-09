@@ -56,9 +56,9 @@
   tile, never a fake logo. Escape hatch below the marquee:
   "Don't see yours? Ask — if it exports, we can use it."
 - Proof block (`#proof`, above pricing) = founder monogram + ex-Kraken /
-  ex-Revolut bio (marks vendored in `previews/logos/`) + pilot-stage honesty.
-  The "no client logos" sentence is OUT per owner — the block says what it is
-  without apologizing. Mock stays mock.
+  ex-Revolut bio in LinkedIn-experience rows (equal-height chips; old flat
+  lilac Kraken mark in `previews/logos/kraken-old.svg`), short lines only.
+  The "no client logos" sentence is OUT per owner. Mock stays mock.
 - Tinted bands: green final CTA only. No other `band` sections. Sections
   share one rhythm (`section.block` padding, no per-section snowflakes).
 ## Trust & honesty (non-negotiable — user-verified 2026-09-09)
@@ -89,10 +89,15 @@
   (hours/dayparts), never Mon–Sun weeks. Leisure keeps longer explorer
   periods but defaults to its Yesterday view. The words Monday, Week 34, and
   Board-ready   appear nowhere on any page — the gate fails them on sight.
-- Daily strip (`#daily`): one link refreshed every morning + PDF hottest-takes
-  printout (`sample-daily-pack.pdf`, regenerated with the pack) + messy-data
-  line. ROI anchor under pricing stays clearly labelled `Illustrative` —
-  never a client result.
+- Product section (`#product`): save-once product story, never the word link.
+  Messy-data line stays. ROI anchor under pricing stays clearly labelled
+  `Illustrative` — never a client result. No sample-PDF file or download row
+  (removed per owner).
+- Trio demos each carry a Yesterday/week/month pill engine (`#ppills`,
+  pre-baked datasets, Yesterday default, no custom builder). Leisure keeps
+  the full engine + custom ranges.
+- Narrative order: What-we-do trio (Collect daily. Show plainly. You act.)
+  then How-it-works. No FAQ section. No sample-PDF download row.
 - Wordmark images (non-square logos) MUST keep `width:auto` (`.chip img.word`)
   — a blanket square size squishes them, which is exactly the distortion
   shipped once when the rule was dropped; the gate pins it.

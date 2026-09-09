@@ -63,6 +63,10 @@ button.ni{font-family:inherit}.ni:hover{background:rgba(255,255,255,.06);color:v
 html,body{overflow-x:clip}
 img{max-width:100%;height:auto}
 .foot a{color:var(--accent);font-weight:700}
+.ppills{display:flex;gap:.5rem;margin:1rem 0 0;flex-wrap:wrap}
+.ppill{font:inherit;font-size:.75rem;font-weight:700;padding:.45rem 1rem;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer}
+.ppill:hover{border-color:var(--accent);color:var(--ink)}
+.ppill.on{background:var(--accent);border-color:transparent;color:var(--accent-ink)}
 .bookbar{margin-top:1.25rem;border:1px solid var(--line);border-radius:1rem;padding:1.25rem;background:linear-gradient(180deg,var(--surface-hi),var(--surface));box-shadow:var(--shadow);display:flex;gap:1rem;align-items:center;justify-content:space-between;flex-wrap:wrap}
 .bookbar b{display:block;font-size:1rem;color:var(--ink-hi);letter-spacing:-.01em}
 .bookbar span{font-size:.875rem;color:var(--muted)}
@@ -75,7 +79,7 @@ img{max-width:100%;height:auto}
 <aside class="side"><div class="brand"><div class="badge">O</div><div class="bname">Olive &amp; Ash</div></div>
 <nav aria-label="Demo views"><div class="nav">Sample demo</div><button type="button" class="ni on" data-v="all">Overview</button><button type="button" class="ni" data-v="covers">Covers</button><button type="button" class="ni" data-v="promos">Promos (extra)</button><button type="button" class="ni" data-v="stock">Stock</button></nav></aside>
 <main class="main">
-<div class="top"><h1>Yesterday <span class="pill">SAMPLE · mock numbers</span></h1><div class="date">Tue 12 Aug · till + bookings + supplier sheets</div><p class="intro">Sample pack — run a restaurant? Start here. Your morning numbers arrive on the same one-page layout.</p></div>
+<div class="top"><h1>Yesterday <span class="pill">SAMPLE · mock numbers</span></h1><div class="date">Tue 12 Aug · till + bookings + supplier sheets</div><p class="intro">Sample pack — run a restaurant? Start here. Your morning numbers arrive on the same one-page layout.</p><div class="ppills" id="ppills"></div></div>
 <div class="kpis">
 <div class="kpi"><div class="l">Covers</div><div class="v">94</div><div class="up">▲ 5% vs yesterday</div></div>
 <div class="kpi"><div class="l">Avg spend / head</div><div class="v">£28.40</div><div class="up">▲ 3%</div></div>
@@ -107,6 +111,15 @@ img{max-width:100%;height:auto}
 function rebalance(){document.querySelectorAll('.grid').forEach(function(g){var vis=Array.prototype.filter.call(g.children,function(c){return c.style.display!=='none'});vis.forEach(function(c){c.style.gridColumn=(vis.length===1)?'1 / -1':'';});});}
 document.querySelectorAll('.ni').forEach(function(n){n.addEventListener('click',function(){document.querySelectorAll('.ni').forEach(function(x){x.classList.remove('on')});n.classList.add('on');var v=n.getAttribute('data-v');document.querySelectorAll('[data-view]').forEach(function(p){p.style.display=(v==='all'||p.getAttribute('data-view')===v)?'':'none';});rebalance();});});
 rebalance();
+(function(){var P={
+yesterday:{kpi:[['94','▲ 5% vs yesterday','up'],['£28.40','▲ 3%','up'],['29.1%','▲ 0.8pts - watch','down'],['+£160','Tue offer working','up']],bars:{labels:['12p','1p','2p','6p','7p','8p','9p'],heights:[55,70,45,60,100,85,50],sub:'Bookings export · dinner peak 7–9'},promos:['+£96 net','+£44 net','+£21 net','−£14 - kill?']},
+week:{kpi:[['612','▲ 5% vs last week','up'],['£28.40','▲ 3%','up'],['29.1%','▲ 0.8pts - watch','down'],['+£1,120','Tue offer working','up']],bars:{labels:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],heights:[30,52,40,55,85,100,70],sub:'Bookings export · weekends carry the week'},promos:['+£640 net','+£310 net','+£170 net','−£90 - kill?']},
+month:{kpi:[['2,640','▲ 6% vs last month','up'],['£28.10','▲ 2%','up'],['29.4%','▲ 0.5pts - watch','down'],['+£4,600','monthly promos','up']],bars:{labels:['W1','W2','W3','W4'],heights:[60,75,88,100],sub:'Bookings export · month-end peaks'},promos:['+£2,700 net','+£1,300 net','+£880 net','−£390 - kill?']}};
+var order=['yesterday','week','month'],txt={yesterday:'Yesterday',week:'This week',month:'This month'},cur='yesterday';
+function render(){var d=P[cur];var ks=document.querySelectorAll('.kpis .kpi');ks.forEach(function(k,i){if(!d.kpi[i])return;k.querySelector('.v').textContent=d.kpi[i][0];var dl=k.querySelector('.up,.down,.flat');if(dl){dl.className=d.kpi[i][2];dl.textContent=d.kpi[i][1];}});
+var chart=document.querySelector('[data-view="covers"] .panel');var bars=document.querySelector('.bars');if(bars&&d.bars){bars.innerHTML=d.bars.labels.map(function(l,i){return '<div class="bar" style="height:'+d.bars.heights[i]+'%"><span>'+l+'</span></div>'}).join('');chart.querySelector('.sub').textContent=d.bars.sub;}
+document.querySelectorAll('[data-view="promos"] .row b').forEach(function(b,i){b.textContent=d.promos[i];});}
+var wrap=document.getElementById('ppills');order.forEach(function(o){var b=document.createElement('button');b.type='button';b.className='ppill'+(o===cur?' on':'');b.textContent=txt[o];b.addEventListener('click',function(){cur=o;wrap.querySelectorAll('.ppill').forEach(function(x){x.classList.toggle('on',x===b)});render();});wrap.appendChild(b);});})();
 (function(){var b=document.getElementById('themeToggle');function paint(m){b.textContent=(m==='light')?'☾':'☀';b.setAttribute('aria-label',(m==='light')?'Switch to dark mode':'Switch to light mode');}function set(m){document.documentElement.dataset.theme=m;try{localStorage.setItem('leargas-theme',m)}catch(e){}paint(m);}paint(document.documentElement.dataset.theme==='light'?'light':'dark');b.addEventListener('click',function(){var m=document.documentElement.dataset.theme==='light'?'dark':'light';set(m);if(window.applyChartTheme)applyChartTheme(m==='light');});})();
 </script>
 </body>

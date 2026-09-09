@@ -97,7 +97,6 @@ section.block:last-of-type{padding-bottom:3rem}
 .kicker{font-size:.75rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--primary);margin:0 0 .5rem}
 h2.title{font-size:clamp(1.5rem,3.5vw,2rem);letter-spacing:-.02em;line-height:1.2;margin:0 0 .5rem;text-wrap:balance}
 p.standfirst{color:var(--muted);margin:0 0 2rem;max-width:38rem;font-size:1.0625rem}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:1.25rem}
 .shot{position:relative;display:block;overflow:hidden;border:1px solid var(--line);border-radius:var(--radius);box-shadow:inset 0 1px 0 0 var(--highlight),var(--shadow);background:var(--surface);text-decoration:none;transition:transform .15s ease-out,box-shadow .15s ease-out}
 .shot:hover{transform:translateY(-2px);box-shadow:inset 0 1px 0 0 var(--highlight),var(--shadow-big)}
 .shot img{display:block;width:100%;height:auto}
@@ -106,18 +105,15 @@ p.standfirst{color:var(--muted);margin:0 0 2rem;max-width:38rem;font-size:1.0625
 .shot-cap{display:flex;align-items:baseline;justify-content:space-between;gap:.25rem 1rem;padding:.8rem 1.25rem;background:var(--surface);color:var(--ink);flex-wrap:wrap}
 .shot-cap b{font-size:1.0625rem;letter-spacing:-.01em}
 .shot-cap span{font-size:.875rem;color:var(--muted)}
-.feat{background:linear-gradient(var(--surface),var(--surface));border:1px solid var(--line);border-radius:var(--radius);padding:1.25rem;box-shadow:inset 0 1px 0 0 var(--highlight),var(--shadow)}
-.feat b{display:block;font-size:1.0625rem;margin-bottom:.25rem;letter-spacing:-.01em}
-.feat p{margin:0;font-size:.9375rem;color:var(--muted)}
+.do{margin:0 0 .9rem;max-width:38rem;font-size:1.0625rem}
+.do b{letter-spacing:-.01em}
+.do p{display:inline;color:var(--muted)}
 .founder{display:flex;gap:1.25rem;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:1.5rem;box-shadow:inset 0 1px 0 0 var(--highlight),var(--shadow);max-width:44rem}
 .face{flex-shrink:0;width:3.5rem;height:3.5rem;border-radius:50%;background:var(--primary);color:var(--on-primary);font-weight:800;font-size:1.5rem;display:flex;align-items:center;justify-content:center}
 .founder b{display:block;font-size:1.0625rem;margin-bottom:.25rem;letter-spacing:-.01em}
 .founder p{margin:0;font-size:.9375rem;color:var(--muted)}
 .founder p img.wlogo{height:1.1em;width:auto;vertical-align:-0.2em}
-.dl-row{text-align:center;margin-top:1rem}
-.quote{background:linear-gradient(var(--surface),var(--surface));border:1px solid var(--line);border-radius:var(--radius);padding:1.25rem;box-shadow:inset 0 1px 0 0 var(--highlight),var(--shadow);display:flex;flex-direction:column;gap:.5rem}
-.quote p{margin:0;font-size:1rem;letter-spacing:-.005em}
-.quote cite{font-style:normal;font-size:.875rem;color:var(--muted)}
+.founder p.exp{display:flex;align-items:center;gap:.5rem;margin:.35rem 0 0}
 .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:1.25rem;counter-reset:step}
 .step{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:1.25rem;box-shadow:inset 0 1px 0 0 var(--highlight),var(--shadow)}
 .step .n{flex-shrink:0;width:1.625rem;height:1.625rem;border-radius:.625rem;background:var(--primary);color:var(--on-primary);font-weight:800;display:inline-flex;align-items:center;justify-content:center;font-size:.875rem;margin-bottom:.75rem}
@@ -128,9 +124,6 @@ p.standfirst{color:var(--muted);margin:0 0 2rem;max-width:38rem;font-size:1.0625
 .price-card ul{margin:1rem 0;padding:0;list-style:none;font-size:.9375rem}
 .price-card li{padding:.4rem 0 .4rem 1.5rem;position:relative}
 .price-card li::before{content:'✓';position:absolute;left:0;color:var(--primary);font-weight:800}
-details.faq{background:var(--surface);border:1px solid var(--line);border-radius:.75rem;padding:1rem 1.25rem;margin:0 auto .75rem;box-shadow:inset 0 1px 0 0 var(--highlight),var(--shadow);max-width:44rem}
-details.faq summary{font-weight:700;cursor:pointer;font-size:1rem}
-details.faq p{margin:.5rem 0 0;color:var(--muted);font-size:.9375rem}
 .final{display:block;background:var(--primary);color:var(--on-primary);border-radius:var(--radius);padding:2.5rem 2rem;text-align:center;margin-top:1rem;box-shadow:var(--shadow-big);text-decoration:none;transition:background .15s ease-out,transform .15s ease-out}
 .final:hover{background:var(--primary-hi)}
 .final:active{transform:translateY(1px)}
@@ -221,18 +214,14 @@ footer.site .wrap{display:flex;gap:.5rem 1.5rem;flex-wrap:wrap;align-items:cente
 <a class="strip" href="demo-social-group.html"><span class="sthumb"><img src="previews/social.png" alt="" width="480" height="270" loading="lazy" decoding="async"><img src="previews/social-light.png" alt="" aria-hidden="true" width="480" height="270" loading="lazy" decoding="async" class="light"></span><span class="scap"><b>Social group</b><span>Ticket sales, guest pipeline</span></span></a>
 <a class="strip" href="demo-leisure-club.html"><span class="sthumb"><img src="previews/leisure.png" alt="" width="480" height="270" loading="lazy" decoding="async"><img src="previews/leisure-light.png" alt="" aria-hidden="true" width="480" height="270" loading="lazy" decoding="async" class="light"></span><span class="scap"><b>Leisure club</b><span>Members, courts, bar</span></span></a>
 </div>
-<p class="dl-row"><a class="link-more" href="sample-daily-pack.pdf" download>Download the sample daily pack (PDF)</a></p>
 </section>
 
 <section class="block">
-<p class="kicker">Why Léargas</p>
-<h2 class="title">Monthly accounts tell you history. Every morning tells you what to do.</h2>
-<p class="standfirst">Your accounts show what happened. Your morning pack shows what's happening — down to daily detail.</p>
-<div class="grid">
-<div class="feat"><b>One page, every morning</b><p>Revenue, costs, cash position and anything that needs a look — compiled automatically, reviewed in a minute.</p></div>
-<div class="feat"><b>Daily detail, not monthly fog</b><p>Promo profit, fastest movers, waste flags, quiet-hour gaps — recorded daily in your systems, displayed daily here.</p></div>
-<div class="feat"><b>No work on your side</b><p>No new software or hardware. No manual entry. Duplicates, gaps and odd lines caught before you ever see them.</p></div>
-</div>
+<p class="kicker">What we do</p>
+<h2 class="title">Collect daily. Show plainly. You act.</h2>
+<div class="do"><b>Collect daily.</b><p>Your till, bookings and bank, pulled every night.</p></div>
+<div class="do"><b>Show plainly.</b><p>Yesterday's numbers and three actions, on one page.</p></div>
+<div class="do"><b>You act.</b><p>Read it in a minute. Run the day on it.</p></div>
 </section>
 
 <section class="block">
@@ -251,16 +240,18 @@ footer.site .wrap{display:flex;gap:.5rem 1.5rem;flex-wrap:wrap;align-items:cente
 <h2 class="title">A person, not a platform.</h2>
 <div class="founder">
 <span class="face" aria-hidden="true">C</span>
-<div><b>Ciaran — founder, Belfast.</b><p>Experienced data analyst, previously building data products at <img class="wlogo" src="previews/logos/kraken.png" alt="Kraken" width="60" height="21"> Kraken and <img class="wlogo" src="previews/logos/revolut.svg" alt="Revolut" width="20" height="20"> Revolut. Léargas is onboarding its first Belfast partners now — founding partners get the two-months-for-one start and shape what the pack becomes.</p></div>
+<div><b>Ciaran — Founder, Léargas</b>
+<p class="exp"><img class="wlogo" src="previews/logos/kraken-old.svg" alt="Kraken" width="111" height="19"> Data Analyst · Kraken</p>
+<p class="exp"><img class="wlogo" src="previews/logos/revolut.svg" alt="Revolut" width="20" height="20"> Data Analyst · Revolut</p>
+<p>Onboarding first Belfast partners now.</p></div>
 </div>
 <p class="micro">Real photo and first partner numbers land here when they exist — ask about founding-partner terms on the <a href="https://calendly.com/leargas/30min" target="_blank" rel="noopener">free 30-min chat</a>.</p>
 </section>
 
-<section class="block" id="daily">
-<p class="kicker">What lands daily</p>
-<h2 class="title">One link. Every morning.</h2>
-<p class="standfirst">The same dashboard link, refreshed with your numbers every morning — never a new login, never a new link. Alongside it, a one-page PDF of the day's hottest takes, for when you don't even want to look.</p>
-<div class="cta-row"><a class="link-more" href="sample-daily-pack.pdf" download>See a sample hottest-takes PDF ↓</a></div>
+<section class="block" id="product">
+<p class="kicker">The product</p>
+<h2 class="title">Yours, every morning.</h2>
+<p class="standfirst">We send you your dashboard once — you save it and open it like an app. Every morning it's refreshed with your numbers, with the PDF hottest-takes alongside.</p>
 <p class="micro">Duplicates, gaps and odd lines are caught before you ever see the pack.</p>
 </section>
 
@@ -278,16 +269,6 @@ footer.site .wrap{display:flex;gap:.5rem 1.5rem;flex-wrap:wrap;align-items:cente
 <p class="micro">Setup only happens when the fit is obvious.</p>
 <p class="micro"><b>Illustrative:</b> pays for itself if it saves one person an afternoon a month.</p>
 </div>
-</section>
-
-<section class="block">
-<p class="kicker">Questions</p>
-<h2 class="title">No new software. Cancel anytime.</h2>
-<details class="faq" open><summary>Do I need new software or hardware?</summary><p>No. The pack is built from the systems you already hold — till, bookings, bank, sheets. Nothing to install, nothing to learn.</p></details>
-<details class="faq"><summary>How do you connect to my till and bank? Is it safe?</summary><p>Read-only connections where possible — Open Banking for bank feeds, official integrations or exports for till and bookings. No passwords stored, you can revoke access anytime, and we only pull what the daily pack needs. UK GDPR applies; data stays in the UK/EEA.</p></details>
-<details class="faq"><summary>How do the £195 extras work?</summary><p>Each extra answers one money question your accounts can't — did the promo profit, are busy hours covered without idle ones, who's close to buying. Built around your data, one at a time, cancel anytime.</p></details>
-<details class="faq"><summary>When do I get my first pack?</summary><p>On the first morning within 10 days of setup, once everything's connected and checked. You review a single page to start the day.</p></details>
-<details class="faq"><summary>What does the timeline and billing look like?</summary><p>Free 30-min chat → £150 one-off setup on video → first pack within 10 days of setup → £595 covers months one and two → then £595 +VAT a month, rolling, cancel with 30 days. Cancel anytime and the dashboard stops with your subscription; any PDFs you've saved stay yours.</p></details>
 </section>
 
 <section class="block">
